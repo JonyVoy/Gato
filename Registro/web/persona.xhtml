@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+    </h:head>
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/plantilla.xhtml">
+
+            <ui:define name="content">
+                <f:event type="preRenderView" listener="#{personaBean.listar('F')}"/>
+                <p:growl id="msj" autoUpdate="true"/>
+                <h:form>
+                    <p:panel header="Registro de Personal" id="panelper">
+                        <p:panelGrid id="pnlDatos" columns="2" >
+                            <p:outputLabel value="Numero De Empleado #" for="noEmp"/>
+                            <p:inputText value="#{personaBean.persona.no_Emp}" id="noEmp" required="true" requiredMessage="Numero de empleado requerido" />
+                            <p:outputLabel value="Nombre " for="nombre"/>
+                            <p:inputText value="#{personaBean.persona.nombre}" id="nombre" required="true" requiredMessage="Nombre invalido"/>
+                            <p:outputLabel value="Apellido paterno " for="APat"/>
+                            <p:inputText value="#{personaBean.persona.apaterno}" id="APat" required="true" requiredMessage="Apellido Paterno necesario"/>
+                            <p:outputLabel value="Apellido materno " for="APmat"/>
+                            <p:inputText value="#{personaBean.persona.amaterno}" required="true" id="APmat" requiredMessage="Apellido Materno necesario"/>
+                            <p:outputLabel value="Area " for="Area"/>
+                            <p:selectOneMenu value="#{personaBean.persona.area}" id="Area" required="true">
+                                <f:selectItem itemLabel="Area 1" itemValue="Area1" />
+                                <f:selectItem itemLabel="Area 2" itemValue="Area2" />
+                            </p:selectOneMenu>          
+                        </p:panelGrid>
+
+                        <p:commandButton value="Registrar" actionListener="#{personaBean.registrar()}" update="pnlDatos :lista:data" />
+                        <p:commandButton  type="reset" value="limpiar"  update=" pnlDatos:lista:data" />
+                    </p:panel>
+                </h:form>
+                <br/><br/><br/>
+                <h:form id="lista">
+
+                    <p:dataTable id="data" value="#{personaBean.lstPersonas}" var="persona" paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                        <p:column headerText="Numero de empleado" sortBy="#{persona.no_Emp}" filterBy="#{persona.no_Emp}">
+                            <p:outputLabel value="#{persona.no_Emp}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Completo" sortBy="#{persona.nombre}" filterBy="#{persona.nombre}">
+                            <p:outputLabel value="#{persona.nombre} #{persona.apaterno} #{persona.amaterno}"/>
+                        </p:column>
+                        <p:column headerText="AREA" sortBy="#{persona.area}" filterBy="#{persona.area}">
+                            <p:outputLabel value="#{persona.area}"/>
+                        </p:column>
+                        <p:column headerText="MODIFICAR" >
+                            <p:commandButton value="Modificar" actionListener="#{personaBean.LeerId(persona)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />
+                            <p:commandButton value="Eliminar" actionListener="#{personaBean.eliminar(persona)}" update="data" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <p:dialog header="DATOS" widgetVar="widgetDatos" id="modDatos" >
+                    <h:form>
+                        <p:panelGrid columns="2" >
+                            <p:outputLabel value="Numero de Empleado "  />
+                            <p:inputText value="#{personaBean.persona.no_Emp}" required="true" />
+                            <p:outputLabel value="Nombre " />
+                            <p:inputText value="#{personaBean.persona.nombre}" required="true"/>
+                            <p:outputLabel value="Apellido paterno "/>
+                            <p:inputText value="#{personaBean.persona.apaterno}" required="true"/>
+                            <p:outputLabel value="Apellido materno " />
+                            <p:inputText value="#{personaBean.persona.amaterno}" required="true" />
+                            <p:outputLabel value="Area "/>
+                            <p:selectOneMenu value="#{personaBean.persona.area}" required="true">
+                                <f:selectItem itemLabel="Area 1" itemValue="Area1" />
+                                <f:selectItem itemLabel="Area 2" itemValue="Area2" />
+                            </p:selectOneMenu> 
+                        </p:panelGrid>    
+
+                        <p:commandButton value="Terminar edicion" actionListener="#{personaBean.modificar()}" oncomplete="PF('widgetDatos').hide();" update=":lista:data"/>
+                    </h:form>        
+                </p:dialog>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

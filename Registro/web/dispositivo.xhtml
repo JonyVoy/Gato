@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+   
+    </h:head>
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/plantilla.xhtml">
+
+            <ui:define name="content">
+                <f:event type="preRenderView" listener="#{dispositivoBean.listar('F')}"/>
+                <f:event type="preRenderView" listener="#{personaBean.listar('F')}"/>
+                
+                <p:growl id="msj" autoUpdate="true"/>
+        <h:form>
+            <p:panel header="Registro de Dispositivo">
+                <p:panelGrid columns="2" >
+                    <p:outputLabel value="Imei " for="imei"/>
+                    <p:inputText  value="#{dispositivoBean.dispositivo.imei}" id="imei" required="true" requiredMessage="Imei ruerido" autocomplete="off" maxlength="15"/>
+                    <p:outputLabel value="Marca " for="marca"/>
+                    <p:selectOneMenu value="#{dispositivoBean.dispositivo.marca}" id="marca" required="true" requiredMessage="Es necesario ingresar la marca" autoWidth="true">
+                        <f:selectItem itemLabel="Seleccione la marca" itemValue="" />
+                        <f:selectItem itemLabel="Apple" itemValue="Apple" />
+                        <f:selectItem itemLabel="Samsung" itemValue="Samsung" />
+                        <f:selectItem itemLabel="Nokia" itemValue="Nokia" />
+                        <f:selectItem itemLabel="Morotola" itemValue="Motorola" />
+                        <f:selectItem itemLabel="ZTE" itemValue="ZTE" />
+                        <f:selectItem itemLabel="HTC" itemValue="HTC" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Modelo " for="modelo"/>
+                    <p:inputText value="#{dispositivoBean.dispositivo.modelo}" id="modelo" required="true" requiredMessage="Modelo necesario" autocomplete="off" maxlength="15"/>
+                    
+                    <p:outputLabel value="Numero de Inventario #"/>
+                    <p:inputText value="#{dispositivoBean.dispositivo.noInv}" required="true" id="noInv" requiredMessage="NO.Inventario Necesario" autocomplete="off"/>                             
+                    <p:outputLabel value="Fecha De llegada" for="llegada"/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true" value="#{dispositivoBean.dispositivo.fecha_llegada}" id="llegada"/>
+                    <p:outputLabel value="idPersona" rendered="false"/>
+                    <p:inputText value="#{dispositivoBean.dispositivo.idPersona}" required="true" disabled="true" rendered="false"/>
+                    
+                </p:panelGrid>
+                 
+                <p:commandButton value="Registrar" actionListener="#{dispositivoBean.registrar()}" update=":lista:data"/>
+                <p:commandButton  type="reset" value="limpiar"  update=":lista:data" />
+              
+             </p:panel>
+        </h:form>
+                <br/><br/><br/>
+        <h:form id="lista">
+            
+                    <p:dataTable id="data" value="#{dispositivoBean.lstDispositivo}" var="dispositivo" paginator="true" rows="10">
+                     <p:column headerText="Imei" sortBy="#{dispositivo.imei}">
+                         <p:outputLabel value="#{dispositivo.imei}"/>
+                     </p:column>
+                     <p:column headerText="Modelo y Marca" sortBy="#{dispositivo.marca}">
+                         <p:outputLabel value="#{dispositivo.marca} #{dispositivo.modelo}"/>
+                     </p:column>
+                     <p:column headerText="No. Inv" sortBy="#{dispositivo.noInv}">
+                         <p:outputLabel value="#{dispositivo.noInv}"/>
+                     </p:column>
+                     <p:column headerText="Fecha de llegada" sortBy="#{dispositivo.fecha_llegada}">
+                         <p:outputLabel value="#{dispositivo.fecha_llegada}" />
+                     </p:column>
+                     
+                     <p:column headerText="MODIFICAR">
+                         <p:commandButton value="Modificar" actionListener="#{dispositivoBean.LeerId(dispositivo)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />
+                         <p:commandButton value="Eliminar" actionListener="#{dispositivoBean.eliminar(dispositivo)}" update="data" />
+                     </p:column>
+                 </p:dataTable>
+         </h:form>
+        <p:dialog header="DATOS" widgetVar="widgetDatos" id="modDatos" >
+            
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Imei " />
+                    <p:inputText value="#{dispositivoBean.dispositivo.imei}" required="true"/>
+                    <p:outputLabel value="Modelo " />
+                    <p:inputText value="#{dispositivoBean.dispositivo.modelo}" required="true"/>
+                    <p:outputLabel value="Marca "/>
+                    <p:inputText value="#{dispositivoBean.dispositivo.marca}" required="true"/>
+                    <p:outputLabel value="Numero de inventario " />
+                    <p:inputText value="#{dispositivoBean.dispositivo.noInv}" required="true" />
+                    <p:outputLabel value="Fecha de llegada "/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true" value="#{dispositivoBean.dispositivo.fecha_llegada}" id="llegada"/>
+                    
+                </p:panelGrid>    
+                <p:commandButton value="Modificar" actionListener="#{dispositivoBean.modificar()}" oncomplete="PF('widgetDatos').hide();" update=":lista:data"/> 
+                    
+            </h:form>        
+        </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
