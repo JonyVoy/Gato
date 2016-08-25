@@ -18,7 +18,17 @@ public class DispositivoBean {
     
     private Dispositivo dispositivo = new Dispositivo();
     private List<Dispositivo> lstDispositivo;
+    private List<Dispositivo> lstDispositivoEnt;
 
+    public List<Dispositivo> getLstDispositivoEnt() {
+        return lstDispositivoEnt;
+    }
+
+    public void setLstDispositivoEnt(List<Dispositivo> lstDispositivoEnt) {
+        this.lstDispositivoEnt = lstDispositivoEnt;
+    }
+    
+    
     public List<Dispositivo> getLstDispositivo() {
         return lstDispositivo;
     }
@@ -72,7 +82,26 @@ public class DispositivoBean {
             throw e;
         }
     }
-     
+ //--------------------------------------------------Lista filtrada para campo entrega-----------
+     public void listardispent(String valor) throws Exception{
+        
+        DispositivoDAO dao;
+        try{
+            if(valor.equals("F")){
+                if (isPostBack()==false){
+                        dao= new DispositivoDAO();
+                        lstDispositivoEnt = dao.listardispent();
+            }
+            
+            }else{
+                dao=new DispositivoDAO();
+                lstDispositivoEnt = dao.listardispent();
+            }                        
+        }catch(Exception e){
+            throw e;
+        }
+    }
+ //-------------------------------------------------------------------------------------------------    
      public void LeerId(Dispositivo disp) throws Exception{
         
         DispositivoDAO dao;
@@ -133,7 +162,7 @@ public class DispositivoBean {
         }
     }
 // Detalles
-    
+  /*  
     private detalles detalle = new detalles();
     private List<detalles> lstdetalle;
 
@@ -190,6 +219,7 @@ public void LeerId(detalles det) throws Exception{
             throw e;
         }
     }
-
+*/
+    
 }
 

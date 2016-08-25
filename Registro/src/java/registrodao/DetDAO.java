@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.detalles;
 
-/**
- *
- * @author Jony
- */
 public class DetDAO extends DAO{
     
     public List<detalles> listardet() throws Exception{

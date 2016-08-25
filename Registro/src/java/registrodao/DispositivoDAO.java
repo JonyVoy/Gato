@@ -59,7 +59,36 @@ public class DispositivoDAO extends DAO {
         }
             return lista;
     } 
+//--------------------------------------------Lista para seccion de entrega
     
+    public List<Dispositivo> listardispent() throws Exception{
+        List<Dispositivo> lista;
+        ResultSet rs;
+        try{
+            this.Conectar();
+            PreparedStatement st = this.getCn().prepareCall("SELECT id, Imei, Modelo, Marca, Numero_inv, Fecha_llegada,idPersona FROM Dispositivo where idPersona = 0");
+            rs = st.executeQuery();
+            lista = new ArrayList();
+            while(rs.next()){
+                Dispositivo disp = new Dispositivo();
+                disp.setId(rs.getInt("id"));
+                disp.setImei(rs.getString("Imei"));
+                disp.setModelo(rs.getString("Modelo"));
+                disp.setMarca(rs.getString("Marca"));
+                disp.setNoInv(rs.getString("Numero_inv"));
+                disp.setFecha_llegada(rs.getDate("Fecha_llegada"));
+                disp.setIdPersona(rs.getInt("idPersona"));
+                lista.add(disp);
+            }   
+        }catch(Exception e){
+                throw e;
+        }finally{
+            this.Cerrar();
+        }
+            return lista;
+    } 
+    
+   //-----------------------------------------------------------------------------------------------------------   
     public Dispositivo LeerId(Dispositivo disp) throws Exception{
         Dispositivo dispo = null;
         ResultSet rs;
@@ -148,7 +177,7 @@ public void eliminar(Dispositivo disp) throws Exception{
         }
     }
     
-    // Detalles de la entrega del dispositivo
+    /* Detalles de la entrega del dispositivo
     public List<detalles> listardet() throws Exception{
         List<detalles> lista;
         ResultSet rs;
@@ -225,5 +254,6 @@ public void eliminar(Dispositivo disp) throws Exception{
         }
           return detall;       
     }
+*/
    
 }

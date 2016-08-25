@@ -12,8 +12,9 @@
             <ui:define name="content">
                 
                 <f:event type="preRenderView" listener="#{accesoriosBean.listar('F')}"/>
-                <f:event type="preRenderView" listener="#{personaBean.listar('F')}"/>
+                <f:event type="preRenderView" listener="#{personaBean.listarpent('F')}"/>
                 <f:event type="preRenderView" listener="#{dispositivoBean.listar('F')}"/>
+                <f:event type="preRenderView" listener="#{dispositivoBean.listardispent('F')}"/>
                 <f:event type="preRenderView" listener="#{detallesBean.listardet('F')}"/>
                 
                 <p:growl id="msj" autoUpdate="true"/>
@@ -29,7 +30,7 @@
                     <p:outputLabel value="Dispositivo"/>
                     <p:selectOneMenu value="#{entregaBean.idDisp}" converter="omnifaces.SelectItemsConverter" >
                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
-                        <f:selectItems value="#{dispositivoBean.lstDispositivo}" var="disp" itemLabel="#{disp.marca} #{disp.modelo} #{disp.idPersona}" itemValue="#{disp.id}"/>
+                        <f:selectItems value="#{dispositivoBean.lstDispositivoEnt}" var="disp" itemLabel="#{disp.marca} #{disp.modelo} #{disp.idPersona}" itemValue="#{disp.id}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Accesorio"/>
                     <p:selectOneMenu value="#{entregaBean.accesorios}" converter="omnifaces.SelectItemsConverter">
@@ -64,7 +65,7 @@
                         <p:rowToggler />
                     </p:column>
                      <p:column headerText="imei" sortBy="#{dispositivo.imei}" filterBy="#{dispositivo.imei}" width="140">
-                         <p:outputLabel value="#{dispositivo.imei}"/>
+                         <p:outputLabel value="#{dispositivo.imei}" />
                      </p:column>
                         <p:column headerText="Modelo y Marca" sortBy="#{dispositivo.marca}" filterBy="#{dispositivo.marca}">
                          <p:outputLabel value="#{dispositivo.marca} #{dispositivo.modelo}"/>
@@ -78,23 +79,17 @@
                         <p:column headerText="Id De persona asignada" sortBy="#{dispositivo.idPersona}">
                          <p:outputLabel value="#{dispositivo.idPersona}" />
                      </p:column>   
-          <p:rowExpansion  >
-                                
-             <p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
+          <p:rowExpansion>
+              <p:panelGrid columns="2" columnClasses="label,#{detallesBean.lstdetalle}"  style="width:300px">
                 
                 <h:outputText value="Id  detalle de entrega:" />
-                <h:outputText value="#{dispositivoBean.detalle.idEntrega} " />
- 
+                <h:outputLabel  value="#{detallesBean.detalle.idEntrega}"/>
                 <h:outputText value="Year" />
-                <h:outputText value="#{dispositivo.modelo}" />
- 
+                
                 <h:outputText value="Color:" />
-                <h:outputText value="#{car.color}" style="color:#{car.color}"/>
- 
                 <h:outputText value="Price" />
-                <h:outputText value="$#{car.price}" />
-            </p:panelGrid>
-          
+                </p:panelGrid>
+              
         </p:rowExpansion> 
                      <p:column headerText="MODIFICAR Asignacion">
                          <p:commandButton value="Modificar" actionListener="#{dispositivoBean.LeerId(dispositivo)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />

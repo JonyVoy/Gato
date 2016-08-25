@@ -69,7 +69,26 @@ public class PersonaBean {
             throw e;
         }
     }
-     
+ //------------------------------listaFiltrada para la Entrega 
+      public void listarpent(String valor) throws Exception{
+        
+        PersonaDAO dao;
+        try{
+            if(valor.equals("F")){
+                if (isPostBack()==false){
+                        dao= new PersonaDAO();
+                        lstPersonas = dao.listarpent();
+            }
+            
+            }else{
+                dao=new PersonaDAO();
+                lstPersonas = dao.listarpent();
+            }                        
+        }catch(Exception e){
+            throw e;
+        }
+    }
+ //----------------------------    
      public void LeerId(Persona per) throws Exception{
         
         PersonaDAO dao;
@@ -102,6 +121,7 @@ public class PersonaBean {
         }
     }
      
+    
      public void eliminar(Persona per) throws Exception{
         
         PersonaDAO dao;

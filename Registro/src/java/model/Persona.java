@@ -13,6 +13,15 @@ public class Persona {
     private String Amaterno;
     private String area;
     private int No_Emp;
+    private int estado;
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 
     @Override
     public String toString() {

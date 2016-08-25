@@ -52,7 +52,9 @@
                 <br/><br/><br/>
         <h:form id="lista">
             
-                    <p:dataTable id="data" value="#{dispositivoBean.lstDispositivo}" var="dispositivo" paginator="true" rows="10">
+            <p:dataTable id="data" value="#{dispositivoBean.lstDispositivo}" var="dispositivo" paginator="true" rows="10" stickyHeader="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
                      <p:column headerText="Imei" sortBy="#{dispositivo.imei}">
                          <p:outputLabel value="#{dispositivo.imei}"/>
                      </p:column>
