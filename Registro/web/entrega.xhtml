@@ -73,12 +73,16 @@
                      <p:column headerText="No. Inv" sortBy="#{dispositivo.noInv}" width="110">
                          <p:outputLabel value="# #{dispositivo.noInv}"/>
                      </p:column>
-                        <p:column headerText="Fecha de llegada" sortBy="#{dispositivo.fecha_llegada}">
+                     <p:column headerText="Fecha de llegada" sortBy="#{dispositivo.fecha_llegada}">
                          <p:outputLabel value="#{dispositivo.fecha_llegada}" />
                      </p:column>
-                        <p:column headerText="Id De persona asignada" sortBy="#{dispositivo.idPersona}">
+                     <p:column headerText="Id De persona asignada" sortBy="#{dispositivo.idPersona}">
                          <p:outputLabel value="#{dispositivo.idPersona}" />
-                     </p:column>   
+                     </p:column>
+                        <p:column headerText="Fecha de cambio" sortBy="#{dispositivo.fecha_cambio}">
+                            <p:outputLabel value="#{dispositivo.fecha_cambio}" />
+                     </p:column>
+                        
           <p:rowExpansion>
               <p:panelGrid columns="2" columnClasses="label,#{detallesBean.lstdetalle}"  style="width:300px">
                 
@@ -100,7 +104,7 @@
             
             <h:form>
                 <p:panelGrid columns="2">
-                    <p:outputLabel value="Imei " />
+                    <p:outputLabel value="Imei" />
                     <p:inputText value="#{dispositivoBean.dispositivo.imei}" required="true" disabled="true"/>
                     <p:outputLabel value="Modelo " />
                     <p:inputText value="#{dispositivoBean.dispositivo.modelo}" required="true" disabled="true"/>
@@ -113,6 +117,11 @@
                         <f:selectItem noSelectionOption="true" itemLabel="Seleccionar" itemValue="#{null}"/>
                         <f:selectItems value="#{personaBean.lstPersonas}" var="per" itemLabel="#{per.nombre}" itemValue="#{per.id}"/>
                     </p:selectOneMenu>
+                    <p:outputLabel value="Fecha de cambio" for="fechaCambio"/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="fechaCambio" value="#{dispositivoBean.dispositivo.fecha_cambio}" required="true"/>
+                    <p:outputLabel value="Fecha de llegada" for="fechallegada"/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="fechallegada" value="#{dispositivoBean.dispositivo.fecha_llegada}" required="true"/>
+                 
                 </p:panelGrid>    
                 <p:commandButton value="Modificar" actionListener="#{dispositivoBean.asignar()}" oncomplete="PF('widgetDatos').hide();" update=":lista:data"/> 
                     

@@ -22,8 +22,7 @@ public class DispositivoDAO extends DAO {
             st.setString(3, disp.getMarca());
             st.setString(4, disp.getNoInv());
             st.setDate(5,new java.sql.Date(disp.getFecha_llegada().getTime()));
-            st.setInt(6, disp.getIdPersona());
-            
+            st.setInt(6, disp.getIdPersona());  
             st.executeUpdate();
             
         }catch(Exception e){
@@ -38,7 +37,7 @@ public class DispositivoDAO extends DAO {
         ResultSet rs;
         try{
             this.Conectar();
-            PreparedStatement st = this.getCn().prepareCall("SELECT id, Imei, Modelo, Marca, Numero_inv, Fecha_llegada,idPersona FROM Dispositivo");
+            PreparedStatement st = this.getCn().prepareCall("SELECT id, Imei, Modelo, Marca, Numero_inv, Fecha_llegada,idPersona,Fecha_cambio FROM Dispositivo order by id desc");
             rs = st.executeQuery();
             lista = new ArrayList();
             while(rs.next()){
@@ -50,6 +49,8 @@ public class DispositivoDAO extends DAO {
                 disp.setNoInv(rs.getString("Numero_inv"));
                 disp.setFecha_llegada(rs.getDate("Fecha_llegada"));
                 disp.setIdPersona(rs.getInt("idPersona"));
+                disp.setFecha_cambio(rs.getDate("Fecha_cambio"));
+                
                 lista.add(disp);
             }   
         }catch(Exception e){
@@ -94,7 +95,7 @@ public class DispositivoDAO extends DAO {
         ResultSet rs;
            try{
             this.Conectar();
-            PreparedStatement st = this.getCn().prepareStatement("SELECT id, Imei, Modelo, Marca, Numero_inv,Fecha_llegada,idPersona FROM Dispositivo WHERE id = ?");
+            PreparedStatement st = this.getCn().prepareStatement("SELECT id, Imei, Modelo, Marca, Numero_inv,Fecha_llegada,idPersona,Fecha_cambio FROM Dispositivo WHERE id = ?");
             st.setInt(1, disp.getId());
             rs = st.executeQuery();
            
@@ -107,6 +108,7 @@ public class DispositivoDAO extends DAO {
                 dispo.setNoInv(rs.getString("Numero_inv"));
                 dispo.setFecha_llegada(rs.getDate("Fecha_llegada"));
                 dispo.setIdPersona(rs.getInt("idPersona"));
+                dispo.setFecha_cambio(rs.getDate("Fecha_cambio"));
                 
                 
             }   
@@ -159,14 +161,16 @@ public void eliminar(Dispositivo disp) throws Exception{
     public void asignar(Dispositivo disp) throws Exception{
         try{
             this.Conectar();
-            PreparedStatement st = this.getCn().prepareStatement("UPDATE Dispositivo SET Imei = ?, Modelo = ?, Marca = ?, Numero_inv = ?,idPersona = ? WHERE id= ?" );
+            PreparedStatement st = this.getCn().prepareStatement("UPDATE Dispositivo SET Imei = ?, Modelo = ?, Marca = ?, Numero_inv = ?,idPersona = ?,Fecha_llegada = ?,Fecha_cambio=? WHERE id= ?" );
             st.setString(1, disp.getImei());
             st.setString(2, disp.getModelo());
             st.setString(3, disp.getMarca());
             st.setString(4, disp.getNoInv());
-            st.setInt(6, disp.getId());
             st.setInt(5, disp.getIdPersona());
+            st.setDate(7, new java.sql.Date(disp.getFecha_cambio().getTime()));
+            st.setDate(6,new java.sql.Date(disp.getFecha_llegada().getTime()));
             
+            st.setInt(8, disp.getId());
             
             
             st.executeUpdate();

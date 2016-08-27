@@ -13,15 +13,6 @@ public class Dispositivo {
     private int idPersona;
     private Date Fecha_entrega;
     private Date Fecha_cambio;
-    private Date Fecha_baja;
-
-    public Date getFecha_entrega() {
-        return Fecha_entrega;
-    }
-
-    public void setFecha_entrega(Date Fecha_entrega) {
-        this.Fecha_entrega = Fecha_entrega;
-    }
 
     public Date getFecha_cambio() {
         return Fecha_cambio;
@@ -30,15 +21,18 @@ public class Dispositivo {
     public void setFecha_cambio(Date Fecha_cambio) {
         this.Fecha_cambio = Fecha_cambio;
     }
+  
 
-    public Date getFecha_baja() {
-        return Fecha_baja;
-    }
-
-    public void setFecha_baja(Date Fecha_baja) {
-        this.Fecha_baja = Fecha_baja;
-    }
     
+    
+    public Date getFecha_entrega() {
+        return Fecha_entrega;
+    }
+
+    public void setFecha_entrega(Date Fecha_entrega) {
+        this.Fecha_entrega = Fecha_entrega;
+    }
+
     public int getIdPersona() {
         return idPersona;
     }

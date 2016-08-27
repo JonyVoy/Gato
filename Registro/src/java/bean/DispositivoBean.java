@@ -101,7 +101,7 @@ public class DispositivoBean {
             throw e;
         }
     }
- //-------------------------------------------------------------------------------------------------    
+ //------------------------------------------------------------------------------------------------    
      public void LeerId(Dispositivo disp) throws Exception{
         
         DispositivoDAO dao;
@@ -153,7 +153,7 @@ public class DispositivoBean {
         DispositivoDAO dao;
         try{
             dao= new DispositivoDAO();
-            dao.modificar(dispositivo);
+            dao.asignar(dispositivo);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos Correctamente Modificados"));
             this.listar("V");
             
