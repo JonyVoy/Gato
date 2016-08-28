@@ -1,12 +1,14 @@
 #top {
     position: relative;
     background-color: rgba(0, 35, 146, 0.9);
-    border-radius: 20px;
+    border-radius: 10px;
     color: black;
-    padding: 5px;
+    padding: 10px;
     margin: 0px 0px 10px 0px;
 }
-
+#menubar{
+    font-size: 20px;
+}
 #bottom {
     position: relative;
     background-color: #088A85;

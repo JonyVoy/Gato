@@ -119,9 +119,7 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="Fecha de cambio" for="fechaCambio"/>
                     <p:calendar pattern="dd/MM/yyyy" mask="true"  id="fechaCambio" value="#{dispositivoBean.dispositivo.fecha_cambio}" required="true"/>
-                    <p:outputLabel value="Fecha de llegada" for="fechallegada"/>
-                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="fechallegada" value="#{dispositivoBean.dispositivo.fecha_llegada}" required="true"/>
-                 
+                    
                 </p:panelGrid>    
                 <p:commandButton value="Modificar" actionListener="#{dispositivoBean.asignar()}" oncomplete="PF('widgetDatos').hide();" update=":lista:data"/> 
                     

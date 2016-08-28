@@ -5,7 +5,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
-    <body>
-        <p:link value="Ir" outcome="/persona"/>
-    </body>
+    
+    <h:head>
+        <title>BIENVENIDO</title>
+        <h:outputStylesheet library="css" name="index.css"/>
+    </h:head>  
+    <body id="index">
+        <div id="entrar">
+            <p:outputLabel id="bienvenido" value="Bienvenido" />
+            <br/><br/>
+            <p:button id="boton" value="Entrar" outcome="/persona" /> 
+        </div>   
+    
+         </body>
 </html>

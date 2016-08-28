@@ -1,0 +1,24 @@
+#index{
+    background-image:url("../..//resources/images/woodbg.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 800px;
+    margin: 0 auto;
+}
+
+#entrar{
+    margin: 200px auto;
+    padding: 50px 50px 50px 50px;
+    border-radius: 20px;
+    width: 40%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#bienvenido{
+    color: white;
+    font-size: 40px;
+}
+#boton{
+    font-size: 20px;
+}

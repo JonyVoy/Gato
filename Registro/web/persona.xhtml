@@ -14,6 +14,8 @@
 
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{personaBean.listar('F')}"/>
+                <f:event type="preRenderView" listener="#{areasDisponiblesBean.listarareas('F')}"/>
+                
                 <p:growl id="msj" autoUpdate="true"/>
                 <h:form>
                     <p:panel header="Registro de Personal" id="panelper">
@@ -27,10 +29,10 @@
                             <p:outputLabel value="Apellido materno " for="APmat"/>
                             <p:inputText value="#{personaBean.persona.amaterno}" required="true" id="APmat" requiredMessage="Apellido Materno necesario"><p:keyFilter mask="alpha"/></p:inputText>
                             <p:outputLabel value="Area " for="Area"/>
-                            <p:selectOneMenu value="#{personaBean.persona.area}" id="Area" required="true">
-                                <f:selectItem itemLabel="Area 1" itemValue="Area1" />
-                                <f:selectItem itemLabel="Area 2" itemValue="Area2" />
-                            </p:selectOneMenu> 
+                            <p:selectOneMenu  id="Area" value="#{personaBean.persona.area}" converter="omnifaces.SelectItemsConverter" >
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
+                                <f:selectItems value="#{areasDisponiblesBean.lstAreasDisponibles}" var="area" itemLabel="#{area.nombreArea}" itemValue="#{area.nombreArea}"/>
+                            </p:selectOneMenu>
                             <p:outputLabel value="status" rendered="false"/>
                             <p:inputText value="#{personaBean.persona.estado}" required="true" disabled="true" rendered="false"/>
                     
@@ -55,6 +57,9 @@
                         </p:column>
                         <p:column headerText="AREA" sortBy="#{persona.area}">
                             <p:outputLabel value="#{persona.area}"/>
+                        </p:column>
+                        <p:column  headerText="Habilitado para asignacion (0=deshabilitado)(1=Habilidato)" sortBy="#{persona.estado}">
+                            <p:outputLabel value="#{persona.estado}"/>
                         </p:column>
                         <p:column headerText="MODIFICAR" >
                             <p:commandButton value="Modificar" actionListener="#{personaBean.LeerId(persona)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />
