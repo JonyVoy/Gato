@@ -15,6 +15,7 @@
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{dispositivoBean.listar('F')}"/>
                 <f:event type="preRenderView" listener="#{personaBean.listar('F')}"/>
+                <f:event type="preRenderView" listener="#{marcasBean.listarmarcas('F')}"/>
                 
                 <p:growl id="msj" autoUpdate="true"/>
         <h:form>
@@ -23,14 +24,9 @@
                     <p:outputLabel value="Imei " for="imei"/>
                     <p:inputText  value="#{dispositivoBean.dispositivo.imei}" id="imei" required="true" requiredMessage="Imei ruerido" autocomplete="off" maxlength="15"/>
                     <p:outputLabel value="Marca " for="marca"/>
-                    <p:selectOneMenu value="#{dispositivoBean.dispositivo.marca}" id="marca" required="true" requiredMessage="Es necesario ingresar la marca" autoWidth="true">
-                        <f:selectItem itemLabel="Seleccione la marca" itemValue="" />
-                        <f:selectItem itemLabel="Apple" itemValue="Apple" />
-                        <f:selectItem itemLabel="Samsung" itemValue="Samsung" />
-                        <f:selectItem itemLabel="Nokia" itemValue="Nokia" />
-                        <f:selectItem itemLabel="Morotola" itemValue="Motorola" />
-                        <f:selectItem itemLabel="ZTE" itemValue="ZTE" />
-                        <f:selectItem itemLabel="HTC" itemValue="HTC" />
+                    <p:selectOneMenu  id="marca" value="#{dispositivoBean.dispositivo.marca}" converter="omnifaces.SelectItemsConverter" >
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
+                                <f:selectItems value="#{marcasBean.lstMarcas}" var="marca" itemLabel="#{marca.marca}" itemValue="#{marca.marca}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Modelo " for="modelo"/>
                     <p:inputText value="#{dispositivoBean.dispositivo.modelo}" id="modelo" required="true" requiredMessage="Modelo necesario" autocomplete="off" maxlength="15"/>
@@ -39,14 +35,13 @@
                     <p:inputText value="#{dispositivoBean.dispositivo.noInv}" required="true" id="noInv" requiredMessage="NO.Inventario Necesario" autocomplete="off"/>                             
                     <p:outputLabel value="Fecha De llegada" for="llegada"/>
                     <p:calendar pattern="dd/MM/yyyy" mask="true" value="#{dispositivoBean.dispositivo.fecha_llegada}" id="llegada"/>
-                    <p:outputLabel value="idPersona" rendered="false"/>
-                    <p:inputText value="#{dispositivoBean.dispositivo.idPersona}" required="true" disabled="true" rendered="false"/>
+                    <p:outputLabel value="idPersona" rendered="false" />
+                    <p:inputText value="#{dispositivoBean.dispositivo.idPersona}"  required="true" rendered="false" />
                     
                 </p:panelGrid>
                  
-                <p:commandButton value="Registrar" actionListener="#{dispositivoBean.registrar()}" update=":lista:data"/>
-                <p:commandButton  type="reset" value="limpiar"  update=":lista:data" />
-              
+                <p:commandButton value="Registrar" actionListener="#{dispositivoBean.registrar()}" update=":lista:data" action="dispositivo?faces-redirect=true"/>
+                
              </p:panel>
         </h:form>
                 <br/><br/><br/>

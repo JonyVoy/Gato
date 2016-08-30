@@ -22,9 +22,8 @@
                     <p:inputText  value="#{accesoriosBean.accesorios.nombreacc}" id="nombre" required="true" requiredMessage="Campo vacio" autocomplete="off" maxlength="15"/>
                 </p:panelGrid>
                  
-                <p:commandButton value="Registrar" actionListener="#{accesoriosBean.registrar()}" update=":lista:data"/>
-                <p:commandButton  type="reset" value="limpiar"  update=":lista:data" />
-              
+                <p:commandButton value="Registrar" actionListener="#{accesoriosBean.registrar()}" update=":lista:data" action="accesorios?faces-redirect=true"/>
+                
              </p:panel>
         </h:form>
                 <br/><br/><br/>

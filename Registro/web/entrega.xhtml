@@ -25,7 +25,7 @@
                     <p:outputLabel value="Empleado"/>
                     <p:selectOneMenu value="#{entregaBean.entrega.idPer_ent}" converter="omnifaces.SelectItemsConverter" >
                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
-                        <f:selectItems value="#{personaBean.lstPersonas}" var="per" itemLabel="#{per.nombre} #{per.amaterno} #{per.apaterno} #{per.id}" itemValue="#{per.id}"/>
+                        <f:selectItems value="#{personaBean.lstPersonas}" var="per" itemLabel="#{per.nombre} #{per.apaterno} #{per.amaterno} #{per.area}" itemValue="#{per.id}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Dispositivo"/>
                     <p:selectOneMenu value="#{entregaBean.idDisp}" converter="omnifaces.SelectItemsConverter" >
@@ -58,73 +58,45 @@
                 </p:panel> 
                 </h:form>
                 <br/><br/>
-                <h:form id="lista">
+                <h:form id="lista" >
                     
-                    <p:dataTable id="data" value="#{dispositivoBean.lstDispositivo}" var="dispositivo" paginator="true" paginatorPosition="top" rows="10" scrollable="true" >
+                    <p:dataTable id="data" value="#{detallesBean.lstdetalle}" var="detalle" paginator="true" paginatorPosition="top" rows="10" scrollable="true" >
                     <p:column style="width:16px">
                         <p:rowToggler />
                     </p:column>
-                     <p:column headerText="imei" sortBy="#{dispositivo.imei}" filterBy="#{dispositivo.imei}" width="140">
-                         <p:outputLabel value="#{dispositivo.imei}" />
+                        <p:column headerText="imei" sortBy="#{detalle.imei}" width="140">
+                            <p:outputLabel value="#{detalle.imei}" />
                      </p:column>
-                        <p:column headerText="Modelo y Marca" sortBy="#{dispositivo.marca}" filterBy="#{dispositivo.marca}">
-                         <p:outputLabel value="#{dispositivo.marca} #{dispositivo.modelo}"/>
+                        <p:column headerText="Modelo y Marca" sortBy="#{detalle.marca}">
+                         <p:outputLabel value="#{detalle.marca} #{detalle.modelo}"/>
                      </p:column>
-                     <p:column headerText="No. Inv" sortBy="#{dispositivo.noInv}" width="110">
-                         <p:outputLabel value="# #{dispositivo.noInv}"/>
+                        <p:column headerText="Fecha de la entrega" sortBy="#{detalle.fecha_ent}" width="110">
+                            <p:outputLabel value="#{detalle.fecha_ent}"/>
                      </p:column>
-                     <p:column headerText="Fecha de llegada" sortBy="#{dispositivo.fecha_llegada}">
-                         <p:outputLabel value="#{dispositivo.fecha_llegada}" />
+                        <p:column headerText="Nombre del empleado" sortBy="#{detalle.nombre_emp}">
+                            <p:outputLabel value="#{detalle.nombre_emp} #{detalle.pat_emp} #{detalle.mat_emp}" />
                      </p:column>
-                     <p:column headerText="Id De persona asignada" sortBy="#{dispositivo.idPersona}">
-                         <p:outputLabel value="#{dispositivo.idPersona}" />
+                        <p:column headerText="Area" sortBy="#{detalle.area}">
+                            <p:outputLabel value="#{detalle.area}" />
                      </p:column>
-                        <p:column headerText="Fecha de cambio" sortBy="#{dispositivo.fecha_cambio}">
-                            <p:outputLabel value="#{dispositivo.fecha_cambio}" />
-                     </p:column>
-                        
+                                 
           <p:rowExpansion>
-              <p:panelGrid columns="2" columnClasses="label,#{detallesBean.lstdetalle}"  style="width:300px">
+              <p:panelGrid columns="2" style="width:300px">
                 
-                <h:outputText value="Id  detalle de entrega:" />
-                <h:outputLabel  value="#{detallesBean.detalle.idEntrega}"/>
-                <h:outputText value="Year" />
-                
-                <h:outputText value="Color:" />
-                <h:outputText value="Price" />
-                </p:panelGrid>
+                <p:outputLabel value="Id  detalle de entrega:" />
+                <p:outputLabel  value="#{detalle.idEntrega}"/>
+                <p:outputLabel value="Fecha de llegada del dispositivo"/>
+                <p:outputLabel value="#{detalle.fecha_llegada}"/>
+                <p:outputLabel value="Fecha De Cambio del dispositivo"/>
+                <p:outputLabel value="#{detalle.fecha_cambio}"/>
+                <p:outputLabel value="Detalles"/>
+                <p:outputLabel value="#{detalle.nombre} #{detalle.cantidad}"/>
+               </p:panelGrid>
               
         </p:rowExpansion> 
-                     <p:column headerText="MODIFICAR Asignacion">
-                         <p:commandButton value="Modificar" actionListener="#{dispositivoBean.LeerId(dispositivo)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />
-                     </p:column>
+                     
                  </p:dataTable>
          </h:form>
-        <p:dialog header="DATOS" widgetVar="widgetDatos" id="modDatos" >
-            
-            <h:form>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Imei" />
-                    <p:inputText value="#{dispositivoBean.dispositivo.imei}" required="true" disabled="true"/>
-                    <p:outputLabel value="Modelo " />
-                    <p:inputText value="#{dispositivoBean.dispositivo.modelo}" required="true" disabled="true"/>
-                    <p:outputLabel value="Marca "/>
-                    <p:inputText value="#{dispositivoBean.dispositivo.marca}" required="true" disabled="true"/>
-                    <p:outputLabel value="Numero de inventario " />
-                    <p:inputText value="#{dispositivoBean.dispositivo.noInv}" required="true"  disabled="true"/>
-                    <p:outputLabel value="Cambiar asignacion"/>
-                    <p:selectOneMenu value="#{dispositivoBean.dispositivo.idPersona}">
-                        <f:selectItem noSelectionOption="true" itemLabel="Seleccionar" itemValue="#{null}"/>
-                        <f:selectItems value="#{personaBean.lstPersonas}" var="per" itemLabel="#{per.nombre}" itemValue="#{per.id}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Fecha de cambio" for="fechaCambio"/>
-                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="fechaCambio" value="#{dispositivoBean.dispositivo.fecha_cambio}" required="true"/>
-                    
-                </p:panelGrid>    
-                <p:commandButton value="Modificar" actionListener="#{dispositivoBean.asignar()}" oncomplete="PF('widgetDatos').hide();" update=":lista:data"/> 
-                    
-            </h:form>        
-        </p:dialog>
             </ui:define>
 
         </ui:composition>

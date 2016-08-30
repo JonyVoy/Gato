@@ -2,13 +2,21 @@
     position: relative;
     background-color: rgba(0, 35, 146, 0.9);
     border-radius: 10px;
-    color: black;
-    padding: 10px;
-    margin: 0px 0px 10px 0px;
+    padding: 25px;
+    padding-bottom: 10px;
+    margin: 0px 0px 30px 0px;
 }
 #menubar{
-    font-size: 20px;
+    font-size: 25px;
 }
+#content{
+    padding: 35px;
+    margin: auto;
+    text-transform: capitalize;
+    background-color: rgba(1, 56, 96, 0.3);
+    border-radius: 20px;;
+}
+
 #bottom {
     position: relative;
     background-color: #088A85;
@@ -35,7 +43,7 @@
 .center_content {
     position: relative;
     background-color: #dddddd;
-    padding: 5px;
+    padding: 10px;
 }
 
 .left_content {

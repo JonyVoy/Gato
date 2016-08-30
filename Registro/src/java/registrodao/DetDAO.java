@@ -19,12 +19,14 @@ public class DetDAO extends DAO{
         lista = new ArrayList();
         try{
             this.Conectar();
-            PreparedStatement st = this.getCn().prepareCall("Select Accesorios.Nombre, Detalle_Entrega.cantidad,Detalle_Entrega.idEntrega,Entrega.Fecha_ent,Dispositivo.Marca,Dispositivo.Modelo,Persona.Nombre_emp,Persona.Pat_emp,Persona.Mat_emp,Detalle_Entrega.idDisp\n" +
-                                                                "From Accesorios\n" +
-                                                                "Inner Join Detalle_Entrega On Accesorios.idAc = Detalle_Entrega.idAc\n" +
-                                                                "Inner Join Entrega On Detalle_Entrega.idEntrega=Entrega.idEntrega\n" +
-                                                                "Inner Join Dispositivo on Dispositivo.id=Detalle_Entrega.idDisp\n" +
-                                                                "Inner Join Persona on Persona.id=Dispositivo.idPersona");
+            PreparedStatement st = this.getCn().prepareCall("Select Detalle_Entrega.idDisp,Accesorios.Nombre, Detalle_Entrega.cantidad,Detalle_Entrega.idEntrega,Entrega.Fecha_ent,\n" +
+                                                            "Dispositivo.Marca,Dispositivo.Modelo,Dispositivo.Imei,Dispositivo.Fecha_llegada,Dispositivo.Fecha_cambio,\n" +
+                                                            "Persona.Nombre_emp,Persona.Pat_emp,Persona.Mat_emp,Persona.Area\n" +
+                                                            "From Accesorios\n" +
+                                                            "Inner Join Detalle_Entrega On Accesorios.idAc = Detalle_Entrega.idAc\n" +
+                                                            "Inner Join Entrega On Detalle_Entrega.idEntrega=Entrega.idEntrega\n" +
+                                                            "Inner Join Dispositivo on Dispositivo.id=Detalle_Entrega.idDisp\n" +
+                                                            "Inner Join Persona on Persona.id=Dispositivo.idPersona order by idEntrega desc");
             
             rs = st.executeQuery();
             lista = new ArrayList();
@@ -36,9 +38,13 @@ public class DetDAO extends DAO{
                 det.setFecha_ent(rs.getDate("Fecha_ent"));
                 det.setMarca(rs.getString("Marca"));
                 det.setModelo(rs.getString("Modelo"));
+                det.setImei(rs.getString("Imei"));
+                det.setFecha_llegada(rs.getDate("Fecha_llegada"));
+                det.setFecha_cambio(rs.getDate("Fecha_cambio"));
                 det.setNombre_emp(rs.getString("Nombre_emp"));
                 det.setPat_emp(rs.getString("Pat_emp"));
                 det.setMat_emp(rs.getString("Mat_emp"));
+                det.setArea(rs.getString("Area"));
                 det.setIdDisp(rs.getInt("idDisp"));
                 lista.add(det);
                 
@@ -56,13 +62,15 @@ public class DetDAO extends DAO{
         ResultSet rs;
            try{
             this.Conectar();
-            PreparedStatement st = this.getCn().prepareStatement("Select Accesorios.Nombre, Detalle_Entrega.cantidad,Detalle_Entrega.idEntrega,Entrega.Fecha_ent,Dispositivo.Marca,Dispositivo.Modelo,Persona.Nombre_emp,Persona.Pat_emp,Persona.Mat_emp\n" +
-                                                                        "From Accesorios\n" +
-                                                                        "Inner Join Detalle_Entrega On Accesorios.idAc = Detalle_Entrega.idAc\n" +
-                                                                        "Inner Join Entrega On Detalle_Entrega.idEntrega=Entrega.idEntrega\n" +
-                                                                        "Inner Join Dispositivo on Dispositivo.id=Detalle_Entrega.idDisp\n" +
-                                                                        "Inner Join Persona on Persona.id=Dispositivo.idPersona\n" +
-                                                                        "where idDisp = ?");
+            PreparedStatement st = this.getCn().prepareStatement("Select Detalle_Entrega.idDisp,Accesorios.Nombre, Detalle_Entrega.cantidad,Detalle_Entrega.idEntrega,Entrega.Fecha_ent,\n" +
+                                                                    "Dispositivo.Marca,Dispositivo.Modelo,Dispositivo.Imei,Dispositivo.Fecha_llegada,Dispositivo.Fecha_cambio,\n" +
+                                                                    "Persona.Nombre_emp,Persona.Pat_emp,Persona.Mat_emp,Persona.Area\n" +
+                                                                    "From Accesorios\n" +
+                                                                    "Inner Join Detalle_Entrega On Accesorios.idAc = Detalle_Entrega.idAc\n" +
+                                                                    "Inner Join Entrega On Detalle_Entrega.idEntrega=Entrega.idEntrega\n" +
+                                                                    "Inner Join Dispositivo on Dispositivo.id=Detalle_Entrega.idDisp\n" +
+                                                                    "Inner Join Persona on Persona.id=Dispositivo.idPersona\n" +
+                                                                    "where idDisp = ?");
             st.setInt(1, det.getIdDisp());
             rs = st.executeQuery();
            
@@ -74,9 +82,13 @@ public class DetDAO extends DAO{
                 detall.setFecha_ent(rs.getDate("Fecha_ent"));
                 detall.setMarca(rs.getString("Marca"));
                 detall.setModelo(rs.getString("Modelo"));
+                detall.setImei(rs.getString("Imei"));
+                detall.setFecha_llegada(rs.getDate("Fecha_llegada"));
+                detall.setFecha_cambio(rs.getDate("Fecha_cambio"));
                 detall.setNombre_emp(rs.getString("Nombre_emp"));
                 detall.setPat_emp(rs.getString("Pat_emp"));
                 detall.setMat_emp(rs.getString("Mat_emp"));
+                detall.setArea(rs.getString("Area"));
                 detall.setIdDisp(rs.getInt("idDisp"));
                 
                 

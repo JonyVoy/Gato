@@ -89,7 +89,39 @@ public class DispositivoDAO extends DAO {
             return lista;
     } 
     
-   //-----------------------------------------------------------------------------------------------------------   
+   //-----------------------------------------------------------------------------------------------------------
+    //--------------------------------------------Lista para seccion de cambios
+    
+    public List<Dispositivo> listardispcambio() throws Exception{
+        List<Dispositivo> lista;
+        ResultSet rs;
+        try{
+            this.Conectar();
+            PreparedStatement st = this.getCn().prepareCall("SELECT id, Imei, Modelo, Marca, Numero_inv, Fecha_llegada,idPersona,Fecha_cambio FROM Dispositivo where idPersona != 0");
+            rs = st.executeQuery();
+            lista = new ArrayList();
+            while(rs.next()){
+                Dispositivo disp = new Dispositivo();
+                disp.setId(rs.getInt("id"));
+                disp.setImei(rs.getString("Imei"));
+                disp.setModelo(rs.getString("Modelo"));
+                disp.setMarca(rs.getString("Marca"));
+                disp.setNoInv(rs.getString("Numero_inv"));
+                disp.setFecha_llegada(rs.getDate("Fecha_llegada"));
+                disp.setIdPersona(rs.getInt("idPersona"));
+                disp.setFecha_cambio(rs.getDate("Fecha_cambio"));
+                                
+                lista.add(disp);
+            }   
+        }catch(Exception e){
+                throw e;
+        }finally{
+            this.Cerrar();
+        }
+            return lista;
+    } 
+    
+   //----------------------------------------------------------------------------------------------------------- 
     public Dispositivo LeerId(Dispositivo disp) throws Exception{
         Dispositivo dispo = null;
         ResultSet rs;

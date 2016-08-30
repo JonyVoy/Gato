@@ -47,7 +47,10 @@ public class PersonaBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos Correctamente Guardados"));
             this.listar("V");
         }catch(Exception e){
-            throw e;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contacta al admin."));
+        }finally {
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+            
         }
     }
     

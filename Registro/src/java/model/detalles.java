@@ -10,11 +10,49 @@ public class detalles {
     private Date Fecha_ent;
     private String Marca;
     private String Modelo;
+    private String imei;
+    private Date Fecha_llegada;
+    private Date Fecha_cambio;
     private String Nombre_emp;
     private String Pat_emp;
     private String Mat_emp;
+    private String Area;
     private int idDisp;
 
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public Date getFecha_llegada() {
+        return Fecha_llegada;
+    }
+
+    public void setFecha_llegada(Date Fecha_llegada) {
+        this.Fecha_llegada = Fecha_llegada;
+    }
+
+    public Date getFecha_cambio() {
+        return Fecha_cambio;
+    }
+
+    public void setFecha_cambio(Date Fecha_cambio) {
+        this.Fecha_cambio = Fecha_cambio;
+    }
+
+    public String getArea() {
+        return Area;
+    }
+
+    public void setArea(String Area) {
+        this.Area = Area;
+    }
+
+    
+    
     public int getIdDisp() {
         return idDisp;
     }

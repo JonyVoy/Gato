@@ -37,7 +37,7 @@ public class PersonaDAO extends DAO {
         ResultSet rs;
         try{
             this.Conectar();
-            PreparedStatement st = this.getCn().prepareCall("SELECT id,No_Emp, Nombre_emp, Pat_emp, Mat_emp, Area,estado FROM Persona order by id desc");
+            PreparedStatement st = this.getCn().prepareCall("SELECT id,No_Emp, Nombre_emp, Pat_emp, Mat_emp, Area,estado FROM Persona where id>0 order by id desc");
             rs = st.executeQuery();
             lista = new ArrayList();
             while(rs.next()){

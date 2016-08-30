@@ -15,7 +15,7 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top"></ui:insert>
+            <ui:insert name="top">
             <h1>Sistema de registro y asignacion de dispositivos</h1>
             
             <h:form styleClass="menubar" > 
@@ -24,13 +24,12 @@
                     <p:menuitem url="persona.xhtml" value="Registro de Empleado"/>
                     <p:menuitem url="dispositivo.xhtml" value="Registro de Dispositivos"/>
                     <p:menuitem url="accesorios.xhtml" value="Agregar accesorios"/>
-                    <p:menuitem url="Asignacion.xhtml" value="Asignar"/>
-                    <p:menuitem url="entrega.xhtml" value="entrega"/>
-                
+                    <p:menuitem url="entrega.xhtml" value="Entregas"/>
+                    <p:menuitem url="cambios.xhtml" value="Cambios"/>
                 </p:menubar>
             </h:form>     
             
-            
+            </ui:insert>
         </div>
         
         <div id="content">

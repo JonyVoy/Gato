@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/plantilla.xhtml">
+
+            <ui:define name="content">
+                <f:event type="preRenderView" listener="#{dispositivoBean.listardispcambio('F')}"/>
+                <f:event type="preRenderView" listener="#{personaBean.listar('F')}"/>
+                <f:event type="preRenderView" listener="#{detallesBean.listardet('F')}"/>
+                
+                <p:growl id="msj" autoUpdate="true"/>
+                
+                <h:form id="lista">
+                    
+                    <p:dataTable id="data" value="#{dispositivoBean.lstDispositivoCambio}" var="dispositivo" paginator="true" paginatorPosition="top" rows="10" scrollable="true" >
+                        
+                     <p:column headerText="imei" sortBy="#{dispositivo.imei}" width="140">
+                         <p:outputLabel value="#{dispositivo.imei}"/>
+                     </p:column>
+                        <p:column headerText="Modelo y Marca" sortBy="#{dispositivo.marca}">
+                         <p:outputLabel value="#{dispositivo.marca} #{dispositivo.modelo}"/>
+                     </p:column>
+                     <p:column headerText="No. Inv" sortBy="#{dispositivo.noInv}" width="110">
+                         <p:outputLabel value="# #{dispositivo.noInv}"/>
+                     </p:column>
+                        <p:column headerText="Fecha de llegada" sortBy="#{dispositivo.fecha_llegada}">
+                         <p:outputLabel value="#{dispositivo.fecha_llegada}" />
+                     </p:column>
+                       <p:column headerText="Id De persona asignada" sortBy="#{dispositivo.idPersona}">
+                         <p:outputLabel value="#{dispositivo.idPersona}"  />
+                       </p:column>
+                        <p:column headerText="Fecha de cambio" sortBy="#{dispositivo.fecha_cambio}">
+                            <p:outputLabel value="#{dispositivo.fecha_cambio}" />
+                     </p:column>
+                      
+                     <p:column headerText="MODIFICAR Asignacion">
+                         <p:commandButton value="Modificar" actionListener="#{dispositivoBean.LeerId(dispositivo)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />
+                     </p:column>
+                 </p:dataTable>
+         </h:form>
+        <p:dialog header="DATOS" widgetVar="widgetDatos" id="modDatos" >
+            
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Imei" />
+                    <p:inputText value="#{dispositivoBean.dispositivo.imei}" required="true" disabled="true"/>
+                    <p:outputLabel value="Modelo " />
+                    <p:inputText value="#{dispositivoBean.dispositivo.modelo}" required="true" disabled="true"/>
+                    <p:outputLabel value="Marca "/>
+                    <p:inputText value="#{dispositivoBean.dispositivo.marca}" required="true" disabled="true"/>
+                    <p:outputLabel value="Numero de inventario " />
+                    <p:inputText value="#{dispositivoBean.dispositivo.noInv}" required="true"  disabled="true"/>
+                    <p:outputLabel value="Cambiar asignacion"/>
+                    <p:selectOneMenu value="#{dispositivoBean.dispositivo.idPersona}" >
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccionar" itemValue="#{null}"/>
+                        <f:selectItems value="#{personaBean.lstPersonas}" var="per" itemLabel="#{per.nombre} #{per.apaterno} #{per.amaterno} #{per.area}" itemValue="#{per.id}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Fecha de cambio" for="fechaCambio"/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="fechaCambio" value="#{dispositivoBean.dispositivo.fecha_cambio}" required="true"/>
+                    
+                </p:panelGrid>    
+                <p:commandButton value="Modificar" actionListener="#{dispositivoBean.asignar()}" oncomplete="PF('widgetDatos').hide();" update=":lista:data"/> 
+                    
+            </h:form>        
+        </p:dialog>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

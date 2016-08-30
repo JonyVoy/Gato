@@ -94,7 +94,7 @@ public class entregaBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se asigno el dispositivo"));
             
         }catch(Exception e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contacta al admin."));
         }finally {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
             

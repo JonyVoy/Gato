@@ -19,7 +19,16 @@ public class DispositivoBean {
     private Dispositivo dispositivo = new Dispositivo();
     private List<Dispositivo> lstDispositivo;
     private List<Dispositivo> lstDispositivoEnt;
+    private List<Dispositivo> lstDispositivoCambio;
 
+    public List<Dispositivo> getLstDispositivoCambio() {
+        return lstDispositivoCambio;
+    }
+
+    public void setLstDispositivoCambio(List<Dispositivo> lstDispositivoCambio) {
+        this.lstDispositivoCambio = lstDispositivoCambio;
+    }
+    
     public List<Dispositivo> getLstDispositivoEnt() {
         return lstDispositivoEnt;
     }
@@ -60,7 +69,10 @@ public class DispositivoBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos Correctamente Guardados"));
             this.listar("V");
         }catch(Exception e){
-            throw e;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contacta al admin."));
+        }finally {
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+            
         }
     }
     
@@ -101,7 +113,27 @@ public class DispositivoBean {
             throw e;
         }
     }
- //------------------------------------------------------------------------------------------------    
+ //------------------------------------------------------------------------------------------------   
+ //--------------------------------------------------Lista filtrada para cambios-----------
+     public void listardispcambio(String valor) throws Exception{
+        
+        DispositivoDAO dao;
+        try{
+            if(valor.equals("F")){
+                if (isPostBack()==false){
+                        dao= new DispositivoDAO();
+                        lstDispositivoCambio = dao.listardispcambio();
+            }
+            
+            }else{
+                dao=new DispositivoDAO();
+                lstDispositivoCambio = dao.listardispcambio();
+            }                        
+        }catch(Exception e){
+            throw e;
+        }
+    }
+ //------------------------------------------------------------------------------------------------       
      public void LeerId(Dispositivo disp) throws Exception{
         
         DispositivoDAO dao;
