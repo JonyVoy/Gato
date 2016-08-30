@@ -1,6 +1,9 @@
+#container{
+    min-height: 100%;
+}
 #top {
     position: relative;
-    background-color: rgba(0, 35, 146, 0.9);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 25px;
     padding-bottom: 10px;
@@ -11,15 +14,16 @@
 }
 #content{
     padding: 35px;
-    margin: auto;
+    margin: 20px;
+    box-sizing: border-box;
     text-transform: capitalize;
     background-color: rgba(1, 56, 96, 0.3);
     border-radius: 20px;;
 }
 
 #bottom {
-    position: relative;
-    background-color: #088A85;
+    align-self: flex-end;
+    background-color: rgba(0, 0, 44, 0.5);
     border-radius: 20px;
     padding: 5px;
     margin: 10px 0px 0px 0px;
@@ -59,13 +63,13 @@
 }
 
 #top a:link, #top a:visited {
-  color: grey;
+  color: seagreen;
   font-weight : bold;
   text-decoration: none;
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  color: black;
+  color: olivedrab;
   font-weight : bold;
   text-decoration : underline;
 }

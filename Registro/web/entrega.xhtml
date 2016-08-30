@@ -23,34 +23,33 @@
                     <p:panel header="Entrega de dispositivos">   
                  <p:panelGrid columns="2">
                     <p:outputLabel value="Empleado"/>
-                    <p:selectOneMenu value="#{entregaBean.entrega.idPer_ent}" converter="omnifaces.SelectItemsConverter" >
+                    <p:selectOneMenu value="#{entregaBean.entrega.idPer_ent}" converter="omnifaces.SelectItemsConverter" required="true" requiredMessage="Seleccione un Empleado">
                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
                         <f:selectItems value="#{personaBean.lstPersonas}" var="per" itemLabel="#{per.nombre} #{per.apaterno} #{per.amaterno} #{per.area}" itemValue="#{per.id}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Dispositivo"/>
-                    <p:selectOneMenu value="#{entregaBean.idDisp}" converter="omnifaces.SelectItemsConverter" >
+                    <p:selectOneMenu value="#{entregaBean.idDisp}" converter="omnifaces.SelectItemsConverter" required="true" requiredMessage="Seleccione un Dispositivo">
                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
                         <f:selectItems value="#{dispositivoBean.lstDispositivoEnt}" var="disp" itemLabel="#{disp.marca} #{disp.modelo} #{disp.idPersona}" itemValue="#{disp.id}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Accesorio"/>
-                    <p:selectOneMenu value="#{entregaBean.accesorios}" converter="omnifaces.SelectItemsConverter">
+                    <p:selectOneMenu value="#{entregaBean.accesorios}" converter="omnifaces.SelectItemsConverter" required="true">
                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
                         <f:selectItems value="#{accesoriosBean.lstAccesorios}" var="acc" itemLabel="#{acc.nombreacc}" itemValue="#{acc}"/>
-                    
                     </p:selectOneMenu>
                     <p:outputLabel value="Caantidad" />
-                    <p:inputText value="#{entregaBean.cantidad}" />
+                    <p:inputText value="#{entregaBean.cantidad}" required="true"/>
                     <p:outputLabel value="Fecha De entrega" for="entrega"/>
-                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="entrega" value="#{entregaBean.entrega.fecha_ent}"/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true"  id="entrega" value="#{entregaBean.entrega.fecha_ent}" required="true" requiredMessage="Seleccione una fecha para la entrega"/>
                  </p:panelGrid>
                        
                     <p:commandButton value="Agregar a lista" actionListener="#{entregaBean.agregar()}" update="detalle"/>
                     <br/><br/>
                     <p:dataTable id="detalle" value="#{entregaBean.lista}" var="det">
-                        <p:column headerText="Accesorios">
+                        <p:column headerText="Accesorios" >
                             <p:outputLabel value="#{det.accesorios.nombreacc}" />
                         </p:column>
-                        <p:column headerText="cantidad">
+                        <p:column headerText="cantidad" >
                            #{det.cantidad}
                         </p:column>
                     </p:dataTable>

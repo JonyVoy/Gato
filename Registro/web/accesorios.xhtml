@@ -27,11 +27,11 @@
              </p:panel>
         </h:form>
                 <br/><br/><br/>
-        <h:form id="lista">
+        <h:form id="lista" >
             
-            <p:dataTable id="data" value="#{accesoriosBean.lstAccesorios}" var="accesorios" paginator="true" rows="10">
-                <p:column headerText="Nombre del accesorio" sortBy="#{accesorios.nombreacc}">
-                    <p:outputLabel value="#{accesorios.nombreacc}"/>
+            <p:dataTable id="data" value="#{accesoriosBean.lstAccesorios}" var="accesorios" paginator="true" rows="10" >
+                <p:column headerText="Nombre del accesorio" sortBy="#{accesorios.nombreacc}" >
+                    <p:outputLabel value="#{accesorios.nombreacc}" />
                 </p:column>             
                 <p:column headerText="MODIFICAR">
                     <p:commandButton value="Modificar" actionListener="#{accesoriosBean.LeerId(accesorios)}" oncomplete="PF('widgetDatos').show();" update=":modDatos" />
