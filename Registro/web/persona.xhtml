@@ -23,11 +23,11 @@
                             <p:outputLabel value="Numero De Empleado #" for="noEmp"/>
                             <p:inputText value="#{personaBean.persona.no_Emp}" id="noEmp" required="true" requiredMessage="Numero de empleado requerido" />
                             <p:outputLabel value="Nombre " for="nombre"/>
-                            <p:inputText value="#{personaBean.persona.nombre}" id="nombre" required="true" requiredMessage="Nombre invalido"><p:keyFilter mask="alpha"/></p:inputText>
+                            <p:inputText value="#{personaBean.persona.nombre}" id="nombre" required="true" requiredMessage="Nombre invalido"></p:inputText>
                             <p:outputLabel value="Apellido paterno " for="APat"/>
-                            <p:inputText value="#{personaBean.persona.apaterno}" id="APat" required="true" requiredMessage="Apellido Paterno necesario"><p:keyFilter mask="alpha"/></p:inputText>
+                            <p:inputText value="#{personaBean.persona.apaterno}" id="APat" required="true" requiredMessage="Apellido Paterno necesario"></p:inputText>
                             <p:outputLabel value="Apellido materno " for="APmat"/>
-                            <p:inputText value="#{personaBean.persona.amaterno}" required="true" id="APmat" requiredMessage="Apellido Materno necesario"><p:keyFilter mask="alpha"/></p:inputText>
+                            <p:inputText value="#{personaBean.persona.amaterno}" required="true" id="APmat" requiredMessage="Apellido Materno necesario"></p:inputText>
                             <p:outputLabel value="Area " for="Area"/>
                             <p:selectOneMenu  id="Area" value="#{personaBean.persona.area}" converter="omnifaces.SelectItemsConverter" >
                                 <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="null"/>
