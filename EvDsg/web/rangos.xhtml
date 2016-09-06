@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <p:panelGrid styleClass="PanRangos">
+
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="9">RANGOS DE CALIFICACIÓN</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2">FACTORES DE DESEMPEÑO</p:column>
+                            <p:column colspan="4">PUNTAJE</p:column>
+                            <p:column colspan="3">TABLA DE CALIFICACIÓN</p:column>
+                        </p:row>
+
+                    </f:facet>
+
+                    <p:row>
+                        <p:column rowspan="2">1</p:column>
+                        <p:column rowspan="2">AREAS COMUNES INTERNAS</p:column>
+
+                        <p:column styleClass="titulos">PASILLOS INTERNOS</p:column>
+                        <p:column styleClass="titulos">SALAS DE JUNTA</p:column>
+                        <p:column styleClass="titulos">SEÑALIZACION</p:column>
+                        <p:column styleClass="titulos">PUERTAS</p:column>
+
+                        <p:column styleClass="titulos">DESCRIPCIÓN</p:column>
+                        <p:column styleClass="titulos">SIGLA</p:column>
+                        <p:column styleClass="titulos">VALOR</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column styleClass="titulos">EXCELENTE</p:column>
+                        <p:column>E</p:column>
+                        <p:column>100</p:column>
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">2</p:column>
+                        <p:column rowspan="2">LIMPIEZA DE SANITARIOS</p:column>
+
+                        <p:column styleClass="titulos">W.C</p:column>
+                        <p:column styleClass="titulos">CANCELES</p:column>
+                        <p:column styleClass="titulos">PISOS</p:column>
+                        <p:column styleClass="titulos">LAVABOS</p:column>
+
+                        <p:column styleClass="titulos">BIEN</p:column>
+                        <p:column>B</p:column>
+                        <p:column>75</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column styleClass="titulos">REGULAR</p:column>
+                        <p:column>R</p:column>
+                        <p:column>50</p:column>
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">3</p:column>
+                        <p:column rowspan="2">LIMPIEZA DE OFICINAS</p:column>
+
+                        <p:column styleClass="titulos">PISOS</p:column>
+                        <p:column styleClass="titulos">MOBILIARIO</p:column>
+                        <p:column styleClass="titulos">EQ. COMPUTO</p:column>
+                        <p:column styleClass="titulos">VENTANAS</p:column>
+
+                        <p:column styleClass="titulos">MAL</p:column>
+                        <p:column>M</p:column>
+                        <p:column>25</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column colspan="3" styleClass="titulos">TABLA DE RANGOS(RH)</p:column>
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">4</p:column>
+                        <p:column rowspan="2">REVISION DE OFICINAS(CONFIANZA)</p:column>
+
+                        <p:column styleClass="titulos">BOTES</p:column>
+                        <p:column styleClass="titulos">VENTANAS</p:column>
+                        <p:column styleClass="titulos">PISOS</p:column>
+                        <p:column styleClass="titulos">MOBILIARIO</p:column>
+
+                        <p:column styleClass="titulos">PUNTUALIDAD</p:column>
+                        <p:column styleClass="titulos">RETARDO</p:column>
+                        <p:column styleClass="titulos">VALOR</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column rowspan="4" styleClass="titulos">RETARDOS</p:column>
+                        <p:column>0</p:column>
+                        <p:column>100</p:column>
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">5</p:column>
+                        <p:column rowspan="2">SUPERVISION DE AREAS</p:column>
+
+                        <p:column styleClass="titulos">BOTES</p:column>
+                        <p:column styleClass="titulos">VENTANAS</p:column>
+                        <p:column styleClass="titulos">PISOS</p:column>
+                        <p:column styleClass="titulos">MOBILIARIO</p:column>
+
+                        <p:column>1-2</p:column>
+                        <p:column>75</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column>2-4</p:column>
+                        <p:column>50</p:column>
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">6</p:column>
+                        <p:column rowspan="2">REVISION DE OFICINAS(BASE)</p:column>
+
+                        <p:column styleClass="titulos">BOTES</p:column>
+                        <p:column styleClass="titulos">VENTANAS</p:column>
+                        <p:column styleClass="titulos">PISOS</p:column>
+                        <p:column styleClass="titulos">MOBILIARIO</p:column>
+
+                        <p:column>5 o +</p:column>
+                        <p:column>0</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column colspan="3" styleClass="titulos">TABLA DE RANGOS(RH)</p:column>
+
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">7</p:column>
+                        <p:column rowspan="2">AREAS COMUNES EXTERNAS</p:column>
+
+                        <p:column styleClass="titulos">BAÑOS Y LAVADEROS(CONSTRUCCION)</p:column>
+                        <p:column styleClass="titulos">DEPOSITO DE BASURA</p:column>
+                        <p:column styleClass="titulos">COBACHA</p:column>
+                        <p:column styleClass="titulos">EXPLANADA</p:column>
+
+                        <p:column styleClass="titulos">ASISTENCIA</p:column>
+                        <p:column styleClass="titulos">FALTAS</p:column>
+                        <p:column styleClass="titulos">VALOR</p:column>
+
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column rowspan="4" styleClass="titulos">FALTAS, VACACIONES, INCAPACIDADES</p:column>
+                        <p:column>0</p:column>
+                        <p:column>100</p:column>
+                    </p:row>
+
+
+                    <p:row>     
+                        <p:column rowspan="2">8</p:column>
+                        <p:column rowspan="2">LIMPIEZA DE HERRAMIENTAS DE TRBAJO</p:column>
+
+                        <p:column styleClass="titulos">TRAPOS</p:column>
+                        <p:column styleClass="titulos">TRAPEADORES</p:column>
+                        <p:column styleClass="titulos">CUBETAS</p:column>
+                        <p:column styleClass="titulos">ESCOBAS</p:column>
+
+                        <p:column>1</p:column>
+                        <p:column>75</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column>2</p:column>
+                        <p:column>50</p:column>
+                    </p:row>
+                    <p:row>     
+                        <p:column rowspan="2">9</p:column>
+                        <p:column rowspan="2">CALIDAD DEL MATERIAL DE TRABAJO</p:column>
+
+                        <p:column styleClass="titulos">CLASIFICADO</p:column>
+                        <p:column styleClass="titulos">ORDENADO</p:column>
+                        <p:column styleClass="titulos">LIMPIO</p:column>
+                        <p:column styleClass="titulos">SEÑALIZADO</p:column>
+
+                        <p:column>3 o +</p:column>
+                        <p:column>0</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+
+                        <p:column rowspan="3" colspan="3"></p:column>
+
+                    </p:row>  
+
+
+                    <p:row>
+                        <p:column rowspan="2">10</p:column>
+                        <p:column rowspan="2">PORTACION DEL UNIFORME</p:column>
+
+                        <p:column styleClass="titulos">BOTAS</p:column>
+                        <p:column styleClass="titulos">PANTALÓN</p:column>
+                        <p:column styleClass="titulos">BATA</p:column>
+                        <p:column styleClass="titulos">GUANTES</p:column>
+
+
+                    </p:row>
+                    <p:row>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                        <p:column>25</p:column>
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column  colspan="9" style="text-align: center" styleClass="titulos">PERSONAL ENCARGADO DE EVALUAR CADA FACTOR DEL DESMPEÑO</p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column  colspan="1" styleClass="titulos">*1</p:column>
+                        <p:column  colspan="1">ENLACE DE OFICINAS</p:column>
+                        <p:column  colspan="7">PERSONA ASIGNADA POR EL SUBDIRECTOR DEL AREA PARA REALIZAR LAS SUPERVISIONES DIARIAS</p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column  colspan="1" styleClass="titulos">*2</p:column>
+                        <p:column  colspan="1">JEFE DE INTENDENCIA</p:column>
+                        <p:column  colspan="7">PERSONA ENCARGADA DE LA SUPERVISION DE PERSONAL DE INTENDENCIA EN LAS DIFERENTES OFICINAS DEL ORGANISMO</p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column  colspan="1" styleClass="titulos">*3</p:column>
+                        <p:column  colspan="1">RECURSOS HUMANOS</p:column>
+                        <p:column  colspan="7">AREA ENCARGADA DE REALIZAR EL REGISTRO DE ASISTENCIA Y PUNTUALIDAD DEL PERSONAL PARA PROMEDIARLO EN LA EVALUACION</p:column>
+                    </p:row>
+
+                </p:panelGrid>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
