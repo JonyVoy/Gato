@@ -23,8 +23,7 @@ import javax.validation.constraints.Size;
 public class Usuarios implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CodigoUsuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigoUsuario;
     
     @Size(max = 100)
@@ -59,6 +58,6 @@ public class Usuarios implements Serializable {
         this.apellidos = apellidos;
     }
 
-   
-    
-}
+
+
+    }

@@ -1,4 +1,7 @@
 body {
+    
+    width: auto;
+    height: 100%;
     background-image: url(../..//resources/images/bbg1.jpg);
     font-size: 12px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
@@ -8,7 +11,6 @@ body {
 
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
-    border-bottom: 1px solid #AFAFAF; 
     font-size:  20px;
     font-weight: bold;
     margin: 0px;
@@ -35,4 +37,11 @@ a:link:hover, a:visited:hover  {
   color: #045491;
   font-weight : bold;
   text-decoration : underline;
+}
+
+
+
+/**/
+ui-menu ui-menubar menu{
+    background-color: black;
 }
