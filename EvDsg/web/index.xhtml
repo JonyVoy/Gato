@@ -9,10 +9,24 @@
         </h:head>  
     <body id="index">
         <div id="entrar">
-            <p:outputLabel id="bienvenido" value="Bienvenido" />
-            <br/><br/>
-            <p:button id="boton" value="Entrar" outcome="/rangos" /> 
+            <p:growl autoUpdate="true" showDetail="true" />
+            <h:form>
+                <p:panel header="Bienvenido">
+                <p:panelGrid columns="2" >
+            <p:outputLabel for="inusuario" value="Ingrese Usuario:"/>
+            <p:inputText id="inusuario" value="#{indexController.usuario.usuario}" required="true" requiredMessage="Ingrese un usuario"/>
+            <p:outputLabel for="incontraseña" value="Ingrese Contraseña:"/>
+            <p:inputText id="incontraseña" value="#{indexController.usuario.clave}" required="true" requiredMessage="Ingrese contraseña"/>
+              
+            </p:panelGrid>
+                    <p:commandButton value="Iniciar Sesión" action="#{indexController.iniciarSesion()}"  icon="fa fa-key"/>
+                    
+                    </p:panel>
+                <p:separator/>
+                <p:button id="crear" value="Crear cuenta" outcome="/Registro" icon="fa fa-arrow-right"/>
+        </h:form>
         </div>   
+        
 
     </body>
 </html>

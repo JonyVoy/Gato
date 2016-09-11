@@ -3,22 +3,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./WEB-INF/template.xhtml">
 
             <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true" showDetail="true" showSummary="true"/>
                 <h:form>
-                    <p:outputLabel value="Nombre"/>
-                    <p:inputText  value="#{usuariosController.usuarios.nombres}"/>
-                    <p:inputText value="#{usuariosController.usuarios.apellidos}"/>
-                    <p:commandButton value="Registrar" actionListener="#{usuariosController.registrar()}"/>
+                    <p:panel header="Registro de nuevos evaluadores">
+                        <p:fieldset legend="Datos Personales">
+                        <p:panelGrid columns="2" id="pnlRegistroPer">
+                            <p:outputLabel value="Nombres: " for="nombre"/>
+                            <p:inputText id="nombre" value="#{usuariosController.persona.nombres}"  required="true" requiredMessage="Nombre OBLIGATORIO"/>
+                            <p:outputLabel value="Apellidos: " for="apellido"/>
+                            <p:inputText id="apellido" value="#{usuariosController.persona.apellidos}" required="true" requiredMessage="Apellido OBLIGATORIO"/>
+                            <p:outputLabel value="Sexo: " for="sexo"/>
+                            <p:selectOneRadio id="sexo" value="#{usuariosController.persona.sexo}" required="true" requiredMessage="Cempo Sexo OBLIGATORIO">
+                                <f:selectItem  itemValue="M" itemLabel="MASCULINO" />
+                                <f:selectItem itemValue="F" itemLabel="FEMENINO"/>
+                            </p:selectOneRadio>
+                        </p:panelGrid>
+                            </p:fieldset>
+                        
+                        <p:fieldset legend="Datos de la cuenta">
+                        <p:panelGrid columns="2" id="pnlRegistro">
+                            <p:outputLabel value="ROL:  " for="rol"/>
+                            <p:selectOneMenu id="rol" value="#{usuariosController.usuario.tipo}" required="true" requiredMessage="Usuario OBLIGATORIO">
+                                <f:selectItem itemValue="A" itemLabel="ADMINISTRADOR"/>
+                                <f:selectItem itemValue="E" itemLabel="EVALUADOR"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Usuario: " for="usuario"/>
+                            <p:inputText id="usuario" value="#{usuariosController.usuario.usuario}" required="true" requiredMessage="Usuario OBLIGATORIO"/>
+                            <p:outputLabel value="Correo Electronico " for="email"/>
+                            <p:inputText id="email" value="#{usuariosController.usuario.email}" required="true" requiredMessage="Email OBLIGATORIO" />
+                            <p:outputLabel value="Contraseña " for="contraseña"/>
+                            <p:password  id="contraseña" value="#{usuariosController.usuario.clave}" 
+                                        match="contraseña2" feedback="true" promptLabel="Ingrese Contraseña"
+                                        weakLabel="Nivel bajo" goodLabel="Nivel Medio" strongLabel="Nivel Alto" 
+                                        validatorMessage="Las contraseñas no coinciden" required="true" requiredMessage="Contraseña OBLIGATORIA"/>
+                            <p:outputLabel value="Confirme Su Contraseña " for="contraseña2"/>
+                            <p:password id="contraseña2" required="true" requiredMessage="Confirmación de contraseña OBLIGATORIA"/>
+                            
+                        </p:panelGrid>
+                            </p:fieldset>
+                        <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{usuariosController.registrar()}" icon="fa fa-anchor" />
+                    </p:panel>
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

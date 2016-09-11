@@ -2,7 +2,7 @@
     background-image: url(../..//resources/images/woodbg.jpg);
     background-repeat: no-repeat;
     background-size: auto;
-    width: 800px;
+    width: auto;
     margin: 0 auto;
 }
 
@@ -15,10 +15,3 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-#bienvenido{
-    color: white;
-    font-size: 40px;
-}
-#boton{
-    font-size: 25px;
-}
