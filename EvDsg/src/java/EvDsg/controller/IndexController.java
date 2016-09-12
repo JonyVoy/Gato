@@ -37,7 +37,8 @@ public class IndexController implements Serializable {
         try {
             us = EJBUsuario.iniciarSesion(usuario);
             if (us != null) {
-                redireccion = "/Protegidos/principal";
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                redireccion = "/Protegidos/principal?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error!", "Datos Incorrectos"));
             }

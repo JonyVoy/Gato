@@ -29,7 +29,7 @@ public class Usuarios implements Serializable {
     @Column(name = "Clave")
     private String clave;
     
-    @Size(max = 1)
+    @Size(max = 2)
     @Column(name = "Tipo")
     private String tipo;
     

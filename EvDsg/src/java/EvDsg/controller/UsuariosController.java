@@ -49,7 +49,7 @@ public class UsuariosController implements Serializable{
         try{
             this.usuario.setCodigoUsuario(persona);
             usuariosEJB.create(usuario);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos Correctamente Guardados"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Usuario Registrado"));
             }catch(Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contacta al admin."));
         }finally {
