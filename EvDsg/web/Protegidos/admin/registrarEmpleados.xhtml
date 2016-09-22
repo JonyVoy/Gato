@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro de empleados</title>
+    </h:head>  
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true" showDetail="true"/>
+                <h:form>
+
+                    <p:wizard showStepStatus="true" backLabel="Regresar" nextLabel="Siguiente">
+                        <p:tab id="personal" title="INFORMACION DEL EMPLEADO" >
+
+                            <p:panel header="Registro de nuevo empleado" footer="Todos los campos son obligatorios, Verifique que toda su informacion sea correcta." >
+
+                                <p:panelGrid columns="2" id="pnlRegistroPer">
+                                    <p:outputLabel value="Nombres: " for="nombre"/>
+                                    <p:inputText id="nombre" value="#{empleadoController.empleado.nombre}"  required="true" requiredMessage="Nombre OBLIGATORIO"/>
+                                    <p:outputLabel value="Apellidos: " for="apellido"/>
+                                    <p:inputText id="apellido" value="#{empleadoController.empleado.apellidos}" required="true" requiredMessage="Apellido OBLIGATORIO"/>
+                                    <p:outputLabel value="Sexo: " for="sexo"/>
+                                    <p:selectOneRadio id="sexo" value="#{empleadoController.empleado.sexo}" required="true" requiredMessage="Cempo Sexo OBLIGATORIO">
+                                        <f:selectItem  itemValue="M" itemLabel="MASCULINO" />
+                                        <f:selectItem itemValue="F" itemLabel="FEMENINO"/>
+                                    </p:selectOneRadio>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+                        <p:tab id="relacionlab" title="Relacion laboral">
+                            <p:panel header="Informacion De La Cuenta" footer="Todos los campos son obligatorios, Verifique que toda su informacion este correcta.">
+                                <p:panelGrid columns="2" id="pnlRegistro">
+                                    <p:outputLabel value="Relacion laboral:  " for="rellab"/>
+                                    <p:selectOneMenu id="rellab" value="#{empleadoController.empleado.relacion}" required="true" requiredMessage="Usuario OBLIGATORIO">
+                                        <f:selectItem itemValue="" itemLabel="Seleccionar" noSelectionOption="true"/>
+                                        <f:selectItem itemValue="BASE" itemLabel="EMPLEADO BASE"/>
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+                        <p:tab id="confirm" title="Confirmación">
+                            <p:panel header="POR FAVOR VERIFIQUE QUE LOS DATOS SEAN CORRECTOS!">
+                                <p:panelGrid id="confirmation" columns="3" columnClasses="grid">
+                                    <p:panelGrid columns="2" columnClasses="label, value">
+                                        <p:outputLabel value="Nombres: " />
+                                        <p:outputLabel value="#{empleadoController.empleado.nombre}"/>
+
+                                        <p:outputLabel value="Apellidos: " />
+                                        <p:outputLabel value="#{empleadoController.empleado.apellidos}"/>
+
+                                        <p:outputLabel value="Sexo: " />
+                                        <p:outputLabel value="#{empleadoController.empleado.sexo}"/>
+                                    </p:panelGrid>
+
+                                    <p:panelGrid columns="2" columnClasses="label, value">
+                                        <p:outputLabel value="SRelacion Laboral: " />
+                                        <p:outputLabel value="#{empleadoController.empleado.relacion}"/>
+                                    </p:panelGrid>
+                                </p:panelGrid>
+
+                                <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{empleadoController.registrar()}" icon="fa fa-thumbs-o-up" action="lstEmpleados?faces-redirect=true" />
+
+                            </p:panel>
+                        </p:tab>
+                    </p:wizard>
+
+                </h:form> 
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

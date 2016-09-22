@@ -24,16 +24,23 @@
                             <h2>DIRECCIÓN DE ADMINISTRACION Y FINANZAS</h2>
                             <h3>SUBDIRECCIÓN DE SERVICIOS GENERALES</h3>
                             <h3>EVALUACIÓN DEL DESEMPEÑO PARA PERSONAL DE INTENDENCIA</h3>
-                            <p:commandLink actionListener="#{templateController.cerrarSesion()}" value="Cerrar Sesion" action="/index?faces-redirect=true"/>
-                    
+
                         </div>
                         <h:form>
-                         <p:menubar>
-                            <p:menuitem url="rangos.xhtml" value="Rangos de calificacion"/>
-                            
+                            Bienvenido : #{templateController.mostrarUsuario()}
+                            <p:menubar model="#{templateController.model}">
+                                <f:facet name="options">
+                                   <p:menuitem url="rangos.xhtml" value="Rangos de calificacion" icon="fa fa-send" />
+                                <p:menuitem url="Evaluacion.xhtml" value="Realizar evaluacion" icon="fa fa-chevron-circle-right"/>
+                                
+                                <p:commandButton value="Rangos de calificacion" action="/Protegidos/rangos" icon="fa fa-paw" />
+                               
+                                    <p:commandButton actionListener="#{templateController.cerrarSesion()}" icon="fa fa-sign-out"  action="/index?faces-redirect=true" title="Cerrar Sesión"/>
+                                </f:facet>
+                                 
                             </p:menubar>
-                    </h:form>  
-                        </ui:insert>
+                        </h:form>  
+                    </ui:insert>
                 </div>
                 <div class="ui-g-12">
                     <ui:insert name="content"></ui:insert>
@@ -43,7 +50,7 @@
                 <ui:insert name="bottom">
                     <div class="bottom">
                         <br></br>
-                        <h1>© 2016 </h1>
+                        <h1 >© 2016 </h1>
                     </div>
                 </ui:insert>
             </div>

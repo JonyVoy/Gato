@@ -25,4 +25,5 @@ public interface UsuariosFacadeLocal {
     
     Usuarios iniciarSesion(Usuarios us);
     
+    List<Usuarios> inactivos();
 }

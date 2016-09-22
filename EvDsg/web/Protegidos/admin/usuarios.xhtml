@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+               <p:growl id="msj" autoUpdate="true" showDetail="true"/>
+
+                <h:form>
+                    <p:dataTable value="#{listarusuariosController.usuarioslst}" var="usuarios" editable="true" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" currentPageReportTemplate="Página : ({currentPage} de {totalPages})" >
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                        <p:column headerText="NOMBRE">
+                            <p:outputLabel value="#{usuarios.codigoUsuario.nombres} #{usuarios.codigoUsuario.apellidos}" />
+                        </p:column>
+                        <p:column headerText="SEXO M='MASCULINO' F='FEMENINO'">
+                            <p:outputLabel value="#{usuarios.codigoUsuario.sexo}"/>
+                        </p:column>
+                        <p:column headerText="Tipo de usuario: RH=(Recursos Humanos) EO=(Enlace Oficina) JI=(Jefe Intendencia)">
+                            <p:outputLabel value="#{usuarios.tipo}"/>
+                        </p:column>
+                        <p:column headerText="USUARIO">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{usuarios.usuario}"/>
+                                    </f:facet>
+                                
+                                 <f:facet name="input">
+                                     <p:inputText value="#{usuarios.usuario}"/>
+                                    </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="CONTRASEÑA">
+                            <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{usuarios.clave}"/>
+                                    </f:facet>
+                                
+                                 <f:facet name="input">
+                                     <p:inputText value="#{usuarios.clave}"/>
+                                    </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Activo = 1 Inactivo = 0">
+                            <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{usuarios.estado}"/>
+                                    </f:facet>
+                                
+                                 <f:facet name="input">
+                                     <p:inputText value="#{usuarios.estado}"/>
+                                    </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:ajax event="rowEdit" listener="#{usuariosController.modificar(usuarios)}"/>
+                    </p:dataTable>
+                </h:form>
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

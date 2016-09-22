@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                
+                
+                <h:form>
+                    <p:panelGrid>
+                        <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="12">DATOS GENERALES</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2">TRABAJADOR EVALUADO</p:column>
+                            <p:column colspan="4">RELACION LABORAL</p:column>
+                            <p:column colspan="3">AREA EVALUADA</p:column>
+                            <p:column colspan="3">PERIODO</p:column>
+                        </p:row>
+
+                    </f:facet>
+                        <p:row>
+                            
+                            <p:column colspan="2"><p:inputText/></p:column>
+                           <p:column colspan="4"><p:inputText/></p:column>
+                           <p:column colspan="3"><p:inputText/></p:column>
+                           <p:column colspan="3"><p:calendar mode="popup" showOn="button" showWeek="true" showHour="true" showOtherMonths="true" /><p:clock /></p:column>
+                            
+                    </p:row>
+                        <p:row>
+                            
+                            <p:column colspan="12">
+                                <p:outputPanel deferred="true">
+        <h3>INSTRUCCIONES:</h3>
+        <p> EL ENLACE PREVIAMENTE DESIGNADO DEBERÁ REQUISITAR EL APARTADO DE DATOS GENERALES Y EVALUAR DIARIAMENTE DURANTE UNA SEMANA EN LOS HORARIOS DE SUPERVISION SEÑALADOS,
+            CADA UNO DE LOS FACTORES DE DESEMPEÑO 
+            DE LA TRABAJADORA DE INTENDENCIA QUE PRESTE SUS SERVICIOS EN SU ÁREA DE ADSCRIPCIÓN, 
+            DE ACUERDO A LAS SIGUIENTES VALORES:
+            <H3>E= EXCELENTE (100 PTS), B= BIEN (75 PTS), R= REGULAR (50 PTS), M= MAL (25 PTS)</H3>
+            Y COLOCAR UNICAMENTE LA LETRA </p>
+    </p:outputPanel>
+                            </p:column>
+                           
+                            
+                    </p:row>
+                        
+                    </p:panelGrid>
+                    <p:separator/>
+                    <div >
+                    <p:panelGrid >
+
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="29">EVALUACION DE DESEMPEÑO</p:column>
+                        </p:row>
+                    </f:facet>
+
+                    <p:row>
+                        <p:column colspan="2" rowspan="2">FACTORES DE DESEMPEÑO</p:column>
+                        <p:column rowspan="2">HORARIO DE SUPERVISION</p:column>
+
+                        <p:column colspan="5" styleClass="titulos">SEMANA 1</p:column>
+                        <p:column colspan="5" styleClass="titulos">SEMANA 2</p:column>
+                        <p:column colspan="5" styleClass="titulos">SEMANA 3</p:column>
+                        <p:column colspan="5" styleClass="titulos">SEMANA 4</p:column>
+                        <p:column colspan="5" styleClass="titulos">SEMANA 5</p:column>
+                        <p:column rowspan="2">RESPONSABLE DE EVALUAR</p:column>
+                    </p:row>
+                    <p:row>
+                        
+                        <p:column>L</p:column>
+                        <p:column>M</p:column>
+                        <p:column>M</p:column>
+                        <p:column>J</p:column>
+                        <p:column>V</p:column>
+                        
+                        <p:column>L</p:column>
+                        <p:column>M</p:column>
+                        <p:column>M</p:column>
+                        <p:column>J</p:column>
+                        <p:column>V</p:column>
+                        
+                        <p:column>L</p:column>
+                        <p:column>M</p:column>
+                        <p:column>M</p:column>
+                        <p:column>J</p:column>
+                        <p:column>V</p:column>
+                        
+                        <p:column>L</p:column>
+                        <p:column>M</p:column>
+                        <p:column>M</p:column>
+                        <p:column>J</p:column>
+                        <p:column>V</p:column>
+                        
+                        <p:column>L</p:column>
+                        <p:column>M</p:column>
+                        <p:column>M</p:column>
+                        <p:column>J</p:column>
+                        <p:column>V</p:column>
+                        
+                    </p:row>
+
+                        <p:row>
+                            <p:column>1</p:column>
+                            <p:column>PORTACION DEL UNIFORME</p:column>
+                            <p:column>8:30 HORAS</p:column>
+                            
+                            <p:column><p:inputText style="width: 10px; background-color: transparent;"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            <p:column><p:inputText style="width: 10px"/></p:column>
+                            
+                            
+                        </p:row>
+                  
+
+                </p:panelGrid>
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

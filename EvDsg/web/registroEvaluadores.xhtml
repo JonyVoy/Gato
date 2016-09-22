@@ -14,51 +14,109 @@
 
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true" showDetail="true"/>
+
                 <h:form>
                     <p:button value="Cancelar registro y regresar al inicio" icon="fa fa-frown-o" outcome="/index" />
+                    <p:separator/>
 
-                    <p:panel header="Registro de nuevos evaluadores">
-                        <p:fieldset legend="Datos Personales">
-                            <p:panelGrid columns="2" id="pnlRegistroPer">
-                                <p:outputLabel value="Nombres: " for="nombre"/>
-                                <p:inputText id="nombre" value="#{usuariosController.persona.nombres}"  required="true" requiredMessage="Nombre OBLIGATORIO"/>
-                                <p:outputLabel value="Apellidos: " for="apellido"/>
-                                <p:inputText id="apellido" value="#{usuariosController.persona.apellidos}" required="true" requiredMessage="Apellido OBLIGATORIO"/>
-                                <p:outputLabel value="Sexo: " for="sexo"/>
-                                <p:selectOneRadio id="sexo" value="#{usuariosController.persona.sexo}" required="true" requiredMessage="Cempo Sexo OBLIGATORIO">
-                                    <f:selectItem  itemValue="M" itemLabel="MASCULINO" />
-                                    <f:selectItem itemValue="F" itemLabel="FEMENINO"/>
-                                </p:selectOneRadio>
-                            </p:panelGrid>
-                        </p:fieldset>
+                    <p:wizard showStepStatus="true" backLabel="Regresar" nextLabel="Siguiente">
+                        <p:tab id="personal" title="Datos Personales" >
 
-                        <p:fieldset legend="Datos de la cuenta">
-                            <p:panelGrid columns="2" id="pnlRegistro">
-                                <p:outputLabel value="ROL:  " for="rol"/>
-                                <p:selectOneMenu id="rol" value="#{usuariosController.usuario.tipo}" required="true" requiredMessage="Usuario OBLIGATORIO">
-                                    <f:selectItem itemValue="" itemLabel="Seleccionar" noSelectionOption="true"/>
-                                    <f:selectItem itemValue="EO" itemLabel="*1 ENLACE DE OFICINAS"/>
-                                    <f:selectItem itemValue="JI" itemLabel="*2 JEFE DE INTENDENCIA"/>
-                                    <f:selectItem itemValue="RH" itemLabel="*3 RECURSOS HUMANOS"/>
-                                </p:selectOneMenu>
+                            <p:panel header="Registro de nuevos evaluadores" footer="Todos los campos son obligatorios, Verifique que toda su informacion este correcta." >
 
-                                <p:outputLabel value="Usuario: " for="usuario"/>
-                                <p:inputText id="usuario" value="#{usuariosController.usuario.usuario}" required="true" requiredMessage="Usuario OBLIGATORIO"/>
-                                <p:outputLabel value="Correo Electronico " for="email"/>
-                                <p:inputText id="email" value="#{usuariosController.usuario.email}" required="true" requiredMessage="Email OBLIGATORIO" />
-                                <p:outputLabel value="Contraseña " for="contraseña"/>
-                                <p:password  id="contraseña" value="#{usuariosController.usuario.clave}" 
-                                             match="contraseña2" feedback="true" promptLabel="Ingrese Contraseña"
-                                             weakLabel="Nivel bajo" goodLabel="Nivel Medio" strongLabel="Nivel Alto" 
-                                             validatorMessage="Las contraseñas no coinciden" required="true" requiredMessage="Contraseña OBLIGATORIA"/>
-                                <p:outputLabel value="Confirme Su Contraseña " for="contraseña2"/>
-                                <p:password id="contraseña2" required="true" requiredMessage="Confirmación de contraseña OBLIGATORIA"/>
+                                <p:panelGrid columns="2" id="pnlRegistroPer">
+                                    <p:outputLabel value="Nombres: " for="nombre"/>
+                                    <p:inputText id="nombre" value="#{usuariosController.persona.nombres}"  required="true" requiredMessage="Nombre OBLIGATORIO"/>
+                                    <p:outputLabel value="Apellidos: " for="apellido"/>
+                                    <p:inputText id="apellido" value="#{usuariosController.persona.apellidos}" required="true" requiredMessage="Apellido OBLIGATORIO"/>
+                                    <p:outputLabel value="Sexo: " for="sexo"/>
+                                    <p:selectOneRadio id="sexo" value="#{usuariosController.persona.sexo}" required="true" requiredMessage="Cempo Sexo OBLIGATORIO">
+                                        <f:selectItem  itemValue="M" itemLabel="MASCULINO" />
+                                        <f:selectItem itemValue="F" itemLabel="FEMENINO"/>
+                                    </p:selectOneRadio>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
 
-                            </p:panelGrid>
-                        </p:fieldset>
-                        <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{usuariosController.registrar()}" icon="fa fa-thumbs-o-up" action="index?faces-redirect=true"  />
-                    </p:panel>
-                </h:form>
+                        <p:tab id="cuenta" title="Datos de la Cuenta">
+                            <p:panel header="Informacion De La Cuenta" footer="Todos los campos son obligatorios, Verifique que toda su informacion este correcta.">
+                                <p:panelGrid columns="2" id="pnlRegistro">
+                                    <p:outputLabel value="ROL:  " for="rol"/>
+                                    <p:selectOneMenu id="rol" value="#{usuariosController.usuario.tipo}" required="true" requiredMessage="Usuario OBLIGATORIO">
+                                        <f:selectItem itemValue="" itemLabel="Seleccionar" noSelectionOption="true"/>
+                                        <f:selectItem itemValue="EO" itemLabel="*1 ENLACE DE OFICINAS"/>
+                                        <f:selectItem itemValue="JI" itemLabel="*2 JEFE DE INTENDENCIA"/>
+                                        <f:selectItem itemValue="RH" itemLabel="*3 RECURSOS HUMANOS"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Usuario: " for="usuario"/>
+                                    <p:inputText id="usuario" value="#{usuariosController.usuario.usuario}" required="true" requiredMessage="Usuario OBLIGATORIO"/>
+                                    <p:outputLabel value="Contraseña " for="contraseña"/>
+                                    <p:password  id="contraseña" value="#{usuariosController.usuario.clave}" 
+                                                 match="contraseña2" feedback="true" promptLabel="Ingrese Contraseña"
+                                                 weakLabel="Nivel bajo" goodLabel="Nivel Medio" strongLabel="Nivel Alto" 
+                                                 validatorMessage="Las contraseñas no coinciden" required="true" requiredMessage="Contraseña OBLIGATORIA"/>
+                                    <p:outputLabel value="Confirme Su Contraseña " for="contraseña2"/>
+                                    <p:password id="contraseña2" required="true" requiredMessage="Confirmación de contraseña OBLIGATORIA"/>
+
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+                        <p:tab id="contacto" title="Contacto">
+                            <p:panel header="Informacion de contacto" footer="Todos los campos son obligatorios, Verifique que toda su informacion este correcta.">
+
+                                <p:panelGrid columns="2" columnClasses="label, value">
+                                    <p:outputLabel value="Correo Electronico " for="email"/>
+                                    <p:inputText id="email" value="#{usuariosController.usuario.email}" required="true" requiredMessage="Email OBLIGATORIO" />
+
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+                        <p:tab id="confirm" title="Confirmación">
+                            <p:panel header="POR FAVOR VERIFIQUE QUE SUS DATOS SEAN CORRECTOS!">
+                                <p:panelGrid id="confirmation" columns="3" columnClasses="grid,grid">
+                                    <p:panelGrid columns="2" columnClasses="label, value">
+                                        <p:outputLabel value="Nombres: " />
+                                        <p:outputLabel value="#{usuariosController.persona.nombres}" styleClass="outputLabel"/>
+
+                                        <p:outputLabel value="Apellidos: " />
+                                        <p:outputLabel value="#{usuariosController.persona.apellidos}" styleClass="outputLabel"/>
+
+                                        <p:outputLabel value="Sexo: " />
+                                        <p:outputLabel value="#{usuariosController.persona.sexo}" styleClass="outputLabel"/>
+                                    </p:panelGrid>
+
+                                    <p:panelGrid columns="2" columnClasses="label, value">
+                                        <p:outputLabel value="Nombre de usuario: " />
+                                        <p:outputLabel value="#{usuariosController.usuario.usuario}" styleClass="outputLabel"/>
+
+                                        <p:outputLabel value="Su contraseña es: " />
+                                        <p:outputLabel value="#{usuariosController.usuario.clave}" styleClass="outputLabel"/>
+
+                                        <p:outputLabel value="Correo Electronico: " />
+                                        <p:outputLabel value="#{usuariosController.usuario.email}" styleClass="outputLabel"/>
+
+                                        <p:outputLabel value="Su tipo de usuario es: " />
+                                        <p:outputLabel value="#{usuariosController.usuario.tipo}" styleClass="outputLabel"/>
+
+                                        <p:outputLabel value="EO = Encargado de oficina"/>
+                                        <p:outputLabel value="Todos sus datos son confidenciales." />
+                                    </p:panelGrid>
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{usuariosController.registrar()}" icon="fa fa-thumbs-o-up" action="index?faces-redirect=true"  />
+
+                            </p:panel>
+                        </p:tab>
+                    </p:wizard>
+
+                </h:form> 
+
+
             </ui:define>
 
         </ui:composition>

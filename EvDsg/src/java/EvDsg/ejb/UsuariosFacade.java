@@ -44,4 +44,19 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         }
         return usuario;
     }
+
+    @Override
+    public List<Usuarios> inactivos(){
+        List<Usuarios> inactivo;
+        String inactivos;
+        try{
+        inactivos="FROM Usuarios u WHERE u.estado = 0";
+        Query query = em.createQuery(inactivos);
+        
+        inactivo= query.getResultList();
+        }catch(Exception e){
+            throw e;
+        }
+    return inactivo;
+    }
 }

@@ -1,4 +1,3 @@
-
 package EvDsg.controller;
 
 import EvDsg.ejb.UsuariosFacadeLocal;
@@ -11,22 +10,25 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-
+import javax.inject.Inject;
 
 @Named(value = "usuariosController")
 @ViewScoped
-public class UsuariosController implements Serializable{
+public class UsuariosController implements Serializable {
 
     @EJB
     private UsuariosFacadeLocal usuariosEJB;
-  
-   private Usuarios usuario;
-   private Persona persona;
-    
+
+    @Inject
+    private Usuarios usuario;
+    @Inject
+    private Persona persona;
+
     @PostConstruct
-    public void init(){
-     usuario = new Usuarios();
-     persona = new Persona();
+    public void init() {
+        //usuario = new Usuarios();
+        //persona = new Persona();
+
     }
 
     public Usuarios getUsuario() {
@@ -44,17 +46,24 @@ public class UsuariosController implements Serializable{
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
-    public void registrar(){
-        try{
+
+    public void registrar() {
+        try {
             this.usuario.setCodigoUsuario(persona);
             usuariosEJB.create(usuario);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Usuario Registrado"));
-            }catch(Exception e){
+        } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contacta al admin."));
-        }finally {
+        } finally {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-            
-        }
+
         }
     }
+
+    public void modificar(Usuarios usuarios) {
+        usuariosEJB.edit(usuarios);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Usuario Modificado"));
+
+    }
+
+}
