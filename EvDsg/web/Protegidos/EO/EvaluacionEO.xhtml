@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true"/>
+
+                <h:form >
+                    <p:panel header="Evaluacion">   
+                        <p:panelGrid columns="2" id="pnlEvaluacion">
+                            <f:facet name="header">
+                                <h3>INSTRUCCIONES:</h3>
+                                <p> EL ENLACE PREVIAMENTE DESIGNADO DEBERÁ REQUISITAR EL APARTADO DE DATOS GENERALES Y EVALUAR DIARIAMENTE DURANTE UNA SEMANA EN LOS HORARIOS DE SUPERVISION SEÑALADOS,
+                                    CADA UNO DE LOS FACTORES DE DESEMPEÑO 
+                                    DE LA TRABAJADORA DE INTENDENCIA QUE PRESTE SUS SERVICIOS EN SU ÁREA DE ADSCRIPCIÓN, 
+                                    DE ACUERDO A LOS SIGUIENTES VALORES:
+                                    <H3>E= EXCELENTE (100 PTS), B= BIEN (75 PTS), R= REGULAR (50 PTS), M= MAL (25 PTS)</H3>
+                                    RECUERDE QUE TODOS LOS CAMPOS SON OBLIGATORIOS</p>
+                            </f:facet>
+
+                            <p:outputLabel value="EMPLEADO A EVALUAR" for="emp"/>
+                            <p:selectOneMenu id="emp" value="#{evaluacionController.empleado.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado">
+                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                                <f:selectItems value="#{evaluacionController.lstempleados}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.relacion}" itemValue="#{emp.codigoEmpleado}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="PORTACION DEL UNIFORME" for="uni"/>
+                            <p:selectOneMenu id="uni" value="#{evaluacionController.evaluacion.uniforme}" required="true" requiredMessage="Falta calificacion:UNIFORME ">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="LIMPIEZA DE OFICINAS" for="liof"/>
+                            <p:selectOneMenu id="liof" value="#{evaluacionController.evaluacion.limpiezaOficinas}" required="true" requiredMessage="Falta calificacion:LIMPIEZA DE OFICINAS">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="AREAS COMUNES INTERNAS" for="aci"/>
+                            <p:selectOneMenu id="aci" value="#{evaluacionController.evaluacion.comunesInternas}" required="true" requiredMessage="Falta calificacion:AREAS COMUNES INTERNAS">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="LIMPIEZA DE SANITARIOS" for="sanit"/>
+                            <p:selectOneMenu id="sanit" value="#{evaluacionController.evaluacion.sanitarios}" required="true" requiredMessage="Falta calificacion:LIMPIEZA DE SANITARIOS">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="SUPERVISION DE AREAS" for="supar"/>
+                            <p:selectOneMenu id="supar" value="#{evaluacionController.evaluacion.supervisionAreas}" required="true" requiredMessage="Falta calificacion:SUPERVISION DE AREAS ">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="REVISION DE OFICINAS (BASE)" for="revb"/>
+                            <p:selectOneMenu id="revb" value="#{evaluacionController.evaluacion.revisionBase}" required="true" requiredMessage="Falta calificacion:REVISION DE AREAS (BASE)">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="REVISION DE OFICINAS (CONFIANZA)" for="revc"/>
+                            <p:selectOneMenu id="revc" value="#{evaluacionController.evaluacion.revisionConfianza}" required="true" requiredMessage="Falta calificacion:rEVISION DE AREAS (CONFIANZA)">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItems value="#{listasController.factoresEO}" var="fac" itemValue="#{fac.value}"/>
+                            </p:selectOneMenu>
+
+                            <f:facet name="footer">
+
+                                <p>VERIFIQUE TODAS LAS CALIFICACIONES, SI ESTA SEGURO DE ENVIAR LA INFORMACION CONTINUE.</p>
+                            </f:facet>
+                        </p:panelGrid>
+
+
+                        <br/><br/>
+
+                        <p:commandButton value="EVALUAR Y TERMINAR" actionListener="#{evaluacionController.registrar()}" action="principalEO?faces-redirect=true" update="pnlEvaluacion"/>
+                        <p:commandButton value="TERMINAR EVALUACION Y EVALUAR OTRO EMPLEADO" actionListener="#{evaluacionController.registrar()}" action="EvaluacionEO?faces-redirect=true" update="pnlEvaluacion"/>
+                    </p:panel> 
+                </h:form>
+                <br/><br/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

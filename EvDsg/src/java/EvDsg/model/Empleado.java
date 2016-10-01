@@ -86,8 +86,8 @@ public class Empleado implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + this.codigoEmpleado;
+        int hash = 5;
+        hash = 17 * hash + this.codigoEmpleado;
         return hash;
     }
 
@@ -113,5 +113,4 @@ public class Empleado implements Serializable {
     public String toString() {
         return "Empleado{" + "codigoEmpleado=" + codigoEmpleado + '}';
     }
-
 }

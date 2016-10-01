@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true"/>
+        
+                <h:form >
+                    <p:panel header="Evaluacion">   
+                        <p:panelGrid columns="2" id="pnlEvaluacion">
+                     <f:facet name="header">
+                         <h3>AREA DE RECURSOS HUMANOS</h3>
+        <p>Esta sección es evaluada por el departamento de Recursos Humanos. Se divide en dos factores:  
+1. Puntualidad – es la revisión se lleva a cabo con las tarjetas y la base de datos del 
+checador electrónico. 2. Asistencia – es la revisión de las faltas del personal evaluado.  </p>
+                     </f:facet>
+                     
+                     <p:outputLabel value="EMPLEADO A EVALUAR" for="emp"/>
+                     <p:selectOneMenu id="emp" value="#{evaluacionController.empleado.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado">
+                        <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                        <f:selectItems value="#{evaluacionController.lstempleados}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.relacion}" itemValue="#{emp.codigoEmpleado}"/>
+                    </p:selectOneMenu>
+                     <p:outputLabel value="PUNTUALIDAD" for="punt"/>
+                     <p:selectOneMenu id="punt" value="#{evaluacionController.evaluacion.puntualidad}" required="true" requiredMessage="Falta calificacion:Puntualidad">
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                        <f:selectItems value="#{listasController.factoresRHP}" var="fac" itemValue="#{fac.value}"/>
+                    </p:selectOneMenu>
+                     <p:outputLabel value="ASISTENCIA" for="asist"/>
+                     <p:selectOneMenu id="asist" value="#{evaluacionController.evaluacion.asistencia}" required="true" requiredMessage="Falta calificacion:ASISTENCIA">
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue=""/>
+                        <f:selectItems value="#{listasController.factoresRHA}" var="fac" itemValue="#{fac.value}"/>
+                    </p:selectOneMenu>
+                     <f:facet name="footer">
+                         
+        <p>VERIFIQUE TODAS LAS CALIFICACIONES, SI ESTA SEGURO DE ENVIAR LA INFORMACION CONTINUE.</p>
+                     </f:facet>
+                    </p:panelGrid>
+                       
+                        
+                    <br/><br/>
+                    
+                    <p:commandButton value="EVALUAR Y TERMINAR" actionListener="#{evaluacionController.registrar()}" action="principal?faces-redirect=true" update="pnlEvaluacion"/>
+                    <p:commandButton value="TERMINAR EVALUACION Y EVALUAR OTRO EMPLEADO" actionListener="#{evaluacionController.registrar()}" action="EvaluacionEO?faces-redirect=true" update="pnlEvaluacion"/>
+                </p:panel> 
+                </h:form>
+                <br/><br/>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

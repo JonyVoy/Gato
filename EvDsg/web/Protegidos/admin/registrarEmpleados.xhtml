@@ -41,7 +41,7 @@
                                     <p:outputLabel value="Relacion laboral:  " for="rellab"/>
                                     <p:selectOneMenu id="rellab" value="#{empleadoController.empleado.relacion}" required="true" requiredMessage="Usuario OBLIGATORIO">
                                         <f:selectItem itemValue="" itemLabel="Seleccionar" noSelectionOption="true"/>
-                                        <f:selectItem itemValue="BASE" itemLabel="EMPLEADO BASE"/>
+                                        <f:selectItems value="#{listasController.relacion}"/>
                                     </p:selectOneMenu>
                                 </p:panelGrid>
                             </p:panel>
@@ -62,7 +62,7 @@
                                     </p:panelGrid>
 
                                     <p:panelGrid columns="2" columnClasses="label, value">
-                                        <p:outputLabel value="SRelacion Laboral: " />
+                                        <p:outputLabel value="Relacion Laboral: " />
                                         <p:outputLabel value="#{empleadoController.empleado.relacion}"/>
                                     </p:panelGrid>
                                 </p:panelGrid>
