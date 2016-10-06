@@ -1,7 +1,6 @@
 package EvDsg.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,55 +26,63 @@ public class Evaluacion implements Serializable {
     private Empleado codigoEmpleado;
 
     @ManyToOne
-    @JoinColumn(name = "codigoPersona",nullable = false)
-    private Persona codigoPersona;
+    @JoinColumn(name = "codigoPersonaEO")
+    private Persona codigoPersonaEO;
+    
+    @ManyToOne
+    @JoinColumn(name = "codigoPersonaJI")
+    private Persona codigoPersonaJI;
+    
+    @ManyToOne
+    @JoinColumn(name = "codigoPersonaRH")
+    private Persona codigoPersonaRH;
 
     
-    @Column(name = "Uniforme")
+    @Column(name = "Uniforme",nullable = true)
     private int Uniforme;
 
     
-    @Column(name = "LimpiezaOficinas")
+    @Column(name = "LimpiezaOficinas",nullable = true)
     private int LimpiezaOficinas;
 
     
-    @Column(name = "ComunesInternas")
+    @Column(name = "ComunesInternas",nullable = true)
     private int ComunesInternas;
 
     
-    @Column(name = "Sanitarios")
+    @Column(name = "Sanitarios",nullable = true)
     private int Sanitarios;
 
     
-    @Column(name = "SupervisionAreas")
+    @Column(name = "SupervisionAreas",nullable = true)
     private int SupervisionAreas;
 
     
-    @Column(name = "RevisionBase")
+    @Column(name = "RevisionBase",nullable = true)
     private int RevisionBase;
 
     
-    @Column(name = "RevisionConfianza")
+    @Column(name = "RevisionConfianza",nullable = true)
     private int RevisionConfianza;
 
     
-    @Column(name = "Comunes")
+    @Column(name = "Comunes",nullable = true)
     private int Comunes;
 
     
-    @Column(name = "LimpiezaHerramientas")
+    @Column(name = "LimpiezaHerramientas",nullable = true)
     private int LimpiezaHerramientas;
 
     
-    @Column(name = "CalidadMaterial")
+    @Column(name = "CalidadMaterial",nullable = true)
     private int CalidadMaterial;
 
     
-    @Column(name = "Puntualidad")
+    @Column(name = "Puntualidad",nullable = true)
     private int Puntualidad;
 
     
-    @Column(name = "Asistencia")
+    @Column(name = "Asistencia",nullable = true)
     private int Asistencia;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -84,7 +91,19 @@ public class Evaluacion implements Serializable {
 
     @Column(name = "Periodo")
     private String Periodo;
+    
+    @Column(name = "Año")
+    private String Año;
 
+    public String getAño() {
+        return Año;
+    }
+
+    public void setAño(String Año) {
+        this.Año = Año;
+    }
+    
+    
     public String getPeriodo() {
         return Periodo;
     }
@@ -105,14 +124,31 @@ public class Evaluacion implements Serializable {
         this.codigoEmpleado = codigoEmpleado;
     }
 
-    public Persona getCodigoPersona() {
-        return codigoPersona;
+    public Persona getCodigoPersonaEO() {
+        return codigoPersonaEO;
     }
 
-    public void setCodigoPersona(Persona codigoPersona) {
-        this.codigoPersona = codigoPersona;
+    public void setCodigoPersonaEO(Persona codigoPersonaEO) {
+        this.codigoPersonaEO = codigoPersonaEO;
     }
 
+    public Persona getCodigoPersonaJI() {
+        return codigoPersonaJI;
+    }
+
+    public void setCodigoPersonaJI(Persona codigoPersonaJI) {
+        this.codigoPersonaJI = codigoPersonaJI;
+    }
+
+    public Persona getCodigoPersonaRH() {
+        return codigoPersonaRH;
+    }
+
+    public void setCodigoPersonaRH(Persona codigoPersonaRH) {
+        this.codigoPersonaRH = codigoPersonaRH;
+    }
+
+        
     public int getUniforme() {
         return Uniforme;
     }

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+               <h1>Ingrese su busqueda para encontrar los datos que necesita:</h1>
+               <h:form>
+                   <p:panelGrid columns="7">
+                       <p:outputLabel value="EMPLEADO" for="emp"/>
+                       <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains">
+                           <f:selectItems value="#{corteController.lstempleados}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.relacion}" itemValue="#{emp.codigoEmpleado}"/>
+                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                                
+                            </p:selectOneMenu>
+                       <p:outputLabel value="PERIODO" for="per"/>
+                       <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione periodo">
+                                <f:selectItem noSelectionOption="true" itemLabel="PERIODO" itemValue=""/>
+                                <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
+                            </p:selectOneMenu>
+                       <p:outputLabel value="AÑO" for="año"/>
+                       <p:selectOneMenu id="año" value="#{corteController.año}" required="true" requiredMessage="Seleccione periodo">
+                                <f:selectItem noSelectionOption="true" itemLabel="AÑO" itemValue=""/>
+                                <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
+                            </p:selectOneMenu>
+                       
+                       <p:commandButton icon="fa fa-search" value="BUSCAR" update="ev,rh" actionListener="#{corteController.busquedaMensual()}"/>
+                   </p:panelGrid>
+                   <p:separator/>
+                   <p:dataTable id="ev" value="#{corteController.lstevaluacion}" var="evaluacion" emptyMessage="No se ha realizado una busqueda o no existen evaluaciónes para este periodo" rowHover="true">
+                       <f:facet name="header">
+                                <h3>Resultados de la evaluacion mensual</h3>
+                       </f:facet>
+                      <p:column headerText="Fecha de evaluacion">
+                         <p:outputLabel value="#{evaluacion.fechaEv}">
+                                <f:convertDateTime pattern="dd/MM/YYYY"/>
+                            </p:outputLabel>
+                       </p:column>
+                       <p:column headerText="Uniforme">
+                           <p:outputLabel value="#{evaluacion.uniforme}"/>
+                       </p:column>
+                       <p:column headerText="Limpieza de oficinas">
+                           <p:outputLabel value="#{evaluacion.limpiezaOficinas}"/>
+                       </p:column>
+                       <p:column headerText="A.Comunes internas">
+                           <p:outputLabel value="#{evaluacion.comunesInternas}"/>
+                       </p:column>
+                       <p:column headerText="Sanitarios">
+                           <p:outputLabel value="#{evaluacion.sanitarios}"/>
+                       </p:column>
+                       <p:column headerText="Supervisión areas">
+                           <p:outputLabel value="#{evaluacion.supervisionAreas}"/>
+                       </p:column>
+                       <p:column headerText="Revision (Base)">
+                           <p:outputLabel value="#{evaluacion.revisionBase}"/>
+                       </p:column>
+                       <p:column headerText="Revision (Confianza)">
+                           <p:outputLabel value="#{evaluacion.revisionConfianza}"/>
+                       </p:column><p:column headerText="Areas Comunes">
+                           <p:outputLabel value="#{evaluacion.comunes}"/>
+                       </p:column>
+                       <p:column headerText="Limpieza de herramientas">
+                           <p:outputLabel value="#{evaluacion.limpiezaHerramientas}"/>
+                       </p:column>
+                       <p:column headerText="Calidad del material">
+                           <p:outputLabel value="#{evaluacion.calidadMaterial}"/>
+                       </p:column>
+                       <p:column headerText="(EO) Evaluo:">
+                           <p:outputLabel value="#{evaluacion.codigoPersonaEO.nombres} #{evaluacion.codigoPersonaEO.apellidos}"/>
+                       </p:column>
+                       <p:column headerText="(JI) Evaluo:">
+                           <p:outputLabel value="#{evaluacion.codigoPersonaJI.nombres} #{evaluacion.codigoPersonaJI.apellidos}"/>
+                       </p:column>
+                                            
+                   </p:dataTable>
+                   <p:separator/>
+                   <p:dataTable id="rh" value="#{corteController.lstevaluacion}" var="rh" emptyMessage="No se ha realizado una busqueda o no existen evaluaciónes para este periodo" rowHover="true">
+                        <f:facet name="header">
+                                <h3>Evaluacion Mensual de RH</h3>
+                       </f:facet>
+                       <p:column headerText="Asistencias">
+                           <p:outputLabel value="#{rh.asistencia}"/>
+                       </p:column>
+                       <p:column headerText="Retardos">
+                           <p:outputLabel value="#{rh.puntualidad}"/>
+                       </p:column>
+                       <p:column headerText="(RH) Evaluo:">
+                           <p:outputLabel value="#{rh.codigoPersonaRH.nombres} #{rh.codigoPersonaRH.apellidos}"/>
+                       </p:column>
+                   </p:dataTable>
+               </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

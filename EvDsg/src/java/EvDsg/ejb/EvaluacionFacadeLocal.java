@@ -2,6 +2,7 @@
 package EvDsg.ejb;
 
 import EvDsg.model.Evaluacion;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -21,4 +22,8 @@ import javax.ejb.Local;
     List<Evaluacion> findRange(int[] range);
 
     int count();
+    
+    List<Evaluacion>busqueda(int codigoEmpleado,Date Fecha,String Periodo,String Año)throws Exception;
+    
+    List<Evaluacion>busquedaMensual(int codigoEmpleado,String Periodo,String Año)throws Exception;
 }

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true"/>
+
+                <h:form >
+                    
+                        <p:panelGrid columns="2" id="pnlEvaluacion">
+                            <f:facet name="header">
+                                <h3>INSTRUCCIONES:</h3>
+                                <p>Puede crear una nueva evaluacion si despues de hacer la busqueda no encontro algun resultado</p>
+                            </f:facet>
+
+                            <p:outputLabel value="EMPLEADO A EVALUAR" for="emp"/>
+                            <p:selectOneMenu id="emp" value="#{evaluacionController.empleado.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado">
+                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                                <f:selectItems value="#{evaluacionController.lstempleados}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.relacion}" itemValue="#{emp.codigoEmpleado}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="PERIODO A EVALUAR" for="per"/>
+                            <p:selectOneMenu id="per" value="#{evaluacionController.evaluacion.periodo}" required="true" requiredMessage="Seleccione un Periodo">
+                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN PERIODO" itemValue=""/>
+                                <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="AÑO" for="añ"/>
+                            <p:selectOneMenu id="añ" value="#{evaluacionController.evaluacion.año}" required="true" requiredMessage="Seleccione un año">
+                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN AÑO" itemValue=""/>
+                                <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
+                            </p:selectOneMenu>
+                            
+
+                            <f:facet name="footer">
+
+                                <p>VERIFIQUE TODAS LAS CALIFICACIONES, SI ESTA SEGURO DE ENVIAR LA INFORMACION CONTINUE.</p>
+                            </f:facet>
+                        </p:panelGrid>
+
+                        <p:commandButton value="CREAR EVALUACION DIARIA" actionListener="#{evaluacionController.registrarEO()}" action="principalEO?faces-redirect=true" update="pnlEvaluacion"/>
+                      
+                </h:form>
+                <br/><br/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

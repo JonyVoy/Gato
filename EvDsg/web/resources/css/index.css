@@ -7,7 +7,7 @@
 }
 
 #entrar{
-    margin: 200px auto;
+    margin: 20px auto;
     padding: 50px 50px 50px 50px;
     border-radius: 20px;
     width: 40%;
@@ -15,3 +15,19 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+#logos{
+    margin: 0px auto;
+    padding: 50px 50px 50px 50px;
+    border-radius: 20px;
+    background-image: url(../..//resources/images/logo1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30%;
+    height: 50px;
+
+}
+h1{
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+    color: white;
+   }
