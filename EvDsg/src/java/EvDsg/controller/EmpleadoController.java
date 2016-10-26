@@ -58,5 +58,14 @@ public class EmpleadoController implements Serializable {
         }
     }
     
+    public void modificar (Empleado empleado){
+     empleadoEJB.edit(empleado);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Usuario Modificado"));
+
+    }
+     public void eliminar(Empleado empleado){
+              empleadoEJB.remove(empleado);
+     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Empleado Eliminado"));
+     }
     
 }

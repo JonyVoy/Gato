@@ -101,14 +101,15 @@
                                         <p:outputLabel value="Su tipo de usuario es: " />
                                         <p:outputLabel value="#{usuariosController.usuario.tipo}" styleClass="outputLabel"/>
 
-                                        <p:outputLabel value="EO = Encargado de oficina"/>
-                                        <p:outputLabel value="Todos sus datos son confidenciales." />
+                                        <p:outputLabel><h5>EO = Enlace de Oficina</h5>
+                                        <h5>RH = Recursos Humanos</h5>
+                                        <h5>JI = Jefe de Intendencia</h5>
+                                        </p:outputLabel>
+                                        <p:outputLabel value="Todos los datos son confidenciales, se recomienda no compartir su contraseña"/>
                                     </p:panelGrid>
+                             </p:panelGrid>
 
-
-                                </p:panelGrid>
-
-                                <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{usuariosController.registrar()}" icon="fa fa-thumbs-o-up" action="index?faces-redirect=true"  />
+                                <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{usuariosController.registrar()}" icon="fa fa-thumbs-o-up" action="index?faces-redirect=true"/>
 
                             </p:panel>
                         </p:tab>

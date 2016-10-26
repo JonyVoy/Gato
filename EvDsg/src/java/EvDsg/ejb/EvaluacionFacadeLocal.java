@@ -26,4 +26,6 @@ import javax.ejb.Local;
     List<Evaluacion>busqueda(int codigoEmpleado,Date Fecha,String Periodo,String Año)throws Exception;
     
     List<Evaluacion>busquedaMensual(int codigoEmpleado,String Periodo,String Año)throws Exception;
+    
+    
 }

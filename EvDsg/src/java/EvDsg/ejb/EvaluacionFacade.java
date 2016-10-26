@@ -54,7 +54,7 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
         List<Evaluacion> lista=null;
         String jpql;
        try{
-           jpql="from Evaluacion as EO where EO.codigoEmpleado.codigoEmpleado=EO.codigoEmpleado.codigoEmpleado and EO.codigoEmpleado.codigoEmpleado=?1 and EO.Periodo = ?2 and EO.Año=?3";
+           jpql="from Evaluacion as EO,Empleado as EM where EO.codigoEmpleado.codigoEmpleado=EM.codigoEmpleado and EO.codigoEmpleado.codigoEmpleado=?1 and EO.Periodo = ?2 and EO.Año=?3";
                    
        Query query = em.createQuery(jpql);
        query.setParameter(1, codigoEmpleado);
@@ -66,5 +66,7 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
        }
        return lista;
     }
+
+    
     
 }

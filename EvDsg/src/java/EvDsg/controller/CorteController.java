@@ -5,8 +5,10 @@ import EvDsg.ejb.EmpleadoFacadeLocal;
 import EvDsg.ejb.EvaluacionFacadeLocal;
 import EvDsg.model.Empleado;
 import EvDsg.model.Evaluacion;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,6 +16,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 
 @Named(value = "corteController")
@@ -21,11 +30,14 @@ import javax.faces.view.ViewScoped;
 public class CorteController implements Serializable{
 private List<Empleado> lstempleados;
 private List<Evaluacion> lstevaluacion;
+private List<Evaluacion> lstcorte;
 private int codigoEmpleado;
 private String Periodo;
 private String Año;
 private Date Fecha;
-    
+
+JasperPrint jasperPrint;
+
   @EJB
   private EmpleadoFacadeLocal empleadoEJB;
   @EJB 
@@ -33,9 +45,10 @@ private Date Fecha;
   
   @PostConstruct
   public void init(){
-   lstempleados = empleadoEJB.findAll();
+   lstempleados = empleadoEJB.findAll();    
   }
 
+  
   public void busqueda(){
       try{
       lstevaluacion = evaluacionEJB.busqueda(codigoEmpleado, Fecha , Periodo, Año);
@@ -47,13 +60,36 @@ private Date Fecha;
   
   public void busquedaMensual(){
       try{
-      lstevaluacion = evaluacionEJB.busquedaMensual(codigoEmpleado, Periodo, Año);
+      lstcorte = evaluacionEJB.busquedaMensual(codigoEmpleado, Periodo, Año);
       }catch(Exception e){
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "ERROR"));
-
       }
     }
 
+//  Reporte
+  
+  public void initial() throws JRException{
+  JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lstcorte);
+      String reportPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("\\resources\\Reportes\\Reporte.jasper");
+      jasperPrint = JasperFillManager.fillReport(reportPath,new HashMap(), beanCollectionDataSource);
+  }
+  
+  public void PDF() throws JRException, IOException{
+  initial();
+      HttpServletResponse httpServletResponse= (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+      httpServletResponse.addHeader("Content-disposition", "attachment; filename=Corte_Mensual.pdf");
+      ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
+      JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+      FacesContext.getCurrentInstance().responseComplete();
+  }
+//  Fin
+   
+    public List<Evaluacion> getLstcorte() {
+        return lstcorte;
+    }
+
+    public void setLstcorte(List<Evaluacion> lstcorte) {
+        this.lstcorte = lstcorte;
+    }
   
     public List<Evaluacion> getLstevaluacion() {
         return lstevaluacion;
@@ -102,7 +138,4 @@ private Date Fecha;
     public void setFecha(Date Fecha) {
         this.Fecha = Fecha;
     }
- 
-  
-  
 }

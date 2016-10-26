@@ -1,0 +1,21 @@
+#deny{
+    background-image: url(../..//resources/images/warn2.png);
+    background-color: tomato;
+    width: auto;
+    margin: 0 auto;
+}
+
+#msjdeny{
+    margin:auto;
+    padding: 50px 50px 50px 50px;
+    border-radius: 20px;
+    width: 40%;
+    text-align: center;
+
+}
+
+h1{
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+    color: steelblue;
+}

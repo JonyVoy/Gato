@@ -13,7 +13,7 @@
             <ui:define name="content">
                <p:growl id="msj" autoUpdate="true" showDetail="true"/>
 
-                <h:form>
+               <h:form id="empleados">
                     <p:dataTable value="#{empleadoController.empleados}" var="empleado" editable="true" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
@@ -42,7 +42,11 @@
                                     </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:ajax event="rowEdit" listener="#{usuariosController.modificar(usuarios)}"/>
+                        <p:column headerText="Borrar" >
+                            <p:commandButton value="borrar" actionListener="#{empleadoController.eliminar(empleado)}" action="lstEmpleados?faces-redirect=true"/>
+                                
+                        </p:column>
+                        <p:ajax event="rowEdit" listener="#{empleadoController.modificar(empleado)}"/>
                     </p:dataTable>
                 </h:form>
                 

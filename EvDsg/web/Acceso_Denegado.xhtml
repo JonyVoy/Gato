@@ -1,14 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
         <title>Acceso Denegado</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>
-            <span>Acceso Denegado</span>
-            <span>Permisos insuficientes</span>
+        <h:outputStylesheet library="css" name="aDen.css"/>
+    </h:head>
+    <body id="deny">
+        <div id="msjdeny">
+            <p:panel header="PELIGRO"><span><img src="resources/images/warn.png" alt=""/></span>
+                    <p:panelGrid columns="1" >
+                        <h1>ACCESO DENEGADO</h1>
+                        <h1>NO TIENE LOS PERMISOS SUFICIENTES PARA ACCEDER A ESTA PAGINA</h1>
+                    </p:panelGrid>
+                    </p:panel>
         </div>
     </body>
 </html>

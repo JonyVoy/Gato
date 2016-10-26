@@ -54,18 +54,17 @@ public class listasController implements Serializable {
 
         SelectItemGroup per = new SelectItemGroup("PERIODO EVALUADO");
         per.setSelectItems(new SelectItem[]{
-            new SelectItem("E-F", "ENERO-FEBRERO"),
-            new SelectItem("F-M", "FEBRERO-MARZO"),
-            new SelectItem("M-A", "MARZO-ABRIL"),
-            new SelectItem("A-M", "ABRIL-MAYO"),
-            new SelectItem("M-J", "MAYO-JUNIO"),
-            new SelectItem("J-J", "JUNIO-JULIO"),
-            new SelectItem("J-A", "JULIO-AGOSTO"),
-            new SelectItem("A-S", "AGOSTO-SEPTIEMBRE"),
-            new SelectItem("S-O", "SEPTIEMBRE-OCTUBRE"),
-            new SelectItem("O-N", "OCTUBRE-NOVIEMBRE"),
-            new SelectItem("N-D", "NOVIEMBRE-DICIEMBRE"),
-            new SelectItem("D-E", "DICIEMBRE-ENERO")});
+            new SelectItem("ENERO-FEBRERO", "ENERO-FEBRERO"),
+            new SelectItem("FEBRERO-MARZO", "FEBRERO-MARZO"),
+            new SelectItem("MARZO-ABRIL", "MARZO-ABRIL"),
+            new SelectItem("ABRIL-MAYO", "ABRIL-MAYO"),
+            new SelectItem("MAYO-JUNIO", "MAYO-JUNIO"),
+            new SelectItem("JUNIO-JULIO", "JUNIO-JULIO"),
+            new SelectItem("AGOSTO-SEPTIEMBRE", "AGOSTO-SEPTIEMBRE"),
+            new SelectItem("SEPTIEMBRE-OCTUBRE", "SEPTIEMBRE-OCTUBRE"),
+            new SelectItem("OCTUBRE-NOVIEMBRE", "OCTUBRE-NOVIEMBRE"),
+            new SelectItem("NOVIEMBRE-DICIEMBRE", "NOVIEMBRE-DICIEMBRE"),
+            new SelectItem("DICIEMBRE-ENERO", "DICIEMBRE-ENERO")});
         periodo = new ArrayList<>();
         periodo.add(per);
         

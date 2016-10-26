@@ -1,5 +1,4 @@
 body {
-    
     width: auto;
     height: 100%;
     background-image: url(../..//resources/images/bbg1.jpg);
@@ -25,20 +24,62 @@ h1 {
 .PanRangos{
     align-content: center;
     text-align: center;
-    
+
 }
 a:link, a:visited {
-  color: #045491;
-  font-weight : bold;
-  text-decoration: none;
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
 }
 
 a:link:hover, a:visited:hover  {
-  color: #045491;
-  font-weight : bold;
-  text-decoration : underline;
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
 }
 
+#principal{
 
+    width: auto;
+    margin: 0 auto;
+}
 
+#princ{
+    background-image: url(../..//resources/images/hi.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 12%;
+    margin: 10px auto;
+    padding: 40px 40px 40px 40px;
+    width: 50%;
+    text-align: center;
+}
+#princ h1{
+    color: steelblue;
+    }
+#intro{
+    margin: 20px auto;
+    padding: 5px 50px 50px 50px;
+    border-radius: 20px;
+    width: 80%;
+    text-align: center;
+  }
+  #intro p{
+      text-transform: uppercase;
+      font-size: 15px;
+  }  
+#exito{
+    background-image: url(../..//resources/images/done.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 12%;
+    margin: 20px auto;
+    padding: 50px 50px 50px 50px;
+    border-radius: 20px;
+    width: 40%;
+    text-align: center;
+}
+#exito h1{
+    color: steelblue;
+}
 /**/
