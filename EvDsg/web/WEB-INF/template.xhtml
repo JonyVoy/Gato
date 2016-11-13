@@ -20,11 +20,7 @@
                 <div class="ui-g-12">
                     <ui:insert name="top" class="top">
                         <div class="header">
-                            <h1>COMISIÓN DE AGUA Y ALCANTARILLADO DE SISTEMAS INTERMUNICIPALES</h1>
-                            <h2>DIRECCIÓN DE ADMINISTRACION Y FINANZAS</h2>
-                            <h3>SUBDIRECCIÓN DE SERVICIOS GENERALES</h3>
-                            <h3>EVALUACIÓN DEL DESEMPEÑO PARA PERSONAL DE INTENDENCIA</h3>
-
+                            
                         </div>
                         <h:form>
                             La Fecha De Hoy Es : <p:clock pattern="dd/MM/yyyy hh:mm" mode="server" />
@@ -39,18 +35,21 @@
                                 </f:facet>
                             </p:menubar>
                             <p:dialog header="Información" widgetVar="info" modal="true" height="300" width="800" showEffect="explode">
-                        <p>Para realizar una evaluación usted debera iniciar sesión con su usuario y contraseña ya que la evaluación guarda estos datos para futuras operaciones,
-                        lo primero que debe hacer es dar click en la opción "Evaluacion de desempeño", despues debe Seleccionar un Empleado, un Periodo y el año.
-                        Despues de esto dar click en el boton " <p:commandButton icon="fa fa-search" value="BUSCAR" /> ".
+                        <p>Para realizar una evaluación usted deberá iniciar sesión con su usuario y contraseña ya que la evaluación guarda estos datos para futuras operaciones,
+                            lo primero que debe hacer es dar clic en la opción "Evaluación de desempeño", después debe Seleccionar un Empleado,
+                            un Periodo y el año. Después de esto dar clic en el botón " <p:commandButton icon="fa fa-search"/> ".
                         </p>
-                        <p>        
-                        Si despues de esto la lista de la parte de abajo queda vacía usted podra crear una nueva evaluación dando click en el boton" <p:commandButton icon="fa fa-plus-circle" value="Crear evaluación diaria"/> "
-                        el cual lo llevara a una pagina donde podra crear una nueva evaluación diaria, usted en esa pagina debera seleccionar los campos que se piden ahi y al finalizar repetira los primeros
-                        pasos "Seleccionar los datos que se piden" -> Dar click en "Buscar" y ahora le mostrara una tabla con su evaluacion diaria.
+                        <p> 
+                            Si después de esto la lista de la parte de abajo queda vacía usted podrá crear una nueva evaluación dando clic en el botón" <p:commandButton icon="fa fa-plus-circle" value="Crear evaluación diaria"/> " 
+                            el cual lo llevara a una página donde podrá crear una nueva evaluación diaria, usted en esa página deberá seleccionar los campos que se piden 
+                            ahí y al finalizar repetirá los primeros pasos "Seleccionar los datos que se piden" -> Dar clic en "Buscar" y 
+                            ahora le mostrara una tabla con su evaluación diaria. 
+                        </p>
+                       <p>
+                          Ahí dará clic en el icono del Lápiz del lado izquierdo y podrá comenzar a evaluar, cuando termine dará clic en icono " <p:commandButton icon="fa fa-check" /> " si desea guardar o en " <p:commandButton icon="fa fa-close"/> " si desea cancelar.
+                          Deberá repetir esto con cada empleado que tenga que evaluar, si es que tiene más de un empleado a evaluar. Cuando finalice de clic en el botón que dice terminar.
+                          Después de eso usted podrá salir del sistema. 
                        </p>
-                       <p>Ahi dara click en el icono del Lapíz del lado izquierdo y podra comenzar a evaluar, cuando termine dara click en icono <p:commandButton icon="fa fa-check" /> si desea guardar o en <p:commandButton icon="fa fa-close"/> si desea cancelar.
-                       Debera repetir esto con cada empleado que tenga que evaluar, si es que tiene mas de un empleado a evaluar. cuando finzalize de click en el boton que dice terminar.
-                       Despues de eso usted podra salir del sistema</p>
                     </p:dialog> 
                                 
                         </h:form>  

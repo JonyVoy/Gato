@@ -29,22 +29,40 @@
                             <p:outputLabel value="#{empleado.sexo}"/>
                         </p:column>
                         <p:column headerText="Relacion Laboral">
-                            <p:outputLabel value="#{empleado.relacion}"/>
+                            <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{empleado.relacion}"/>
+                                    </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{empleado.relacion}" style="width:100%">
+                                        <f:selectItems value="#{listasController.relacion}" var="rel" itemValue="#{rel.value}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Area de trabajo">
+                            <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{empleado.area}"/>
+                                    </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{empleado.area}" style="width:100%">
+                                        <f:selectItems value="#{listasController.departamento}" var="area" itemValue="#{area.value}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
                         </p:column>
                         <p:column headerText="Activo = 1 Inactivo = 0">
                             <p:cellEditor>
                             <f:facet name="output">
                                 <p:outputLabel value="#{empleado.estado}"/>
                                     </f:facet>
-                                
-                                 <f:facet name="input">
-                                     <p:inputText value="#{empleado.estado}"/>
-                                    </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{empleado.estado}" style="width:100%">
+                                        <f:selectItems value="#{listasController.activos}" var="estado" itemValue="#{estado.value}"/>
+                                    </p:selectOneMenu>
+                                 </f:facet>
                             </p:cellEditor>
-                        </p:column>
-                        <p:column headerText="Borrar" >
-                            <p:commandButton value="borrar" actionListener="#{empleadoController.eliminar(empleado)}" action="lstEmpleados?faces-redirect=true"/>
-                                
                         </p:column>
                         <p:ajax event="rowEdit" listener="#{empleadoController.modificar(empleado)}"/>
                     </p:dataTable>

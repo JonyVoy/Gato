@@ -28,7 +28,11 @@ public class Empleado implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "Relacion")
     private String relacion;
-
+    
+@Size(min = 1, max = 50)
+    @Column(name = "Area")
+    private String area;
+    
     @Size(max = 10)
     @Column(name = "Sexo")
     private String sexo;
@@ -84,6 +88,15 @@ public class Empleado implements Serializable {
         this.relacion = relacion;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 5;

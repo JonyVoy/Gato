@@ -227,6 +227,7 @@
 	<field name="codigoEmpleado.apellidos" class="java.lang.Object"/>
 	<field name="codigoPersonaEO.nombres" class="java.lang.Object"/>
 	<field name="codigoPersonaEO.apellidos" class="java.lang.Object"/>
+	<field name="codigoEmpleado.area" class="java.lang.String"/>
 	<variable name="uniforme_Promedio" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{uniforme}]]></variableExpression>
 	</variable>
@@ -326,106 +327,188 @@
 	<variable name="TotalBonos" class="java.lang.Double">
 		<variableExpression><![CDATA[$V{BonoUniforme}+$V{BonoLO}+$V{BonoACI}+$V{BonoSanitarios}+$V{BonoSA}+$V{BonoRevisionB}+$V{BonoRevisionC}+$V{BonoAC}+$V{BonoLH}+$V{BonoCM}]]></variableExpression>
 	</variable>
+	<variable name="PuntajeRetardos" class="java.lang.Integer">
+		<variableExpression><![CDATA[($V{puntualidad_Suma}==0)? 100 : (($V{puntualidad_Suma}<=2) ? 75 : (($V{puntualidad_Suma}<=4) ? 50 : 0))]]></variableExpression>
+	</variable>
+	<variable name="PuntajeFaltas" class="java.lang.Integer">
+		<variableExpression><![CDATA[($V{asistencia_Suma}==0)? 100 : (($V{asistencia_Suma}==1) ? 75 : (($V{asistencia_Suma}==2) ? 50 : 0))]]></variableExpression>
+	</variable>
+	<variable name="BonoPuntualidad" class="java.lang.Double">
+		<variableExpression><![CDATA[new java.lang.Double($V{PuntajeRetardos}.doubleValue()*.5)]]></variableExpression>
+	</variable>
+	<variable name="BonoAsistencias" class="java.lang.Double">
+		<variableExpression><![CDATA[new java.lang.Double($V{PuntajeFaltas}.doubleValue()*.5)]]></variableExpression>
+	</variable>
+	<variable name="TotalBonosAP" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{BonoPuntualidad}+$V{BonoAsistencias}]]></variableExpression>
+	</variable>
+	<variable name="BonoMensual" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{TotalBonos}+$V{TotalBonosAP}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="80" splitType="Stretch">
 			<image>
-				<reportElement x="92" y="1" width="622" height="79" uuid="fb7fdcaa-074e-4ecb-a165-48f0df5c7793"/>
-				<imageExpression><![CDATA["C:\\Users\\Jony\\Documents\\NetBeansProjects\\Gato\\EvDsg\\web\\resources\\images\\head.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="802" height="80" uuid="6363d354-ba52-4a43-8dbb-88c8abb2e32d"/>
+				<imageExpression><![CDATA["C:\\Users\\Jony\\Documents\\NetBeansProjects\\Gato\\EvDsg\\web\\resources\\images\\Reporte.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="28" splitType="Stretch">
+		<band height="52" splitType="Stretch">
 			<textField>
-				<reportElement x="165" y="0" width="231" height="26" uuid="eac14d44-6fbb-4dbe-8db6-7570021372c5"/>
+				<reportElement x="165" y="26" width="231" height="26" uuid="eac14d44-6fbb-4dbe-8db6-7570021372c5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""+$F{codigoEmpleado.nombre}+" "+$F{codigoEmpleado.apellidos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="165" height="26" uuid="ea37b402-76f9-4be0-89ba-42c725d738ac"/>
+				<reportElement x="0" y="26" width="165" height="26" uuid="ea37b402-76f9-4be0-89ba-42c725d738ac"/>
 				<textElement verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Empleado evaluado:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="462" y="0" width="143" height="26" uuid="899f8391-29f2-4519-81eb-59282c5dab70"/>
+				<reportElement x="461" y="26" width="143" height="26" uuid="899f8391-29f2-4519-81eb-59282c5dab70"/>
 				<textElement verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Periodo evaluado:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="604" y="0" width="198" height="26" uuid="97ac0bb8-57ef-4563-b68d-61d8ebcaf0b1"/>
+				<reportElement x="604" y="26" width="198" height="26" uuid="97ac0bb8-57ef-4563-b68d-61d8ebcaf0b1"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{periodo}+" "+$F{año}]]></textFieldExpression>
 			</textField>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="20">
 			<staticText>
-				<reportElement x="0" y="0" width="165" height="20" uuid="cbb4ae61-3128-44c6-bf7b-029314c3cd92"/>
-				<text><![CDATA[Nombre del Evaluador]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="242" y="0" width="165" height="20" uuid="35042275-d8e0-4096-bf93-d4a814a5a2d4"/>
-				<text><![CDATA[Firma:]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="23">
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="165" height="23" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="d1219bd9-c443-490c-8549-09c40171f46b"/>
-				<box>
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+				<reportElement x="0" y="0" width="330" height="26" uuid="faac3aef-9706-488b-8ffe-2bd0a7d4e076"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[""+$F{codigoPersonaEO.nombres}+" "+$F{codigoPersonaEO.apellidos}]]></textFieldExpression>
+				<text><![CDATA[Area o Departamento al que esta asignado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="330" y="0" width="272" height="26" uuid="9abf435a-9f47-473d-89c9-e240c9aa7232"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoEmpleado.area}]]></textFieldExpression>
 			</textField>
 		</band>
-	</detail>
+	</pageHeader>
 	<pageFooter>
-		<band height="66" splitType="Stretch">
+		<band height="109" splitType="Prevent">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="46" width="264" height="20" uuid="42700cfe-6f61-4136-b839-a1f2f80ad98c"/>
+				<reportElement x="0" y="89" width="264" height="20" uuid="42700cfe-6f61-4136-b839-a1f2f80ad98c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="680" y="46" width="80" height="20" uuid="329d86d0-40f2-4ac1-a57b-958336847599"/>
+				<reportElement x="679" y="89" width="80" height="20" uuid="329d86d0-40f2-4ac1-a57b-958336847599"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="760" y="46" width="40" height="20" uuid="b2d8fc1b-8b0b-453e-bb1c-a4c8ab38d13e"/>
+				<reportElement x="759" y="89" width="40" height="20" uuid="b2d8fc1b-8b0b-453e-bb1c-a4c8ab38d13e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<rectangle>
+				<reportElement x="0" y="0" width="200" height="78" uuid="10565196-a7ae-4751-a066-8b68e671dfe9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="400" y="0" width="202" height="78" uuid="0cc3f9fd-3048-47e3-8528-e744b13265a0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="200" y="0" width="200" height="78" uuid="0a99583e-8495-40ec-b356-8f95b426e012"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="602" y="0" width="200" height="78" uuid="60b6cc1c-5dc8-4042-a168-e1c8db12c44a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="64" width="200" height="14" uuid="8db6958a-f04c-4dc4-b5ba-2211fc7c9254"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="64" width="200" height="14" uuid="14d71bf6-711d-46b5-85e9-5785383c7882"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CONFORMIDAD CON EL SERVICIO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="200" y="64" width="200" height="14" uuid="f7b6e58b-6ddd-4753-878a-ba94d17328df"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="200" y="64" width="200" height="14" uuid="f24061c6-ebed-4172-8b79-a2c8cef7642d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Vo. Bo.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="400" y="64" width="202" height="14" uuid="fb23bb3f-2b95-49ec-a280-a17cfd4478ac"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="400" y="64" width="202" height="14" uuid="f8e5197f-4e95-4fc0-822d-ac812467aafa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[REVISÓ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="602" y="64" width="200" height="14" uuid="36b9cb43-49e5-4f5e-88eb-401d35e4ecb4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="602" y="64" width="200" height="14" uuid="baf6307e-cde8-458b-adf4-a3e8b7d1f43b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[SUPERVISÓ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="200" height="14" backcolor="#CCCCCC" uuid="c0981867-b48b-496f-bca5-b097c4690a64"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="200" height="14" backcolor="#CCCCCC" uuid="d0700313-011f-4d56-a3a9-a37a2b045921"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TITULAR DEL AREA QUE EVALÚA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="200" y="0" width="200" height="14" backcolor="#CCCCCC" uuid="062f9c7a-ae27-4270-b194-570752fa921b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="200" y="0" width="200" height="14" backcolor="#CCCCCC" uuid="a4447dc9-3790-4825-9ae3-49347e71b9b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SUBDIRECTOR DE SERVICIOS GENERALES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="400" y="0" width="202" height="14" backcolor="#CCCCCC" uuid="0e8028d2-a378-4f72-b456-81709667ab8b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="400" y="0" width="202" height="14" backcolor="#CCCCCC" uuid="11570456-972d-4c3b-89f0-4029a7039e1b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[COMISIÓN DE SEGURIDAD Y SALUD EN EL TRABAJO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="602" y="0" width="200" height="14" backcolor="#CCCCCC" uuid="5c5560b3-9ecc-4d2e-a286-533ab20567b1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="602" y="0" width="200" height="14" backcolor="#CCCCCC" uuid="56a001c1-7680-4ad8-8fc7-e80abb124695"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[JEFE DE INTENDENCIA]]></text>
+			</staticText>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="222" splitType="Stretch">
+		<band height="242" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="792" height="85" backcolor="#CCCCFF" uuid="3a67895e-88df-4c43-82ee-5dc1efc800ca"/>
 			</frame>
@@ -614,11 +697,11 @@
 			<textField>
 				<reportElement mode="Opaque" x="660" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="cfaa15cd-fb15-45f8-99d6-7a48fa2718d0"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -628,11 +711,11 @@
 			<textField>
 				<reportElement mode="Opaque" x="726" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="5a2c1fb1-fd9f-49b3-9f10-5756f96d973e"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -642,11 +725,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="0" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="050ff121-3576-4152-9a71-9fd2c1a853a4"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -656,11 +739,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="66" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="b4fc219b-4961-4ad7-9a8d-e130825762f6"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -670,11 +753,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="132" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="85ee5800-0634-4cb6-8ad8-f9116b87d02b"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -684,11 +767,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="198" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="920040dc-d453-472a-90b2-8cdd4762b4bc"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -698,11 +781,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="264" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="7c0013c1-ceb4-4b14-8adc-32cf9ed6aeaa"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -712,11 +795,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="330" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="084f6d75-608a-4961-a697-d987eacd2612"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -726,11 +809,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="396" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="3fcefc1a-5a02-4312-b6b8-667456edc089"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -740,11 +823,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="462" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="b4c6b220-6987-4a3e-aca2-4e328d42a002"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -754,11 +837,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="528" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="826671f7-2ba2-4e17-bd54-9572166703ec"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -768,11 +851,11 @@
 			<textField pattern="###0.00">
 				<reportElement mode="Opaque" x="594" y="106" width="66" height="15" backcolor="#CCCCCC" uuid="d64e10c4-f26c-4687-8c62-04e5e6329c42"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="10" isBold="true"/>
@@ -802,7 +885,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeUniforme}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -814,7 +899,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeLO}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -826,7 +913,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeLACI}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -838,7 +927,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeSanitarios}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -850,7 +941,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeSA}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -862,7 +955,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeRevisionB}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -874,7 +969,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeRevisionC}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -886,7 +983,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeAC}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -898,7 +997,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeLH}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
@@ -910,11 +1011,13 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{puntajeCM}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="156" width="660" height="20" uuid="e924ec3c-290b-427d-a9dc-6f63a8bc94ff"/>
+				<reportElement x="0" y="156" width="792" height="20" uuid="e924ec3c-290b-427d-a9dc-6f63a8bc94ff"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -936,7 +1039,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoUniforme}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -948,7 +1053,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoLO}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -960,7 +1067,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoACI}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -972,7 +1081,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoSanitarios}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -984,7 +1095,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoSA}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -996,7 +1109,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoRevisionB}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -1008,7 +1123,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoRevisionC}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -1020,7 +1137,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoAC}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -1032,7 +1151,9 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoLH}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
@@ -1044,13 +1165,178 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{BonoCM}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="660" y="141" width="66" height="15" backcolor="#CCCCCC" uuid="b925a96f-3aa1-40ea-9f28-f284072bad34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PuntajeRetardos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="726" y="141" width="66" height="15" backcolor="#CCCCCC" uuid="408805f3-469a-4cb2-9087-6f14b9d726f2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PuntajeFaltas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="660" y="176" width="66" height="15" backcolor="#CCCCCC" uuid="31f45681-1bb1-4ad0-b430-a061f6925966"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{BonoPuntualidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="726" y="176" width="66" height="15" backcolor="#CCCCCC" uuid="bd046a05-3c72-4c88-adc5-ab8c9ba1ee0f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{BonoAsistencias}]]></textFieldExpression>
+			</textField>
 			<textField pattern="¤ #,##0.000">
-				<reportElement mode="Opaque" x="296" y="202" width="100" height="20" backcolor="#99FFFF" uuid="2da97a00-ec27-4467-aae8-f32da81850d0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement mode="Opaque" x="286" y="191" width="100" height="20" backcolor="#CCCCCC" uuid="2da97a00-ec27-4467-aae8-f32da81850d0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{TotalBonos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="286" y="211" width="100" height="20" backcolor="#CCCCCC" uuid="33521931-b798-471a-9965-f330cfe455d8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalBonosAP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="660" y="86" width="132" height="20" uuid="5050c821-f6d6-4627-a67f-9bbb92574619"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acumulados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="121" width="132" height="20" uuid="81ed8473-5d9a-498d-853d-2743e640af81"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puntajes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="191" width="286" height="20" backcolor="#99FF99" uuid="b20545f8-a3ec-4c74-b6ad-7228fa55af8e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total bonos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="211" width="286" height="20" backcolor="#99FF99" uuid="c122ac6e-d1fd-4e42-89f4-7f5a44f2f8b6"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total bonos de Asistencias y puntualidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="386" y="191" width="196" height="40" backcolor="#FF9999" uuid="d8af862c-135d-499b-9293-a12d2e0c9f0c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bono Mensual a pagar:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="582" y="191" width="132" height="40" backcolor="#66FF66" uuid="b21a8478-af97-4462-93a1-9d65442d0c58"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="15" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{BonoMensual}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

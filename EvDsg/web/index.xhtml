@@ -8,7 +8,6 @@
         <h:outputStylesheet library="css" name="index.css"/>
     </h:head>  
     <body id="index">
-        <h1>SISTEMA DE EVALUACION SOBRE LA CALIDAD DE LOS SERVICIOS GENERALES (SEDSG)</h1>
         <div id="logos"></div>
         <div id="entrar">
             <p:growl autoUpdate="true" showDetail="true" />
@@ -19,16 +18,17 @@
                         <p:inputText id="inusuario" value="#{indexController.usuario.usuario}" autocomplete="false" required="true" requiredMessage="Ingrese un usuario"/>
                         <p:outputLabel for="incontraseña" value="Ingrese Contraseña:"/>
                         <p:password id="incontraseña" value="#{indexController.usuario.clave}" autocomplete="false" required="true" requiredMessage="Ingrese contraseña"/>
-
                     </p:panelGrid>
-                    <p:commandButton value="Iniciar Sesión" action="#{indexController.iniciarSesion()}"  icon="fa fa-sign-in"/>
-                    <p:commandButton type="button" onclick="PF('info').show();" icon="fa fa-info-circle" title="Información"/>
+                    <br></br>
+                    <p:commandButton value="Iniciar Sesión" action="#{indexController.iniciarSesion()}"  icon="fa fa-sign-in" />
+                    <p:commandButton type="button" onclick="PF('info').show();" icon="fa fa-info-circle"  title="Información"/>
                     <p:dialog header="Información" widgetVar="info" modal="true" height="200" width="800">
-                        <p>Crear una cuenta de evaluador se deberá hacer solo cuando se le haya asignado realizar una evaluacion, deberá crear una y
-                            solo una cuenta para poder ingresar al sistema, los datos que usted ingrese en su cuenta son confidenciales y solo usted sera
-                            el responsable de su "Usuario" y "Contraseña", si llegara a olvidar su usuario o contraseña debera contactar al administrador
-                            para que el le reponga sus datos.</p>
-                        <p>Gracias.</p>
+                        <p>Crear una cuenta de evaluador se deberá hacer solo cuando se le haya asignado realizar una evaluación,
+                            deberá crear una y solo una cuenta para poder ingresar al sistema, los datos que usted ingrese en su 
+                            cuenta son confidenciales y solo usted será el responsable de su "Usuario" y "Contraseña", si llegara
+                            a olvidar su usuario o contraseña deberá contactar al administrador para que él le
+                            reponga sus datos.</p>
+                        <p>GRACIAS</p>
                     </p:dialog> 
                 </p:panel>
                 <p:separator/>

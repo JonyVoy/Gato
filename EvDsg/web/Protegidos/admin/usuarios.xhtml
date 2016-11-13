@@ -60,7 +60,9 @@
                                     </f:facet>
                                 
                                  <f:facet name="input">
-                                     <p:inputText value="#{usuarios.estado}"/>
+                                     <p:selectOneMenu value="#{usuarios.estado}" style="width:100%">
+                                        <f:selectItems value="#{listasController.activos}" var="estado" itemValue="#{estado.value}"/>
+                                    </p:selectOneMenu>
                                     </f:facet>
                             </p:cellEditor>
                         </p:column>

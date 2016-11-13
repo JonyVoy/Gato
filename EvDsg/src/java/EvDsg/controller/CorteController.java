@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @ViewScoped
 public class CorteController implements Serializable{
 private List<Empleado> lstempleados;
+private List<Empleado> lstempleadosActivos;
 private List<Evaluacion> lstevaluacion;
 private List<Evaluacion> lstcorte;
 private int codigoEmpleado;
@@ -45,16 +46,23 @@ JasperPrint jasperPrint;
   
   @PostConstruct
   public void init(){
+   lstempleadosActivos = empleadoEJB.inactivos();
    lstempleados = empleadoEJB.findAll();    
   }
 
   
   public void busqueda(){
+      
       try{
       lstevaluacion = evaluacionEJB.busqueda(codigoEmpleado, Fecha , Periodo, Año);
+      if (lstevaluacion != null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO!!", "Se encontro una evaluación para el dia de hoy"));
+            
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error!", "No existe evaluación diaria"));
+            }
       }catch(Exception e){
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "ERROR"));
-
+      
       }
     }
   
@@ -107,6 +115,15 @@ JasperPrint jasperPrint;
         this.lstempleados = lstempleados;
     }
 
+    public List<Empleado> getLstempleadosActivos() {
+        return lstempleadosActivos;
+    }
+
+    public void setLstempleadosActivos(List<Empleado> lstempleadosActivos) {
+        this.lstempleadosActivos = lstempleadosActivos;
+    }
+
+        
     public int getCodigoEmpleado() {
         return codigoEmpleado;
     }

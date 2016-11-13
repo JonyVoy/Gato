@@ -43,6 +43,10 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
        query.setParameter(4, Periodo);
        query.setParameter(5, Año);
            lista=query.getResultList();
+           
+           if(lista.isEmpty()){
+                lista=(List<Evaluacion>) lista.get(0);
+            }
        }catch(Exception e){
        throw e;
        }
