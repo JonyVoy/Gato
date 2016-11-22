@@ -23,17 +23,17 @@
 
                             <p:outputLabel value="EMPLEADO A EVALUAR" for="emp"/>
                             <p:selectOneMenu id="emp" value="#{evaluacionController.empleado.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado">
-                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                                <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                                 <f:selectItems value="#{evaluacionController.lstempleados}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.relacion}" itemValue="#{emp.codigoEmpleado}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="PERIODO A EVALUAR" for="per"/>
                             <p:selectOneMenu id="per" value="#{evaluacionController.evaluacion.periodo}" required="true" requiredMessage="Seleccione un Periodo">
-                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN PERIODO" itemValue=""/>
+                                <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                                 <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="AÑO" for="añ"/>
                             <p:selectOneMenu id="añ" value="#{evaluacionController.evaluacion.año}" required="true" requiredMessage="Seleccione un año">
-                                <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN AÑO" itemValue=""/>
+                                <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                                 <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
                             </p:selectOneMenu>
                             

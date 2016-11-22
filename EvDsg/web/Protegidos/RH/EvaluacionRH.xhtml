@@ -5,31 +5,33 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+    <h:head>
+        <h:outputScript library="js" name="calendar_es.js"/>
+    </h:head>
     <body>
 
         <ui:composition template="./../../WEB-INF/template.xhtml">
 
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true" showDetail="true" showSummary="true"/>
-                <h1>Ingrese su busqueda para encontrar los datos que necesita:</h1>
+                <h1>Ingrese su busqueda para encontrar la evaluacion diaria</h1>
                 <h:form>
                     <p:panelGrid columns="9">
                         <p:outputLabel value="EMPLEADO" for="emp"/>
                         <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains" effect="fold">
-                            <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.area}" itemValue="#{emp.codigoEmpleado}"/>
-                            <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                            <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos}" itemValue="#{emp.codigoEmpleado}"/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Dia a evaluar" for="cal"/>
-                        <p:calendar id="cal" required="true" value="#{corteController.fecha}" disabledWeekends="true" size="5"/>
+                        <p:calendar id="cal" required="true" value="#{corteController.fecha}" disabledWeekends="true" size="5" locale="es"/>
                         <p:outputLabel value="PERIODO" for="per"/>
                         <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione periodo" effect="fold">
-                            <f:selectItem noSelectionOption="true" itemLabel="PERIODO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="AÑO" for="año"/>
                         <p:selectOneMenu id="año" value="#{corteController.año}" required="true" requiredMessage="Seleccione año" effect="fold">
-                            <f:selectItem noSelectionOption="true" itemLabel="AÑO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
                         </p:selectOneMenu>
 
@@ -39,18 +41,13 @@
                     <p:dataTable id="ev" value="#{corteController.lstevaluacion}" var="evaluacion" editable="true" emptyMessage="No se ha realizado una busqueda o no existe una evaluación para este dia" rowHover="true">
                         <f:facet name="header">
                             <h3>AREA DE RECURSOS HUMANOS</h3>
-                            <p>Esta sección es evaluada por el departamento de Recursos Humanos. Se divide en dos factores:  
-                                1. Puntualidad – es la revisión se lleva a cabo con las tarjetas y la base de datos del 
-                                checador electrónico. 
-                                2. Asistencia – es la revisión de las faltas del personal evaluado.  </p>
+                            <p>Esta sección es evaluada por el departamento de Recursos Humanos. Se divide en dos factores:</p>  
+                            <p>  1. Puntualidad – es la revisión se lleva a cabo con las tarjetas y la base de datos del 
+                                checador electrónico, se califica con un "0" si es puntual o con un "1" si tuvo retardo.</p>  
+                            <p>    2. Asistencia – es la revisión de las faltas del personal evaluado, se califica con un "0" si es asistencia o un "1" si es falta.  </p>
                         </f:facet>
                         <p:column style="width:32px">
                             <p:rowEditor />
-                        </p:column>
-                        <p:column headerText="Fecha">
-                            <p:outputLabel value="#{evaluacion.fechaEv}">
-                                <f:convertDateTime pattern="dd/MM/YYYY"/>
-                            </p:outputLabel>
                         </p:column>
                         <p:column headerText="Asistencia">
                             <p:cellEditor>

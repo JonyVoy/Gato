@@ -1,6 +1,8 @@
 package EvDsg.controller;
 
+import EvDsg.ejb.AreaFacadeLocal;
 import EvDsg.ejb.EmpleadoFacadeLocal;
+import EvDsg.model.Area;
 import EvDsg.model.Empleado;
 import java.io.Serializable;
 import java.util.List;
@@ -18,14 +20,21 @@ public class EmpleadoController implements Serializable {
 
     @EJB
     private EmpleadoFacadeLocal empleadoEJB;
+    @EJB
+    private AreaFacadeLocal areaEJB;
+    
     @Inject
     private Empleado empleado;
+    @Inject
+    private Area area;
 
     private List<Empleado> empleados;
+    private List<Area> areas;
 
     @PostConstruct
     public void init() {
         empleados = empleadoEJB.findAll();
+        areas = areaEJB.findAll();
     }
 
     public List<Empleado> getEmpleados() {
@@ -44,10 +53,26 @@ public class EmpleadoController implements Serializable {
         this.empleado = empleado;
     }
 
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public List<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
+    }
+
     
     public void registrar() {
         try {
-
+            empleado.setCodigoArea(area);
             empleadoEJB.create(empleado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Empleado Registrado"));
         } catch (Exception e) {
@@ -59,7 +84,7 @@ public class EmpleadoController implements Serializable {
     }
     
     public void modificar (Empleado empleado){
-     empleadoEJB.edit(empleado);
+        empleadoEJB.edit(empleado);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto!", "Usuario Modificado"));
 
     }

@@ -22,37 +22,19 @@
                         <p:column style="width:32px">
                             <p:rowEditor />
                         </p:column>
-                        <p:column headerText="NOMBRE">
+                        <p:column headerText="NOMBRE" >
                             <p:outputLabel value="#{empleado.nombre} #{empleado.apellidos}" />
                         </p:column>
-                        <p:column headerText="SEXO M='MASCULINO' F='FEMENINO'">
+                        <p:column headerText="SEXO M='MASCULINO' F='FEMENINO'" style="width: 90px">
                             <p:outputLabel value="#{empleado.sexo}"/>
                         </p:column>
-                        <p:column headerText="Relacion Laboral">
-                            <p:cellEditor>
-                            <f:facet name="output">
-                                <p:outputLabel value="#{empleado.relacion}"/>
-                                    </f:facet>
-                                <f:facet name="input">
-                                    <p:selectOneMenu value="#{empleado.relacion}" style="width:100%">
-                                        <f:selectItems value="#{listasController.relacion}" var="rel" itemValue="#{rel.value}"/>
-                                    </p:selectOneMenu>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
+                        <p:column headerText="Relacion Laboral" style="width: 90px;">
+                             <p:outputLabel value="#{empleado.relacion}"/>
+                                                              </p:column>
                         <p:column headerText="Area de trabajo">
-                            <p:cellEditor>
-                            <f:facet name="output">
-                                <p:outputLabel value="#{empleado.area}"/>
-                                    </f:facet>
-                                <f:facet name="input">
-                                    <p:selectOneMenu value="#{empleado.area}" style="width:100%">
-                                        <f:selectItems value="#{listasController.departamento}" var="area" itemValue="#{area.value}"/>
-                                    </p:selectOneMenu>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText="Activo = 1 Inactivo = 0">
+                           <p:outputLabel value="#{empleado.codigoArea.nombre}"/>
+                                                            </p:column>
+                        <p:column headerText="Activo = 1 Inactivo = 0" style="width: 70px;">
                             <p:cellEditor>
                             <f:facet name="output">
                                 <p:outputLabel value="#{empleado.estado}"/>

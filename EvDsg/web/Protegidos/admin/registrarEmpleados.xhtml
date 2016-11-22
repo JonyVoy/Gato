@@ -23,9 +23,9 @@
 
                                 <p:panelGrid columns="2" id="pnlRegistroPer">
                                     <p:outputLabel value="Nombres: " for="nombre"/>
-                                    <p:inputText id="nombre" value="#{empleadoController.empleado.nombre}"  required="true" requiredMessage="Nombre OBLIGATORIO"/>
+                                    <p:inputText id="nombre" value="#{empleadoController.empleado.nombre}"  required="true" requiredMessage="Nombre OBLIGATORIO" style="text-transform: uppercase;"/>
                                     <p:outputLabel value="Apellidos: " for="apellido"/>
-                                    <p:inputText id="apellido" value="#{empleadoController.empleado.apellidos}" required="true" requiredMessage="Apellido OBLIGATORIO"/>
+                                    <p:inputText id="apellido" value="#{empleadoController.empleado.apellidos}" required="true" requiredMessage="Apellido OBLIGATORIO" style="text-transform: uppercase;"/>
                                     <p:outputLabel value="Sexo: " for="sexo"/>
                                     <p:selectOneRadio id="sexo" value="#{empleadoController.empleado.sexo}" required="true" requiredMessage="Campo Sexo OBLIGATORIO">
                                         <f:selectItem  itemValue="M" itemLabel="MASCULINO" />
@@ -40,11 +40,13 @@
                                 <p:panelGrid columns="4" id="pnlRegistro">
                                     <p:outputLabel value="Relacion laboral:  " for="rellab"/>
                                     <p:selectOneMenu id="rellab" value="#{empleadoController.empleado.relacion}" required="true" requiredMessage="Relacion laboral OBLIGATORIO">
-                                        <f:selectItems value="#{listasController.relacion}"/>
+                                        <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
+                                                                    <f:selectItems value="#{listasController.relacion}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Area o Departamento:  " for="area"/>
-                                    <p:selectOneMenu id="area" value="#{empleadoController.empleado.area}" required="true" requiredMessage="Area OBLIGATORIO">
-                                        <f:selectItems value="#{listasController.departamento}"/>
+                                    <p:selectOneMenu id="area" value="#{empleadoController.area.codigoArea}" required="true" requiredMessage="Area OBLIGATORIO">
+                                        <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
+                                    <f:selectItems value="#{empleadoController.areas}" var="areas" itemLabel="#{areas.nombre}" itemValue="#{areas.codigoArea}" />
                                     </p:selectOneMenu>
                                 </p:panelGrid>
                             </p:panel>
@@ -67,10 +69,7 @@
                                     <p:panelGrid columns="2" columnClasses="label, value">
                                         <p:outputLabel value="Relacion Laboral: " />
                                         <p:outputLabel value="#{empleadoController.empleado.relacion}"/>
-                                        <p:outputLabel value="Area o Departamento " />
-                                        <p:outputLabel value="#{empleadoController.empleado.area}"/>
-                                    
-                                    </p:panelGrid>
+                                      </p:panelGrid>
                                 </p:panelGrid>
 
                                 <p:commandButton value="Registrar" update="pnlRegistro, pnlRegistroPer" actionListener="#{empleadoController.registrar()}" icon="fa fa-thumbs-o-up" action="lstEmpleados?faces-redirect=true" />

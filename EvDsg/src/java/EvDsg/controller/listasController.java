@@ -14,7 +14,6 @@ import javax.faces.view.ViewScoped;
 public class listasController implements Serializable {
 
     private List<SelectItem> relacion;
-     private List<SelectItem> departamento;
     private List<SelectItem> factoresEO;
     private List<SelectItem> factoresRHA;
     private List<SelectItem> factoresRHP;
@@ -30,14 +29,7 @@ public class listasController implements Serializable {
             new SelectItem("CONFIANZA", "CONFIANZA")});
         relacion = new ArrayList<>();
         relacion.add(rel);
-        
-        SelectItemGroup area = new SelectItemGroup("Area o Departamento");
-        area.setSelectItems(new SelectItem[]{
-            new SelectItem("Dirección General", "Dirección General"),
-            new SelectItem("Subdirección", "Subdirección")});
-        departamento = new ArrayList<>();
-        departamento.add(area);
-
+       
         SelectItemGroup facEO = new SelectItemGroup("Calificación");
         facEO.setSelectItems(new SelectItem[]{
             new SelectItem("100", "E = Excelente"),
@@ -53,7 +45,7 @@ public class listasController implements Serializable {
             new SelectItem("1", "Falta")});
         factoresRHA = new ArrayList<>();
         factoresRHA.add(facRHA);
-        
+
         SelectItemGroup activo = new SelectItemGroup("Activo/Inactivo");
         activo.setSelectItems(new SelectItem[]{
             new SelectItem("0", "Inactivo"),
@@ -83,9 +75,10 @@ public class listasController implements Serializable {
             new SelectItem("DICIEMBRE-ENERO", "DICIEMBRE-ENERO")});
         periodo = new ArrayList<>();
         periodo.add(per);
-        
+
         SelectItemGroup añ = new SelectItemGroup("AÑO");
         añ.setSelectItems(new SelectItem[]{
+            new SelectItem("2016", "2016"),
             new SelectItem("2017", "2017"),
             new SelectItem("2018", "2018"),
             new SelectItem("2019", "2019"),
@@ -102,15 +95,6 @@ public class listasController implements Serializable {
 
     public void setActivos(List<SelectItem> activos) {
         this.activos = activos;
-    }
-
-    
-    public List<SelectItem> getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(List<SelectItem> departamento) {
-        this.departamento = departamento;
     }
 
     public List<SelectItem> getPeriodo() {

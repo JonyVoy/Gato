@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -29,9 +33,9 @@ public class Empleado implements Serializable {
     @Column(name = "Relacion")
     private String relacion;
     
-@Size(min = 1, max = 50)
-    @Column(name = "Area")
-    private String area;
+    @ManyToOne
+    @JoinColumn(name = "codigoArea",nullable = false)
+    private Area codigoArea;
     
     @Size(max = 10)
     @Column(name = "Sexo")
@@ -88,15 +92,15 @@ public class Empleado implements Serializable {
         this.relacion = relacion;
     }
 
-    public String getArea() {
-        return area;
+    public Area getCodigoArea() {
+        return codigoArea;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setCodigoArea(Area codigoArea) {
+        this.codigoArea = codigoArea;
     }
 
-    
+       
     @Override
     public int hashCode() {
         int hash = 5;

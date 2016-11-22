@@ -19,32 +19,33 @@
                         <p:outputLabel value="EMPLEADO" for="emp"/>
                         <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains">
                             <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos}" itemValue="#{emp.codigoEmpleado}"/>
-                            <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
 
                         </p:selectOneMenu>
                         <p:outputLabel value="PERIODO" for="per"/>
                         <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione Periodo">
-                            <f:selectItem noSelectionOption="true" itemLabel="PERIODO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="AÑO" for="año"/>
                         <p:selectOneMenu id="año" value="#{corteController.año}" required="true" requiredMessage="Seleccione Año">
-                            <f:selectItem noSelectionOption="true" itemLabel="AÑO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
                         </p:selectOneMenu>
 
-                        <p:commandButton icon="fa fa-search" update="form,ev,rh" actionListener="#{corteController.busquedaMensual()}"/>
+                        <p:commandButton icon="fa fa-search" update="form,ev" actionListener="#{corteController.busquedaMensual()}"/>
                        <h:commandButton value="Generar Reporte" action="#{corteController.PDF()}" />
                         </p:panelGrid> 
                     <p:separator/>
-                    <p:dataTable id="ev" value="#{corteController.lstcorte}" var="evaluacion" emptyMessage="No se ha realizado una busqueda o no existen evaluaciónes para este periodo" rowHover="true">
+                    <p:dataTable id="ev" value="#{corteController.lstcorte}" var="evaluacion" emptyMessage="No se ha realizado una busqueda o no existen evaluaciónes para este periodo" rowHover="true"
+                                 rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} 
+                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" currentPageReportTemplate="Página : ({currentPage} de {totalPages})" >
                         <f:facet name="header">
                             <h3>Resultados de la evaluacion mensual</h3>
                         </f:facet>
-                        <p:column headerText="Fecha de evaluacion">
-                            <p:outputLabel value="#{evaluacion.fechaEv}" >
-                            </p:outputLabel>
-                        </p:column>
                         <p:column headerText="Uniforme">
                             <p:outputLabel value="#{evaluacion.uniforme}"/>
                         </p:column>
@@ -74,36 +75,26 @@
                         <p:column headerText="Calidad del material">
                             <p:outputLabel value="#{evaluacion.calidadMaterial}"/>
                         </p:column>
-                        <p:column headerText="(EO) Evaluo:">
+                        <p:column headerText="Falta">
+                            <p:outputLabel value="#{evaluacion.asistencia}"/>
+                        </p:column>
+                        <p:column headerText="Retardo">
+                            <p:outputLabel value="#{evaluacion.puntualidad}"/>
+                        </p:column>
+                        <p:column headerText="Enlace">
                             <p:outputLabel value="#{evaluacion.codigoPersonaEO.nombres} #{evaluacion.codigoPersonaEO.apellidos}"/>
                         </p:column>
-                        <p:column headerText="(JI) Evaluo:">
+                        <p:column headerText="Jefe de intendencia">
                             <p:outputLabel value="#{evaluacion.codigoPersonaJI.nombres} #{evaluacion.codigoPersonaJI.apellidos}"/>
                         </p:column>
                     </p:dataTable>
-                    <p:separator/>
-                    <p:dataTable id="rh" value="#{corteController.lstcorte}" var="rh" emptyMessage="No se ha realizado una busqueda o no existen evaluaciónes para este periodo" rowHover="true">
-                        <f:facet name="header">
-                            <h3>Evaluacion Mensual de RH</h3>
-                        </f:facet>
-                        <p:column headerText="Asistencias">
-                            <p:outputLabel value="#{rh.asistencia}"/>
-                        </p:column>
-                        <p:column headerText="Retardos">
-                            <p:outputLabel value="#{rh.puntualidad}"/>
-                        </p:column>
-                        <p:column headerText="(RH) Evaluo:">
-                            <p:outputLabel value="#{rh.codigoPersonaRH.nombres} #{rh.codigoPersonaRH.apellidos}"/>
-                        </p:column>
-                    </p:dataTable>
-
-                    <p:dialog header="Información" widgetVar="informacion" modal="true" height="300" width="800" showEffect="explode">
+                    <p:dialog header="Información" widgetVar="informacion" modal="true" height="200" width="800" showEffect="explode">
                         <p>Para realizar un corte usted deberá llenar los campos de "Empleado”, "Periodo" y “Año” correspondientes al periodo
                             de corte que usted desea visualizar, después de esto dará clic en el botón del lado derecho para buscar "<p:commandButton icon="fa fa-search"/>". 
                         </p>
                         <p> Si hizo esto correctamente, el apartado de abajo se llenara con los datos de las evaluaciones que a lo largo del periodo fueron llenadas,
                             ahí podrá visualizar todas las calificaciones (no modificar) que realizaron los enlaces en el periodo, si desea imprimir el corte final de
-                            esta evaluación dará clic en el icono "<h:commandButton value="Exportar a PDF"/>" ahí se llevaran a cabo todas las operaciones respectivas y se le entregara un documento con todo más
+                            esta evaluación dará clic en el icono "<h:commandButton value="Generar reporte"/>" ahí se llevaran a cabo todas las operaciones respectivas y se le entregara un documento con todo más
                             simplificado el cual podrá guardar o imprimir. 
                         </p>
                     </p:dialog> 

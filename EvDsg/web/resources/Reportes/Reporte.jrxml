@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34d8635c-90dc-486e-8533-5f528db78388">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="3"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -227,7 +227,7 @@
 	<field name="codigoEmpleado.apellidos" class="java.lang.Object"/>
 	<field name="codigoPersonaEO.nombres" class="java.lang.Object"/>
 	<field name="codigoPersonaEO.apellidos" class="java.lang.Object"/>
-	<field name="codigoEmpleado.area" class="java.lang.String"/>
+	<field name="codigoEmpleado.codigoArea.nombre" class="java.lang.String"/>
 	<variable name="uniforme_Promedio" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{uniforme}]]></variableExpression>
 	</variable>
@@ -387,18 +387,18 @@
 				<textFieldExpression><![CDATA[$F{periodo}+" "+$F{año}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="330" height="26" uuid="faac3aef-9706-488b-8ffe-2bd0a7d4e076"/>
+				<reportElement x="0" y="0" width="252" height="26" uuid="faac3aef-9706-488b-8ffe-2bd0a7d4e076"/>
 				<textElement verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Area o Departamento al que esta asignado:]]></text>
+				<text><![CDATA[Departamento al que esta asignado:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="330" y="0" width="272" height="26" uuid="9abf435a-9f47-473d-89c9-e240c9aa7232"/>
+				<reportElement x="252" y="0" width="547" height="26" uuid="b5a7ca7c-2020-4c40-ba89-0c24ed81b4f0"/>
 				<textElement verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{codigoEmpleado.area}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{codigoEmpleado.codigoArea.nombre}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -508,9 +508,9 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="242" splitType="Stretch">
+		<band height="256" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="792" height="85" backcolor="#CCCCFF" uuid="3a67895e-88df-4c43-82ee-5dc1efc800ca"/>
+				<reportElement mode="Opaque" x="0" y="0" width="792" height="85" backcolor="#CCCCCC" uuid="3a67895e-88df-4c43-82ee-5dc1efc800ca"/>
 			</frame>
 			<staticText>
 				<reportElement x="0" y="1" width="66" height="85" uuid="7b22cf06-8269-460a-9ab8-0b84170e8a91"/>
@@ -522,7 +522,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[UNIFORME]]></text>
 			</staticText>
@@ -536,7 +536,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LIMPIEZA DE OFICINAS]]></text>
 			</staticText>
@@ -550,7 +550,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[AREAS COMUNES INTERNAS]]></text>
 			</staticText>
@@ -564,7 +564,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SANITARIOS]]></text>
 			</staticText>
@@ -578,7 +578,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SUPERVISIÓN DE AREAS]]></text>
 			</staticText>
@@ -592,7 +592,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REVISIÓN (base)]]></text>
 			</staticText>
@@ -606,7 +606,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REVISIÓN (confianza)]]></text>
 			</staticText>
@@ -620,7 +620,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[AREAS COMUNES]]></text>
 			</staticText>
@@ -634,7 +634,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LIMPIEZA DE HERRAMIENTAS]]></text>
 			</staticText>
@@ -648,7 +648,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CALIDAD DEL MATERIAL]]></text>
 			</staticText>
@@ -662,7 +662,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RETARDOS]]></text>
 			</staticText>
@@ -676,18 +676,18 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FALTAS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="86" width="660" height="20" uuid="f94fc331-69fa-4a59-8193-9c683ebef191"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14" isBold="true"/>
@@ -865,11 +865,11 @@
 			<staticText>
 				<reportElement x="0" y="121" width="660" height="20" uuid="9dfc0acf-dc0c-4956-a277-5cf2d8664420"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14" isBold="true"/>
@@ -1019,11 +1019,11 @@
 			<staticText>
 				<reportElement x="0" y="156" width="792" height="20" uuid="e924ec3c-290b-427d-a9dc-6f63a8bc94ff"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<pen lineWidth="1.75"/>
+					<topPen lineWidth="1.75"/>
+					<leftPen lineWidth="1.75"/>
+					<bottomPen lineWidth="1.75"/>
+					<rightPen lineWidth="1.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14" isBold="true"/>
@@ -1227,7 +1227,7 @@
 				<textFieldExpression><![CDATA[$V{BonoAsistencias}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.000">
-				<reportElement mode="Opaque" x="286" y="191" width="100" height="20" backcolor="#CCCCCC" uuid="2da97a00-ec27-4467-aae8-f32da81850d0"/>
+				<reportElement mode="Opaque" x="331" y="213" width="100" height="20" backcolor="#CCCCCC" uuid="2da97a00-ec27-4467-aae8-f32da81850d0"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -1241,7 +1241,7 @@
 				<textFieldExpression><![CDATA[$V{TotalBonos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement mode="Opaque" x="286" y="211" width="100" height="20" backcolor="#CCCCCC" uuid="33521931-b798-471a-9965-f330cfe455d8"/>
+				<reportElement mode="Opaque" x="331" y="233" width="100" height="20" backcolor="#CCCCCC" uuid="33521931-b798-471a-9965-f330cfe455d8"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -1283,7 +1283,7 @@
 				<text><![CDATA[Puntajes]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="191" width="286" height="20" backcolor="#99FF99" uuid="b20545f8-a3ec-4c74-b6ad-7228fa55af8e"/>
+				<reportElement mode="Transparent" x="45" y="213" width="286" height="20" backcolor="#99FF99" uuid="b20545f8-a3ec-4c74-b6ad-7228fa55af8e"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -1291,13 +1291,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total bonos:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="211" width="286" height="20" backcolor="#99FF99" uuid="c122ac6e-d1fd-4e42-89f4-7f5a44f2f8b6"/>
+				<reportElement mode="Transparent" x="45" y="233" width="286" height="20" backcolor="#99FF99" uuid="c122ac6e-d1fd-4e42-89f4-7f5a44f2f8b6"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -1305,13 +1305,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total bonos de Asistencias y puntualidad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="386" y="191" width="196" height="40" backcolor="#FF9999" uuid="d8af862c-135d-499b-9293-a12d2e0c9f0c"/>
+				<reportElement mode="Transparent" x="431" y="213" width="196" height="40" backcolor="#FF9999" uuid="d8af862c-135d-499b-9293-a12d2e0c9f0c"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -1325,13 +1325,13 @@
 				<text><![CDATA[Bono Mensual a pagar:]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00">
-				<reportElement mode="Opaque" x="582" y="191" width="132" height="40" backcolor="#66FF66" uuid="b21a8478-af97-4462-93a1-9d65442d0c58"/>
+				<reportElement mode="Opaque" x="627" y="213" width="132" height="40" backcolor="#CCCCCC" uuid="b21a8478-af97-4462-93a1-9d65442d0c58"/>
 				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Comic Sans MS" size="15" isBold="true" isItalic="true" isUnderline="true"/>

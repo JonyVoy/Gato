@@ -17,19 +17,19 @@
                     <p:panelGrid columns="9">
                         <p:outputLabel value="EMPLEADO" for="emp"/>
                         <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains" effect="fold">
-                            <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos} #{emp.area}" itemValue="#{emp.codigoEmpleado}"/>
-                            <f:selectItem noSelectionOption="true" itemLabel="SELECCIONE UN EMPLEADO" itemValue=""/>
+                            <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos}" itemValue="#{emp.codigoEmpleado}"/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Dia a evaluar" for="cal"/>
                         <p:calendar id="cal" required="true" value="#{corteController.fecha}" disabledWeekends="true" size="5"/>
                         <p:outputLabel value="PERIODO" for="per"/>
                         <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione periodo" effect="fold">
-                            <f:selectItem noSelectionOption="true" itemLabel="PERIODO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="AÑO" for="año"/>
                         <p:selectOneMenu id="año" value="#{corteController.año}" required="true" requiredMessage="Seleccione año" effect="fold">
-                            <f:selectItem noSelectionOption="true" itemLabel="AÑO" itemValue=""/>
+                            <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
                         </p:selectOneMenu>
 

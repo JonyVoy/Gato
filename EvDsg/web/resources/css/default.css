@@ -57,7 +57,9 @@ a:link:hover, a:visited:hover  {
 #princ h1{
     color: steelblue;
     }
+    
 #intro{
+    
     margin: 20px auto;
     padding: 5px 50px 50px 50px;
     border-radius: 20px;
@@ -65,7 +67,7 @@ a:link:hover, a:visited:hover  {
     text-align: center;
   }
   #intro p{
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 15px;
   }  
 #exito{
