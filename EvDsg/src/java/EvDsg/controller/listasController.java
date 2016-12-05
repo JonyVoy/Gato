@@ -23,13 +23,14 @@ public class listasController implements Serializable {
 
     @PostConstruct
     public void init() {
+
         SelectItemGroup rel = new SelectItemGroup("Relacion laboral");
         rel.setSelectItems(new SelectItem[]{
             new SelectItem("BASE", "BASE"),
             new SelectItem("CONFIANZA", "CONFIANZA")});
         relacion = new ArrayList<>();
         relacion.add(rel);
-       
+
         SelectItemGroup facEO = new SelectItemGroup("Calificación");
         facEO.setSelectItems(new SelectItem[]{
             new SelectItem("100", "E = Excelente"),

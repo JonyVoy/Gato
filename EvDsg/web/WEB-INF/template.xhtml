@@ -20,38 +20,38 @@
                 <div class="ui-g-12">
                     <ui:insert name="top" class="top">
                         <div class="header">
-                            
+
                         </div>
                         <h:form>
-                            La Fecha De Hoy Es : <p:clock pattern="dd/MM/yyyy hh:mm" mode="server" />
+                            La Fecha De Hoy Es : <p:clock pattern="dd/MM/yyyy hh:mm" mode="server"  />
                             Bienvenido : #{templateController.mostrarUsuario()}
                             <p:menubar model="#{menuController.model}">
                                 <f:facet name="options">
-                                   <p:menuitem url="rangos.xhtml" value="Rangos de calificacion" icon="fa fa-send" />
-                                <p:menuitem url="Evaluacion.xhtml" value="Realizar evaluacion" icon="fa fa-chevron-circle-right"/>
-                                <p:commandButton type="button" onclick="PF('info').show();" icon="fa fa-info-circle" title="Información"/>
-                    <p:commandButton value="Rangos de calificacion" action="/Protegidos/rangos" icon="fa fa-paw" />
-                               <p:commandButton actionListener="#{templateController.cerrarSesion()}" icon="fa fa-sign-out"  action="/index?faces-redirect=true" title="Cerrar Sesión"/>
+                                    <p:commandButton value="Manual de usuario" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                        <p:fileDownload value="#{manual.file}" />
+                                    </p:commandButton>
+                                    <p:commandButton type="button" onclick="PF('info').show();" icon="fa fa-info-circle" title="Información"/>
+                                    <p:commandButton value="Rangos de calificacion" action="/Protegidos/rangos" icon="fa fa-paw" />
+                                    <p:commandButton actionListener="#{templateController.cerrarSesion()}" icon="fa fa-sign-out"  action="/index?faces-redirect=true" title="Cerrar Sesión"/>
                                 </f:facet>
                             </p:menubar>
                             <p:dialog header="Información" widgetVar="info" modal="true" height="300" width="800" showEffect="explode">
-                        <p>Para realizar una evaluación usted deberá iniciar sesión con su usuario y contraseña ya que la evaluación guarda estos datos para futuras operaciones,
-                            lo primero que debe hacer es dar clic en la opción "Evaluación de desempeño", después debe Seleccionar un Empleado,
-                            un Periodo y el año. Después de esto dar clic en el botón " <p:commandButton icon="fa fa-search"/> ".
-                        </p>
-                        <p> 
-                            Si después de esto la lista de la parte de abajo queda vacía usted podrá crear una nueva evaluación dando clic en el botón" <p:commandButton icon="fa fa-plus-circle" value="Crear evaluación diaria"/> " 
-                            el cual lo llevara a una página donde podrá crear una nueva evaluación diaria, usted en esa página deberá seleccionar los campos que se piden 
-                            ahí y al finalizar repetirá los primeros pasos "Seleccionar los datos que se piden" -> Dar clic en "Buscar" y 
-                            ahora le mostrara una tabla con su evaluación diaria. 
-                        </p>
-                       <p>
-                          Ahí dará clic en el icono del Lápiz del lado izquierdo y podrá comenzar a evaluar, cuando termine dará clic en icono " <p:commandButton icon="fa fa-check" /> " si desea guardar o en " <p:commandButton icon="fa fa-close"/> " si desea cancelar.
-                          Deberá repetir esto con cada empleado que tenga que evaluar, si es que tiene más de un empleado a evaluar. Cuando finalice de clic en el botón que dice terminar.
-                          Después de eso usted podrá salir del sistema. 
-                       </p>
-                    </p:dialog> 
-                                
+                                <p>Para realizar una evaluación usted deberá iniciar sesión con su usuario y contraseña ya que la evaluación guarda estos datos para futuras operaciones,
+                                    lo primero que debe hacer es dar clic en la opción "Evaluación de desempeño", después debe Seleccionar un Empleado,
+                                    un Periodo y el año. Después de esto dar clic en el botón " <p:commandButton icon="fa fa-search"/> ".
+                                </p>
+                                <p> 
+                                    Si después de esto no se encuentra ninguna evaluacion se le llevara a una página donde podrá crear una nueva evaluación diaria, usted en esa página deberá seleccionar los campos que se piden 
+                                    ahí y al finalizar repetirá los primeros pasos "Seleccionar los datos que se piden" -> Dar clic en "Buscar" y 
+                                    ahora le mostrara su evaluación diaria. 
+                                </p>
+                                <p>
+                                    Ahí dará clic en el icono del Lápiz del lado izquierdo y podrá comenzar a evaluar, cuando termine dará clic en icono " <p:commandButton icon="fa fa-check" /> " si desea guardar o en " <p:commandButton icon="fa fa-close"/> " si desea cancelar.
+                                    Deberá repetir esto con cada empleado que tenga que evaluar, si es que tiene más de un empleado a evaluar. Cuando finalice de clic en el botón que dice terminar.
+                                    Después de eso usted podrá salir del sistema. 
+                                </p>
+                            </p:dialog> 
+
                         </h:form>  
                     </ui:insert>
                 </div>

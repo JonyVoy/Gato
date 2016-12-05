@@ -30,8 +30,6 @@
         <param-value>true</param-value>
     </context-param>
     
-    
-    
     <mime-mapping>
       <extension>ttf</extension>
       <mime-type>application/x-font-ttf</mime-type>

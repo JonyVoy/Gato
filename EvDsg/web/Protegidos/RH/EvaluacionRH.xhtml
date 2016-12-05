@@ -15,15 +15,13 @@
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true" showDetail="true" showSummary="true"/>
                 <h1>Ingrese su busqueda para encontrar la evaluacion diaria</h1>
-                <h:form>
+                <h:form id="search">
                     <p:panelGrid columns="9">
                         <p:outputLabel value="EMPLEADO" for="emp"/>
                         <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains" effect="fold">
                             <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos}" itemValue="#{emp.codigoEmpleado}"/>
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Dia a evaluar" for="cal"/>
-                        <p:calendar id="cal" required="true" value="#{corteController.fecha}" disabledWeekends="true" size="5" locale="es"/>
                         <p:outputLabel value="PERIODO" for="per"/>
                         <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione periodo" effect="fold">
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
@@ -35,7 +33,7 @@
                             <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
                         </p:selectOneMenu>
 
-                        <p:commandButton icon="fa fa-search" update="ev" actionListener="#{corteController.busqueda()}"/>
+                        <p:commandButton icon="fa fa-search" update="search,ev" actionListener="#{corteController.busqueda()}"/>
                     </p:panelGrid>
                     <p:separator/>
                     <p:dataTable id="ev" value="#{corteController.lstevaluacion}" var="evaluacion" editable="true" emptyMessage="No se ha realizado una busqueda o no existe una evaluación para este dia" rowHover="true">
@@ -56,7 +54,8 @@
                                 </f:facet>
                                 <f:facet name="input">
                                     <p:selectOneMenu value="#{evaluacion.asistencia}" style="width:100%">
-                                        <f:selectItems value="#{listasController.factoresRHA}" var="fac" itemValue="#{fac.value}"/>
+                                        <f:selectItems value="#{listasController.factoresRHA}" />
+                                       <f:ajax event="change" listener="#{evaluacionController.cargalista(evaluacion)}" render="puntualidad" />
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
@@ -67,9 +66,8 @@
                                     <p:outputLabel value="#{evaluacion.puntualidad}"/>
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:selectOneMenu value="#{evaluacion.puntualidad}" style="width:100%">
-                                        <f:selectItem itemLabel="Evaluar" itemValue=""/>
-                                        <f:selectItems value="#{listasController.factoresRHP}" var="fac" itemValue="#{fac.value}"/>
+                                    <p:selectOneMenu id="puntualidad" value="#{evaluacion.puntualidad}" style="width:100%">
+                                        <f:selectItems value="#{evaluacionController.lstpuntualidad}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
@@ -87,7 +85,6 @@
                 </h:form>
                 <h:form>
                     <p:commandButton value="TERMINAR" icon="fa fa-check-square" action="principalRH?faces-redirect=true" title="Puede dar click aqui si quiere hacer algo mas o simplemente dar en el boton de cerrar sesíon que esta arriba a la derecha"/>
-                    <p:commandButton value="CREAR EVALUACIÓN DIARIA" icon="fa fa-plus-circle" action="NuevaEv?faces-redirect=true" title="Crear una nueva evaluacion diaria"/>
                 </h:form>
 
             </ui:define>

@@ -6,11 +6,14 @@ import EvDsg.model.Empleado;
 import EvDsg.model.Evaluacion;
 import EvDsg.model.Usuarios;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -30,7 +33,9 @@ public class EvaluacionController implements Serializable {
     private Empleado empleado;
 
     private List<Empleado> lstempleados;
-
+    private List<SelectItem> lstpuntualidad;
+   
+    
     public Evaluacion getEvaluacion() {
         return evaluacion;
     }
@@ -65,6 +70,16 @@ public class EvaluacionController implements Serializable {
         evaluacionEJB.create(evaluacion);
     }
 
+    public List<SelectItem> getLstpuntualidad() {
+        return lstpuntualidad;
+    }
+
+    public void setLstpuntualidad(List<SelectItem> lstpuntualidad) {
+        this.lstpuntualidad = lstpuntualidad;
+    }
+
+    
+    
     public void modificarEO(Evaluacion evaluacion) {
         try {
             Usuarios us = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
@@ -100,5 +115,29 @@ public class EvaluacionController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "Se cancelo la evaluacion"));
 
         }
+    }
+    
+    public void cargalista(Evaluacion evaluacion){
+    switch (evaluacion.getAsistencia()){
+    
+        case 0:
+            SelectItemGroup facRHP = new SelectItemGroup("Verificar puntualidad");
+        facRHP.setSelectItems(new SelectItem[]{
+            new SelectItem("0", "Puntual"),
+            new SelectItem("1", "Retardo")});
+        lstpuntualidad = new ArrayList<>();
+        lstpuntualidad.add(facRHP);
+            break;
+            
+            case 1:
+            SelectItemGroup fac = new SelectItemGroup("Verificar puntualidad");
+        fac.setSelectItems(new SelectItem[]{
+            new SelectItem("0", "No evaluable")});
+        lstpuntualidad = new ArrayList<>();
+        lstpuntualidad.add(fac);
+            break;
+               
+         
+    }
     }
 }

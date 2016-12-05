@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../../WEB-INF/template.xhtml">
+        <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true"/>
@@ -18,7 +18,7 @@
                         <p:panelGrid columns="2" id="pnlEvaluacion">
                             <f:facet name="header">
                                 <h3>INSTRUCCIONES:</h3>
-                                <p>Puede crear una nueva evaluacion si despues de hacer la busqueda no encontro algun resultado</p>
+                                <p style="font-size: 15px;text-transform: uppercase;">Se detecto que no existe ninguna evaluacion para el periodo que usted selecciono asi que puede crear una nueva evaluacion rellenando los campos de aqui abajo</p>
                             </f:facet>
 
                             <p:outputLabel value="EMPLEADO A EVALUAR" for="emp"/>
@@ -40,11 +40,11 @@
 
                             <f:facet name="footer">
 
-                                <p>VERIFIQUE TODAS LAS CALIFICACIONES, SI ESTA SEGURO DE ENVIAR LA INFORMACION CONTINUE.</p>
+                                <p>VERIFIQUE TODOS LOS CAMPOS QUE INGRESO, SI ESTA SEGURO DE ENVIAR LA INFORMACION CONTINUE.</p>
                             </f:facet>
                         </p:panelGrid>
 
-                        <p:commandButton value="CREAR EVALUACION DIARIA" actionListener="#{evaluacionController.registrarEO()}" action="EvaluacionEO?faces-redirect=true" update="pnlEvaluacion"/>
+                        <p:commandButton value="CREAR EVALUACION DIARIA" actionListener="#{evaluacionController.registrarEO()}" action="evaluacion_creada?faces-redirect=true" update="pnlEvaluacion"/>
                       
                 </h:form>
                 <br/><br/>

@@ -13,15 +13,13 @@
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true" showDetail="true" showSummary="true"/>
                 <h1>Ingrese su busqueda para encontrar los datos que necesita:</h1>
-                <h:form>
+                <h:form id="search">
                     <p:panelGrid columns="9">
                         <p:outputLabel value="EMPLEADO" for="emp"/>
                         <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains" effect="fold">
                             <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos}" itemValue="#{emp.codigoEmpleado}"/>
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Dia a evaluar" for="cal"/>
-                        <p:calendar id="cal" required="true" value="#{corteController.fecha}" disabledWeekends="true" size="5"/>
                         <p:outputLabel value="PERIODO" for="per"/>
                         <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione periodo" effect="fold">
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
@@ -33,12 +31,12 @@
                             <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}"/>
                         </p:selectOneMenu>
 
-                        <p:commandButton icon="fa fa-search" update="ev" actionListener="#{corteController.busqueda()}"/>
+                        <p:commandButton icon="fa fa-search" update="search,ev" actionListener="#{corteController.busqueda()}"/>
                     </p:panelGrid>
                     <p:separator/>
                     <p:dataTable id="ev" value="#{corteController.lstevaluacion}" var="evaluacion" editable="true" emptyMessage="No se ha realizado una busqueda o no existe una evaluación para este dia" rowHover="true">
                         <f:facet name="header">
-                              <h3>INSTRUCCIONES PARA LA EVALUACION DIARIA:</h3>
+                            <h3>INSTRUCCIONES PARA LA EVALUACION DIARIA:</h3>
                             <p> EL ENLACE PREVIAMENTE DESIGNADO DEBERÁ REQUISITAR EL APARTADO DE DATOS GENERALES Y EVALUAR DIARIAMENTE DURANTE UNA SEMANA EN LOS HORARIOS DE SUPERVISION SEÑALADOS,
                                 CADA UNO DE LOS FACTORES DE DESEMPEÑO 
                                 DE LA TRABAJADORA DE INTENDENCIA QUE PRESTE SUS SERVICIOS EN SU ÁREA DE ADSCRIPCIÓN, 
@@ -102,7 +100,6 @@
                 </h:form>
                 <h:form>
                     <p:commandButton value="TERMINAR" icon="fa fa-check-square" action="principalJI?faces-redirect=true" title="Puede dar click aqui si quiere hacer algo mas o simplemente dar en el boton de cerrar sesíon que esta arriba a la derecha"/>
-                    <p:commandButton value="CREAR EVALUACIÓN DIARIA"  icon="fa fa-plus-circle" action="NuevaEv?faces-redirect=true" title="Crear una nueva evaluacion diaria"/>
                 </h:form>
             </ui:define>
 

@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -30,6 +32,7 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
     public List<Evaluacion> busqueda(int codigoEmpleado,Date Fecha, String Periodo, String Año)throws Exception{
         List<Evaluacion> lista=null;
         String jpql;
+        
        try{
            jpql="from Evaluacion as EO where EO.codigoEmpleado.codigoEmpleado=EO.codigoEmpleado.codigoEmpleado and EO.codigoEmpleado.codigoEmpleado=?1 and EO.FechaEv between ?2 and ?3 and EO.Periodo = ?4 and EO.Año=?5";
                    
@@ -48,7 +51,7 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
                 lista=(List<Evaluacion>) lista.get(0);
             }
        }catch(Exception e){
-       throw e;
+            throw e;
        }
        return lista;
     }
@@ -64,6 +67,7 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
        query.setParameter(1, codigoEmpleado);
        query.setParameter(2, Periodo);
        query.setParameter(3, Año);
+       
            lista=query.getResultList();
        }catch(Exception e){
        throw e;

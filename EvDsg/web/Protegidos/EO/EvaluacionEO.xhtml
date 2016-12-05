@@ -7,32 +7,30 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-<h:outputScript library="js" name="calendar_es.js" />
+        <h:outputScript library="js" name="calendar_es.js" />
         <ui:composition template="./../../WEB-INF/template.xhtml">
 
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true" showDetail="true" showSummary="true"/>
                 <h1>Ingrese su busqueda para encontrar los datos que necesita:</h1>
-                <h:form>
+                <h:form id="search">
                     <p:panelGrid columns="9">
                         <p:outputLabel value="EMPLEADO" for="emp"/>
                         <p:selectOneMenu id="emp" value="#{corteController.codigoEmpleado}" required="true" requiredMessage="Seleccione un Empleado" filter="true" filterMatchMode="contains" effect="fold" style="width: 10px">
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{corteController.lstempleadosActivos}" var="emp" itemLabel="#{emp.nombre} #{emp.apellidos}" itemValue="#{emp.codigoEmpleado}"/>
-                            </p:selectOneMenu>
-                        <p:outputLabel value="Dia a evaluar" for="cal"/>
-                        <p:calendar id="cal" required="true" value="#{corteController.fecha}" disabledWeekends="true" size="5" lang="es"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="PERIODO" for="per"/>
                         <p:selectOneMenu id="per" value="#{corteController.periodo}" required="true" requiredMessage="Seleccione periodo" effect="fold">
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" />
                             <f:selectItems value="#{listasController.periodo}" var="per" itemLabel="#{per.label}" itemValue="#{per.value}"/>
-                       </p:selectOneMenu>
+                        </p:selectOneMenu>
                         <p:outputLabel value="AÑO" for="año"/>
                         <p:selectOneMenu id="año" value="#{corteController.año}" required="true" requiredMessage="Seleccione año" effect="fold" >
                             <f:selectItem noSelectionOption="true" itemLabel="-- Seleccione --" itemValue=""/>
                             <f:selectItems value="#{listasController.año}" var="año" itemLabel="#{año.label}" itemValue="#{año.value}" />
                         </p:selectOneMenu>
-                <p:commandButton  icon="fa fa-search" update="ev" actionListener="#{corteController.busqueda()}"/>
+                        <p:commandButton  icon="fa fa-search" update="search,ev" actionListener="#{corteController.busqueda()}"/>
                     </p:panelGrid>
                     <p:separator/>
                     <p:dataTable id="ev" value="#{corteController.lstevaluacion}" var="evaluacion" editable="true" emptyMessage="No se ha realizado una busqueda o no existe una evaluación para este dia" rowHover="true">
@@ -73,7 +71,7 @@
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
-                            </p:column>
+                        </p:column>
                         <p:column headerText="A.Comunes internas">
                             <p:cellEditor>
                                 <f:facet name="output">
@@ -86,7 +84,7 @@
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
-                            </p:column>
+                        </p:column>
                         <p:column headerText="Sanitarios">
                             <p:cellEditor>
                                 <f:facet name="output">
@@ -99,7 +97,7 @@
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
-                            </p:column>
+                        </p:column>
                         <p:column headerText="Supervisión areas">
                             <p:cellEditor>
                                 <f:facet name="output">
@@ -112,7 +110,7 @@
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
-                            </p:column>
+                        </p:column>
                         <p:column headerText="Revision (Base)">
                             <p:cellEditor>
                                 <f:facet name="output">
@@ -125,7 +123,7 @@
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
-                            </p:column>
+                        </p:column>
                         <p:column headerText="Revision (Confianza)">
                             <p:cellEditor>
                                 <f:facet name="output">
@@ -138,7 +136,7 @@
                                     </p:selectOneMenu>
                                 </f:facet>
                             </p:cellEditor>
-                            </p:column>
+                        </p:column>
                         <p:column headerText="Evaluo:">
                             <p:outputLabel value="#{evaluacion.codigoPersonaEO.nombres} #{evaluacion.codigoPersonaEO.apellidos}"/>
                         </p:column>
@@ -153,7 +151,6 @@
                 </h:form>
                 <h:form>
                     <p:commandButton value="TERMINAR" icon="fa fa-check-square" action="principalEO?faces-redirect=true" title="Puede dar click aqui si quiere hacer algo mas o simplemente dar en el boton de cerrar sesíon que esta arriba a la derecha"/>
-                    <p:commandButton value="CREAR EVALUACIÓN DIARIA" icon="fa fa-plus-circle" action="NuevaEv?faces-redirect=true" title="Crear una nueva evaluacion diaria"/>
                 </h:form>
             </ui:define>
 
