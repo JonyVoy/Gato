@@ -30,7 +30,7 @@
                                     <p:commandButton value="Manual de usuario" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
                                         <p:fileDownload value="#{manual.file}" />
                                     </p:commandButton>
-                                    <p:commandButton type="button" onclick="PF('info').show();" icon="fa fa-info-circle" title="Información"/>
+                                    <p:commandButton type="button" onclick="PF('info').show();" icon="fa fa-info-circle" title="Guia Rapida"/>
                                     <p:commandButton value="Rangos de calificacion" action="/Protegidos/rangos" icon="fa fa-paw" />
                                     <p:commandButton actionListener="#{templateController.cerrarSesion()}" icon="fa fa-sign-out"  action="/index?faces-redirect=true" title="Cerrar Sesión"/>
                                 </f:facet>

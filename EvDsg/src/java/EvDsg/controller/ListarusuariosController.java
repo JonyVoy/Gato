@@ -1,9 +1,7 @@
 
 package EvDsg.controller;
 
-import EvDsg.ejb.EmpleadoFacadeLocal;
 import EvDsg.ejb.UsuariosFacadeLocal;
-import EvDsg.model.Empleado;
 import EvDsg.model.Usuarios;
 import java.io.Serializable;
 import java.util.List;

@@ -7,8 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -45,6 +43,7 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
        query.setParameter(3, cal,TemporalType.DATE);
        query.setParameter(4, Periodo);
        query.setParameter(5, Año);
+       
            lista=query.getResultList();
            
            if(lista.isEmpty()){
@@ -67,10 +66,11 @@ public class EvaluacionFacade extends AbstractFacade<Evaluacion> implements Eval
        query.setParameter(1, codigoEmpleado);
        query.setParameter(2, Periodo);
        query.setParameter(3, Año);
+       query.setMaxResults(22);
        
            lista=query.getResultList();
        }catch(Exception e){
-       throw e;
+           throw e;
        }
        return lista;
     }
