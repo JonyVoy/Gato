@@ -12,6 +12,7 @@ public class Entrega {
     private Date Fecha_ent;
     private int idPer_ent;
     private Persona persona = new Persona();
+    
 
     public Persona getPersona() {
         return persona;

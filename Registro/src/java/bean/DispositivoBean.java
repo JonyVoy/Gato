@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Dispositivo;
-import model.detalles;
 import registrodao.DispositivoDAO;
 
 

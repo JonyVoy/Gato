@@ -8,10 +8,7 @@ package registrodao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- *
- * @author Jony
- */
+
 public class DAO {
     private Connection cn;
 

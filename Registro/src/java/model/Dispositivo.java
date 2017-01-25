@@ -11,9 +11,10 @@ public class Dispositivo {
     private String marca;
     private String noInv;
     private Date Fecha_llegada;
-    private int idPersona;
+    private Persona personaAsignada;
     private Date Fecha_entrega;
     private Date Fecha_cambio;
+    
 
     public Date getFecha_cambio() {
         return Fecha_cambio;
@@ -32,15 +33,7 @@ public class Dispositivo {
 
     public void setFecha_entrega(Date Fecha_entrega) {
         this.Fecha_entrega = Fecha_entrega;
-    }
-
-    public int getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
-    }
+    }  
 
     public Date getFecha_llegada() {
         return Fecha_llegada;
@@ -89,6 +82,20 @@ public class Dispositivo {
 
     public void setNoInv(String noInv) {
         this.noInv = noInv;
+    }
+
+    /**
+     * @return the personaAsignada
+     */
+    public Persona getPersonaAsignada() {
+        return personaAsignada;
+    }
+
+    /**
+     * @param personaAsignada the personaAsignada to set
+     */
+    public void setPersonaAsignada(Persona personaAsignada) {
+        this.personaAsignada = personaAsignada;
     }
         
 }
